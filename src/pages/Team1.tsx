@@ -9,6 +9,7 @@ import AuraGenMbImage from "../images/team1/AuraGen-mb.jpg";
 import PICLogo from "../images/team1/PICLogo.svg";
 import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
 import AuraGenLogo from "../images/team1/AuraGenLogo.png";
+import {Link} from "react-router-dom";
 
 const blocks = [
     {
@@ -16,7 +17,7 @@ const blocks = [
         bgImage: PICImage,
         mbImage: PICMbImage,
         productInfo: "https://picwire.com/Interconnect-Solutions",
-        managerInfo: "https://cbol.com/contact.html",
+        managerInfo: "/picManagerInfo",
         name: "PIC",
         text:
             "MIL Standard, FAA 인증\n" +
@@ -219,7 +220,10 @@ export default function App() {
                                                         alt={`${block.name} Logo`}
                                                         className="h-16 md:h-20 object-contain"
                                                         initial={{ opacity: 0, scale: 0.8 }}
-                                                        animate={{ opacity: 1, scale: 1 }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            scale: block.name === "AuraGen" ? 2 : 1,  // AuraGen일 때만 크기를 두 배로 설정
+                                                        }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
                                                         transition={{ duration: 0.4 }}
                                                     />
@@ -260,34 +264,37 @@ export default function App() {
                                             <AnimatePresence>
                                                 {isActive && (
                                                     <>
-                                                        <motion.a
+                                                        <motion.div
                                                             key={`btn1-${block.id}`}
-                                                            href={block.productInfo}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
                                                             initial={{ opacity: 0, y: 10 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             exit={{ opacity: 0, y: 10 }}
                                                             whileHover={{ scale: 1.05 }}
                                                             transition={{ duration: 0.4 }}
                                                         >
-                                                            제품정보
-                                                        </motion.a>
-                                                        <motion.a
+                                                            <Link
+                                                                to={block.productInfo}
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                            >
+                                                                제품정보
+                                                            </Link>
+                                                        </motion.div>
+
+                                                        <motion.div
                                                             key={`btn2-${block.id}`}
-                                                            href={block.managerInfo}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
                                                             initial={{ opacity: 0, y: 10 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             exit={{ opacity: 0, y: 10 }}
                                                             whileHover={{ scale: 1.05 }}
                                                             transition={{ duration: 0.4 }}
                                                         >
-                                                            제품문의
-                                                        </motion.a>
+                                                            <Link
+                                                                to={block.managerInfo}
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                            >
+                                                                제품문의
+                                                            </Link>
+                                                        </motion.div>
                                                     </>
                                                 )}
                                             </AnimatePresence>
