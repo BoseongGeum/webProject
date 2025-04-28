@@ -73,7 +73,7 @@ export default function Home() {
 
             <div className="absolute top-[30vh] left-0 w-full h-[40vh] z-10 flex">
                 <div className="w-full h-full flex items-center justify-center text-center bg-indigo-400 bg-cover bg-center relative">
-                    <div className="absolute inset-0 bg-black bg-opacity-30" />
+                    <div className="absolute inset-0 bg-black bg-opacity-40" />
                     <div className="flex w-full h-full">
                         {/* 팀1 */}
                         <div
