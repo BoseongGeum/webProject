@@ -16,7 +16,7 @@ const blocks = [
         id: 1,
         bgImage: PICImage,
         mbImage: PICMbImage,
-        productInfo: "https://picwire.com/Interconnect-Solutions",
+        productInfo: "/picProductInfo",
         managerInfo: "/picManagerInfo",
         name: "PIC",
         text:
@@ -167,38 +167,42 @@ export default function App() {
                                                 <AnimatePresence>
                                                     {isActive && (
                                                         <>
-                                                            <motion.a
+                                                            <motion.div
                                                                 key={`btn1-${block.id}`}
-                                                                href={block.productInfo}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
                                                                 initial={{ opacity: 0, y: 10 }}
                                                                 animate={{ opacity: 1, y: 0 }}
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
                                                             >
-                                                                제품정보
-                                                            </motion.a>
-                                                            <motion.a
+                                                                <Link
+                                                                    to={block.productInfo}
+                                                                    className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
+                                                                >
+                                                                    제품정보
+                                                                </Link>
+                                                            </motion.div>
+
+                                                            <motion.div
                                                                 key={`btn2-${block.id}`}
-                                                                href={block.managerInfo}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
                                                                 initial={{ opacity: 0, y: 10 }}
                                                                 animate={{ opacity: 1, y: 0 }}
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
                                                             >
-                                                                제품문의
-                                                            </motion.a>
+                                                                <Link
+                                                                    to={block.managerInfo}
+                                                                    className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
+                                                                >
+                                                                    제품문의
+                                                                </Link>
+                                                            </motion.div>
                                                         </>
                                                     )}
                                                 </AnimatePresence>
                                             </div>
+
                                         </div>
                                     </div>
                                 ) : (

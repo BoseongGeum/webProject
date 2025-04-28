@@ -4,7 +4,9 @@ import Home from "./pages/Home";
 import Team1 from "./pages/Team1";
 import Team2 from "./pages/Team2";
 import Navbar from "./components/Navbar";
-import LoadingScreen from "./components/LoadingScreen"; // 로딩 화면 컴포넌트
+import LoadingScreen from "./components/LoadingScreen";
+import PICManagerInfo from "./pages/PICManagerInfo";
+import PICProductInfo from "./pages/PICProductInfo"; // 로딩 화면 컴포넌트
 
 function AppContent() {
     const [isLoadingDone, setIsLoadingDone] = useState(false);
@@ -24,6 +26,8 @@ function AppContent() {
                         <Route path="/" element={<Home />} />
                         <Route path="/team1" element={<Team1 />} />
                         <Route path="/team2" element={<Team2 />} />
+                        <Route path="/picManagerInfo" element={<PICManagerInfo />} />
+                        <Route path="/picProductInfo" element={<PICProductInfo />} />
                     </Routes>
                 </>
             )}
