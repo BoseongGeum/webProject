@@ -2,8 +2,6 @@ import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
 import PICLogo from "../images/team1/PICLogo.svg";
-import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
-import AuraGenLogo from "../images/team1/AuraGenLogo.png";
 
 const PICProductInfo: React.FC = () => {
     return (

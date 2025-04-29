@@ -2,7 +2,7 @@ import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
 import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
-import {ChevronLeft, ChevronRight} from "lucide-react";
+import {ChevronRight} from "lucide-react";
 
 const QuanticEvansProductInfo: React.FC = () => {
     return (
