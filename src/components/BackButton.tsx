@@ -12,7 +12,7 @@ const BackButton: React.FC = () => {
     return (
         <button
             onClick={handleGoBack}
-            className="flex items-center text-white hover:text-red-500 transition-all duration-200"
+            className="flex items-center text-black hover:text-red-800 transition-all duration-200"
         >
             <ChevronLeft className="mr-2" /> {/* 화살표 아이콘 추가 */}
             <span className="text-lg font-bold">뒤로 가기</span>

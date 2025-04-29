@@ -2,9 +2,9 @@ import React from "react";
 
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
-import PICLogo from "../images/team1/PICLogo.svg";
+import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
 
-const PICManagerInfo: React.FC = () => {
+const QuanticEvansManagerInfo: React.FC = () => {
     return (
         <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
@@ -12,8 +12,8 @@ const PICManagerInfo: React.FC = () => {
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
-                            src={ PICLogo }
-                            alt={ "PICLogo" }
+                            src={ QuanticEvansLogo }
+                            alt={ "QuanticEvansLogo" }
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -119,4 +119,4 @@ const PICManagerInfo: React.FC = () => {
     );
 };
 
-export default PICManagerInfo;
+export default QuanticEvansManagerInfo;

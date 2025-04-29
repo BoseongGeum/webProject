@@ -16,8 +16,8 @@ const blocks = [
         id: 1,
         bgImage: PICImage,
         mbImage: PICMbImage,
-        productInfo: "/picProductInfo",
-        managerInfo: "/picManagerInfo",
+        productInfo: "/team1/picProductInfo",
+        managerInfo: "/team1/picManagerInfo",
         name: "PIC",
         text:
             "MIL Standard, FAA 인증\n" +
@@ -29,10 +29,9 @@ const blocks = [
         id: 2,
         bgImage: QuanticEvansImage,
         mbImage: QuanticEvansMbImage,
-        productInfo:
-            "https://d2f6h2rm95zg9t.cloudfront.net/94541529/C_UAS_1_pager_FNL_Feb_12_2024_21226040.pdf",
+        productInfo: "/quanticEvansProductInfo",
         managerInfo:
-            "https://www.quanticevans.com/distributors?kind=distributor&country=South%20Korea",
+            "/quanticEvansManagerInfo",
         name: "Quantic Evans",
         text:
             "미국 EVANS 사의 \n" +
@@ -44,7 +43,7 @@ const blocks = [
         id: 3,
         bgImage: AuraGenImage,
         mbImage: AuraGenMbImage,
-        productInfo: "https://www.aurasystems.com/auragen.html",
+        productInfo: "/auraGenProductInfol",
         managerInfo:
             "https://cbol.com/download/military_underhood_power_fenerator.pdf",
         name: "AuraGen",
@@ -174,10 +173,11 @@ export default function App() {
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
+                                                                className="w-24 px-2 py-1 border-2 border-y-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-lg text-center flex items-center justify-center"
                                                             >
                                                                 <Link
                                                                     to={block.productInfo}
-                                                                    className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
+                                                                    className="w-full h-full flex items-center justify-center"
                                                                 >
                                                                     제품정보
                                                                 </Link>
@@ -190,10 +190,11 @@ export default function App() {
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
+                                                                className="w-24 px-2 py-1 border-2 border-y-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-lg text-center flex items-center justify-center"
                                                             >
                                                                 <Link
                                                                     to={block.managerInfo}
-                                                                    className="w-24 px-2 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm text-center flex items-center justify-center"
+                                                                    className="w-full h-full flex items-center justify-center"
                                                                 >
                                                                     제품문의
                                                                 </Link>

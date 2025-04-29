@@ -4,9 +4,10 @@ import Logo from "../images/favicon.png"; // 로딩용 로고
 
 type LoadingScreenProps = {
     onFinish: () => void;
+    isMainNavbarPage: boolean;
 };
 
-export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
+export default function LoadingScreen({ onFinish, isMainNavbarPage }: LoadingScreenProps) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export default function LoadingScreen({ onFinish }: LoadingScreenProps) {
     if (!loading) return null;
 
     return (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+        <div className={`fixed inset-0 z-50 bg-black flex items-center justify-center ${isMainNavbarPage ? "bg-white" : "bg-black"}`}>
             <motion.img
                 src={Logo}
                 alt="Loading Logo"
