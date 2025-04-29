@@ -278,7 +278,7 @@ export default function App() {
                                                         >
                                                             <Link
                                                                 to={block.productInfo}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
                                                             >
                                                                 제품정보
                                                             </Link>
@@ -294,7 +294,7 @@ export default function App() {
                                                         >
                                                             <Link
                                                                 to={block.managerInfo}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
                                                             >
                                                                 제품문의
                                                             </Link>
