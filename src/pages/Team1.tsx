@@ -29,9 +29,8 @@ const blocks = [
         id: 2,
         bgImage: QuanticEvansImage,
         mbImage: QuanticEvansMbImage,
-        productInfo: "/quanticEvansProductInfo",
-        managerInfo:
-            "/quanticEvansManagerInfo",
+        productInfo: "/team1/quanticEvansProductInfo",
+        managerInfo: "/team1/quanticEvansManagerInfo",
         name: "Quantic Evans",
         text:
             "미국 EVANS 사의 \n" +
@@ -43,7 +42,7 @@ const blocks = [
         id: 3,
         bgImage: AuraGenImage,
         mbImage: AuraGenMbImage,
-        productInfo: "/auraGenProductInfol",
+        productInfo: "/team1/auraGenProductInfo",
         managerInfo:
             "https://cbol.com/download/military_underhood_power_fenerator.pdf",
         name: "AuraGen",
