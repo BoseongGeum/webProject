@@ -84,7 +84,7 @@ const AuraGenManagerInfo: React.FC = () => {
                                         EMAIL ADDRESS
                                     </h4>
                                     <p className="text-gray-500">
-                                        info@cbol.com
+                                        Gino.Ofria@cbol.com
                                     </p>
                                 </div>
                             </div>
@@ -92,9 +92,28 @@ const AuraGenManagerInfo: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="w-full flex items-center justify-end mt-12">
+                <div className="w-full flex items-center justify-between max-w-7xl mx-auto px-4 lg:px-0 mt-12">
+                    {/* "더 보기" 버튼 (가운데) */}
+                    <div className="flex justify-center w-full text-center ml-28">
+                        <AnimatePresence>
+                            <motion.a
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 10 }}
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.4 }}
+                                href="https://cbol.com/download/military_underhood_power_fenerator.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
+                                    더 보기
+                                </button>
+                            </motion.a>
+                        </AnimatePresence>
+                    </div>
 
-                    {/* "제품정보" 버튼 (오른쪽) */}
+                    {/* "제품문의" 버튼 (오른쪽) */}
                     <AnimatePresence>
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -105,7 +124,7 @@ const AuraGenManagerInfo: React.FC = () => {
                             className="w-32 px-2 py-1 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 rounded-none text-lg text-center flex items-center justify-center"
                         >
                             <Link
-                                to={"/team1/picProductInfo"}
+                                to={"/team1/auraGenProductInfo"}
                                 className="w-full h-full flex items-center justify-center"
                             >
                                 제품정보
@@ -113,7 +132,6 @@ const AuraGenManagerInfo: React.FC = () => {
                         </motion.div>
                     </AnimatePresence>
                 </div>
-
             </div>
         </div>
     );

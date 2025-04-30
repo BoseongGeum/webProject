@@ -35,7 +35,7 @@ function AppContent() {
 
     // URL을 보고 '팀1' 소속인지, '팀2' 소속인지 판별
     const isTeam1Page = location.pathname.startsWith("/team1/");
-    const isTeam2Page = location.pathname.startsWith("/team2/");
+    const isTeam2Page = location.pathname.startsWith("/team2");
 
     const isMainNavbarPage = isTeam1Page || isTeam2Page;
 

@@ -44,7 +44,7 @@ const blocks = [
         mbImage: AuraGenMbImage,
         productInfo: "/team1/auraGenProductInfo",
         managerInfo:
-            "https://cbol.com/download/military_underhood_power_fenerator.pdf",
+            "/team1/auraGenManagerInfo",
         name: "AuraGen",
         text:
             "96파운드의 초경량 설계\n" +
