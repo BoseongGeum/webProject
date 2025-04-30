@@ -12,6 +12,7 @@ import QuanticEvansManagerInfo from "./pages/QuanticEvansManagerInfo";
 import QuanticEvansProductInfo from "./pages/QuanticEvansProductInfo";
 import AuraGenManagerInfo from "./pages/AuraGenManagerInfo";
 import AuraGenProductInfo from "./pages/AuraGenProductInfo";
+import ContactUs from "./pages/ContactUs";
 
 function AppContent() {
     const [isLoadingDone, setIsLoadingDone] = useState(false);
@@ -23,14 +24,14 @@ function AppContent() {
 
     const team1Menus = [
         { name: "PIC", path: "/team1/pic"},
-        { name: "QuanticEvans", path: "/team1/quanticEvans" },
-        { name: "AuraGen", path: "/team1/auraGen" },
+        { name: "Quantic Evans", path: "/team1/quanticEvans" },
+        { name: "Aura Gen", path: "/team1/auraGen" },
     ];
 
     const team2Menus = [
-        { name: "Dashboard", path: "/team2/dashboard" },
-        { name: "Settings", path: "/team2/settings" },
-        { name: "Contact", path: "/team2/contact" },
+        { name: "CBOL Korea Office", path: "/team2/dashboard" },
+        { name: "Our Services", path: "/team2/settings" },
+        { name: "Contact Us", path: "/team2/contactus" },
     ];
 
     // URL을 보고 '팀1' 소속인지, '팀2' 소속인지 판별
@@ -72,7 +73,7 @@ function AppContent() {
                             <Route path="/team2" element={<Team2 />} />
                             <Route path="/team2/dashboard" element={<QuanticEvansManagerInfo />} />
                             <Route path="/team2/settings" element={<AuraGenManagerInfo />} />
-                            <Route path="/team2/logout" element={<AuraGenProductInfo />} />
+                            <Route path="/team2/contactus" element={<ContactUs />} />
                         </Routes>
 
                 </>

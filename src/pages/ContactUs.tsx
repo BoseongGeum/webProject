@@ -1,31 +1,14 @@
 import React from "react";
 
-import {AnimatePresence, motion} from "framer-motion";
-import {Link} from "react-router-dom";
-import PICLogo from "../images/team1/PICLogo.svg";
-
 const PICManagerInfo: React.FC = () => {
     return (
-        <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
+        <div className="w-full h-[calc(100vh-96px)] bg-white text-black font-bold py-20 mt-8">
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
-
-                <div className="mb-4">
-                    <AnimatePresence>
-                        <motion.img
-                            src={ PICLogo }
-                            alt={ "PICLogo" }
-                            className="h-20 object-contain"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.4 }}
-                        />
-                    </AnimatePresence>
-                </div>
 
                 {/* Section Title */}
                 <div className="text-left mb-10">
                     <h2 className="text-5xl font-bold">
-                        CONTACT <span className="text-red-800">US</span>
+                        CONTACT <span className="text-red-800">KOREA OFFICE</span>
                     </h2>
                 </div>
 
@@ -37,11 +20,11 @@ const PICManagerInfo: React.FC = () => {
                 </div>
 
                 {/* 지도 + 연락처 */}
-                <div className="flex flex-col lg:flex-row w-full h-[400px]">
+                <div className="flex flex-col lg:flex-row w-full h-[600px]">
                     {/* 구글 맵 */}
-                    <div className="w-full lg:w-2/3">
+                    <div className="w-full lg:w-3/4">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3298.2598745885157!2d-118.56752208477998!3d34.24191188055478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c29b7033afd367%3A0xa8be6d728e186243!2s19850%20Plummer%20St%2C%20Chatsworth%2C%20CA%2091311!5e0!3m2!1sen!2sus!4v1603896825281!5m2!1sen!2sus"
+                            src="https://naver.me/xa5zJAh3"
                             className="w-full h-full rounded-md"
                             style={{ border: 0 }}
                             allowFullScreen
@@ -52,7 +35,7 @@ const PICManagerInfo: React.FC = () => {
                     </div>
 
                     {/* 연락처 정보 */}
-                    <div className="w-full lg:w-1/3 flex flex-col justify-between h-full pl-6 lg:pl-8">
+                    <div className="w-full lg:w-1/4 flex flex-col justify-center h-full pl-6 lg:pl-8">
                         <div>
                             <h3 className="text-black text-3xl mb-8">
                                 <span className="text-yellow-500">Contact</span> Info
@@ -64,7 +47,7 @@ const PICManagerInfo: React.FC = () => {
                                         MAILING ADDRESS
                                     </h4>
                                     <p className="text-gray-500">
-                                        19850 Plummer St. Chatsworth, CA 91311
+                                        서울시 중구 정동길 35, 두비빌딩 403호
                                     </p>
                                 </div>
 
@@ -73,9 +56,9 @@ const PICManagerInfo: React.FC = () => {
                                         PHONE & FAX
                                     </h4>
                                     <p className="text-gray-500">
-                                        Tel: 818-704-8200
+                                        Tel: 02-318-5510
                                         <br />
-                                        Fax: 818-704-4336
+                                        Fax: 02-318-0550
                                     </p>
                                 </div>
 
@@ -90,28 +73,6 @@ const PICManagerInfo: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="w-full flex items-center justify-end mt-12">
-
-                    {/* "제품정보" 버튼 (오른쪽) */}
-                    <AnimatePresence>
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.4 }}
-                            className="w-32 px-2 py-1 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 rounded-none text-lg text-center flex items-center justify-center"
-                        >
-                            <Link
-                                to={"/team1/picProductInfo"}
-                                className="w-full h-full flex items-center justify-center"
-                            >
-                                제품정보
-                            </Link>
-                        </motion.div>
-                    </AnimatePresence>
                 </div>
 
             </div>

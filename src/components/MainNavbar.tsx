@@ -45,7 +45,10 @@ const MainNavbar: React.FC<MainNavbarProps> = ({ menus }) => {
                                 isActive ? "bg-white text-red-800" : "hover:bg-red-700"
                             }`}
                         >
-                            <Link to={`${menu.path}ProductInfo`} className="w-full h-full flex items-center justify-center">
+                            <Link
+                                to={isTeam1Page ? `${menu.path}ProductInfo` : menu.path}
+                                className="w-full h-full flex items-center justify-center"
+                            >
                                 {menu.name}
                             </Link>
                         </div>

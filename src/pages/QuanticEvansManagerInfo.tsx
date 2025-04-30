@@ -54,8 +54,8 @@ const QuanticEvansManagerInfo: React.FC = () => {
                     {/* 연락처 정보 */}
                     <div className="w-full lg:w-1/3 flex flex-col justify-between h-full pl-6 lg:pl-8">
                         <div>
-                            <h3 className="text-yellow-500 text-3xl mb-8">
-                                Contact Info
+                            <h3 className="text-black text-3xl mb-8">
+                                <span className="text-yellow-500">Contact</span> Info
                             </h3>
 
                             <div className="space-y-8">
