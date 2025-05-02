@@ -2,7 +2,7 @@ import React from "react";
 
 const PICManagerInfo: React.FC = () => {
     return (
-        <div className="w-full h-[calc(100vh-96px)] bg-white text-black font-bold py-20 mt-8">
+        <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
 
                 {/* Section Title */}
