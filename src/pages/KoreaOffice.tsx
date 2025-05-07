@@ -9,7 +9,7 @@ const slides = [
         title: "Your Idea, Made Real\nwith CBOL",
         description:
             "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
-        rightImages: ["/images/team2/koreaOffice/koreaOffice2.jpg"],
+        rightImages: ["/images/team2/koreaOffice/koreaOffice2.avif"],
     },
     {
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
@@ -23,6 +23,8 @@ const slides = [
             "/images/team2/koreaOffice/koreaOffice6.jpg",
             "/images/team2/koreaOffice/koreaOffice7.jpg",
             "/images/team2/koreaOffice/koreaOffice8.jpg",
+            "/images/team2/koreaOffice/koreaOffice9.jpg",
+            "/images/team2/koreaOffice/koreaOffice10.jpg",
         ],
     },
 ];
