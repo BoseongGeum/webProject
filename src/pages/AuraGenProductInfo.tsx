@@ -230,7 +230,7 @@ const AuraGenProductInfo: React.FC = () => {
                     >
                         <Link
                             to={"/team1/auraGenManagerInfo"}
-                            className="w-full h-full flex items-center justify-center"
+                            className="w-32 h-full flex items-center justify-center"
                         >
                             제품문의
                         </Link>

@@ -96,7 +96,7 @@ const QuanticEvansManagerInfo: React.FC = () => {
                             className="w-32 px-2 py-1 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 rounded-none text-lg text-center flex items-center justify-center"
                         >
                             <Link
-                                to={"/team1/picProductInfo"}
+                                to={"/team1/quanticEvansProductInfo"}
                                 className="w-full h-full flex items-center justify-center"
                             >
                                 제품정보

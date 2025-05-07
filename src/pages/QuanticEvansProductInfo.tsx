@@ -134,7 +134,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
+                                <button className="w-full bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
                                     더 보기
                                 </button>
                             </motion.a>
@@ -152,7 +152,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                         >
                             <Link
                                 to={"/team1/quanticEvansManagerInfo"}
-                                className="w-full h-full flex items-center justify-center"
+                                className="w-32 h-full flex items-center justify-center"
                             >
                                 제품문의
                             </Link>
