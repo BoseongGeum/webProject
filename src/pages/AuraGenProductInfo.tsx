@@ -1,6 +1,5 @@
 import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
-import AuraGenLogo from "../images/team1/AuraGenLogo-black.svg";
 import {Link} from "react-router-dom";
 
 const AuraGenProductInfo: React.FC = () => {
@@ -10,7 +9,7 @@ const AuraGenProductInfo: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 lg:px-0 mb-4">
                 <AnimatePresence>
                     <motion.img
-                        src={ AuraGenLogo }
+                        src="/images/team1/main/AuraGenLogo-black.svg"
                         alt={ "AuraGenLogo" }
                         className="h-20 object-contain"
                         initial={{ opacity: 0, scale: 0.8 }}

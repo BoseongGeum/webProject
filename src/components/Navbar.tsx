@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
-import logo from "../images/favicon.png";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(true);
@@ -22,7 +21,7 @@ export default function Navbar() {
                     className="transition-transform duration-300 hover:scale-105"
                 >
                     <img
-                        src={logo}
+                        src="/images/logo.png"
                         alt="CBOL Logo"
                         className="h-8 w-auto sm:h-10"
                     />

@@ -2,7 +2,6 @@ import React from "react";
 
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
-import AuraGenLogo from "../images/team1/AuraGenLogo-black.svg";
 
 const AuraGenManagerInfo: React.FC = () => {
     return (
@@ -12,7 +11,7 @@ const AuraGenManagerInfo: React.FC = () => {
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
-                            src={ AuraGenLogo }
+                            src="/images/team1/main/AuraGenLogo-black.svg"
                             alt={ "AuraGenLogo" }
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}

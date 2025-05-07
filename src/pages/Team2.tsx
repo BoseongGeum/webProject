@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import logo from "../images/favicon.png";
 import GoMainButton from "../components/GoMainButton";
 
 export default function Team2() {
@@ -24,7 +23,7 @@ export default function Team2() {
             {/* 우측 1/3: 로고 + 텍스트 */}
             <div className="w-1/3 h-full flex flex-col justify-center text-black p-16">
                 <motion.img
-                    src={logo}
+                    src="/images/logo.png"
                     alt="Logo"
                     className="w-96 h-auto mb-6"
                     initial={{ opacity: 0, scale: 0.9 }}

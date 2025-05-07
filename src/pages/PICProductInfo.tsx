@@ -1,7 +1,6 @@
 import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
-import PICLogo from "../images/team1/PICLogo.svg";
 
 const PICProductInfo: React.FC = () => {
     return (
@@ -12,7 +11,7 @@ const PICProductInfo: React.FC = () => {
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
-                            src={ PICLogo }
+                            src="/images/team1/main/PICLogo.svg"
                             alt={ "PICLogo" }
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}

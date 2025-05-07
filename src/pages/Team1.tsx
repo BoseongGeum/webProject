@@ -1,21 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PICImage from "../images/team1/PIC.png";
-import QuanticEvansImage from "../images/team1/QuanticEvans.png";
-import AuraGenImage from "../images/team1/AuraGen.png";
-import PICMbImage from "../images/team1/PIC-mb.jpg";
-import QuanticEvansMbImage from "../images/team1/QuanticEvans-mb.jpg";
-import AuraGenMbImage from "../images/team1/AuraGen-mb.jpg";
-import PICLogo from "../images/team1/PICLogo.svg";
-import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
-import AuraGenLogo from "../images/team1/AuraGenLogo.png";
 import {Link} from "react-router-dom";
 
 const blocks = [
     {
         id: 1,
-        bgImage: PICImage,
-        mbImage: PICMbImage,
+        bgImage: "/images/team1/main/PIC.png",
+        mbImage: "/images/team1/main/PIC-mb.jpg",
+        logoImage: "/images/team1/main/PICLogo.svg.jpg",
         productInfo: "/team1/picProductInfo",
         managerInfo: "/team1/picManagerInfo",
         name: "PIC",
@@ -27,8 +19,9 @@ const blocks = [
     },
     {
         id: 2,
-        bgImage: QuanticEvansImage,
-        mbImage: QuanticEvansMbImage,
+        bgImage: "/images/team1/main/QuanticEvans.png",
+        mbImage: "/images/team1/main/QuanticEvans-mb.jpg",
+        logoImage: "//images/team1/main/QuanticEvansLogo.png",
         productInfo: "/team1/quanticEvansProductInfo",
         managerInfo: "/team1/quanticEvansManagerInfo",
         name: "Quantic Evans",
@@ -40,8 +33,9 @@ const blocks = [
     },
     {
         id: 3,
-        bgImage: AuraGenImage,
-        mbImage: AuraGenMbImage,
+        bgImage: "/images/team1/main/AuraGen.png",
+        mbImage: "/images/team1/main/AuraGen-mb.jpg",
+        logoImage: "/images/team1/main/AuraGenLogo.png",
         productInfo: "/team1/auraGenProductInfo",
         managerInfo:
             "/team1/auraGenManagerInfo",
@@ -112,13 +106,7 @@ export default function App() {
                                                 {isActive && (
                                                     <motion.img
                                                         key={`logo-${block.id}`}
-                                                        src={
-                                                            block.name === "PIC"
-                                                                ? PICLogo
-                                                                : block.name === "Quantic Evans"
-                                                                    ? QuanticEvansLogo
-                                                                    : AuraGenLogo
-                                                        }
+                                                        src={block.logoImage}
                                                         alt={`${block.name} Logo`}
                                                         className="h-16 object-contain"
                                                         initial={{ opacity: 0, scale: 0.8 }}
@@ -214,13 +202,7 @@ export default function App() {
                                                 {isActive && (
                                                     <motion.img
                                                         key={`logo-${block.id}`}
-                                                        src={
-                                                            block.name === "PIC"
-                                                                ? PICLogo
-                                                                : block.name === "Quantic Evans"
-                                                                    ? QuanticEvansLogo
-                                                                    : AuraGenLogo
-                                                        }
+                                                        src={block.logoImage}
                                                         alt={`${block.name} Logo`}
                                                         className="h-16 md:h-20 object-contain"
                                                         initial={{ opacity: 0, scale: 0.8 }}

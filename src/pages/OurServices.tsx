@@ -1,4 +1,4 @@
-import { SlideLayout } from "./SlideLayout";
+import { SlideLayout } from "../components/SlideLayout";
 
 export const OurServices = () => {
     const bgImage = "/images/team2/ourServices/ourServices1.jpg";

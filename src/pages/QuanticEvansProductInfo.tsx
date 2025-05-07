@@ -1,7 +1,6 @@
 import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Link} from "react-router-dom";
-import QuanticEvansLogo from "../images/team1/QuanticEvansLogo.png";
 import {ChevronRight} from "lucide-react";
 
 const QuanticEvansProductInfo: React.FC = () => {
@@ -13,7 +12,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
-                            src={ QuanticEvansLogo }
+                            src="/images/team1/main/QuanticEvansLogo.png"
                             alt={ "QuanticEvansLogo" }
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}

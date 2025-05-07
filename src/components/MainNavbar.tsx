@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../images/favicon.png";
 import { Link, useLocation } from "react-router-dom";
 
 interface MenuItem {
@@ -27,7 +26,7 @@ const MainNavbar: React.FC<MainNavbarProps> = ({ menus }) => {
                     className="transition-transform duration-300 hover:scale-105"
                 >
                     <img
-                        src={logo}
+                        src="/images/logo.png"
                         alt="CBOL Logo"
                         className="h-8 w-auto sm:h-10"
                     />

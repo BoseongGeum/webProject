@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Logo from "../images/favicon.png"; // 로딩용 로고
 
 type LoadingScreenProps = {
     onFinish: () => void;
@@ -25,7 +24,7 @@ export default function LoadingScreen({ onFinish, isMainNavbarPage }: LoadingScr
     return (
         <div className={`fixed inset-0 z-50 bg-black flex items-center justify-center ${isMainNavbarPage ? "bg-white" : "bg-black"}`}>
             <motion.img
-                src={Logo}
+                src="/images/logo.png"
                 alt="Loading Logo"
                 className="h-32 w-32 object-contain"  // 크기를 더 키움
                 initial={{ scale: 1, opacity: 0.8 }}

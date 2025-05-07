@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SlideLayout } from "./SlideLayout";
+import { SlideLayout } from "../components/SlideLayout";
 
 const slides = [
     {
