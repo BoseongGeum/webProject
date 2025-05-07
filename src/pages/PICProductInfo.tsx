@@ -1,18 +1,28 @@
 import React from "react";
-import {AnimatePresence, motion} from "framer-motion";
-import {Link} from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useImagePreloader } from "../hooks/useImagePreloader";
+import LoadingScreen from "../components/LoadingScreen";
 
 const PICProductInfo: React.FC = () => {
+    const images = [
+        "/images/team1/main/PICLogo.svg",
+        "/images/team1/PIC/picProductInfo1.png",
+        "/images/team1/PIC/picProductInfo2.png",
+        "/images/team1/PIC/picProductInfo3.png",
+        "/images/team1/PIC/picProductInfo4.png"
+    ];
+    const loaded = useImagePreloader(images);
+    if (!loaded) return <LoadingScreen isWhite={true} />;
+
     return (
         <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
-
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
-
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
                             src="/images/team1/main/PICLogo.svg"
-                            alt={ "PICLogo" }
+                            alt={"PICLogo"}
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -48,7 +58,7 @@ const PICProductInfo: React.FC = () => {
                     <p className="text-gray-500 text-lg mb-2">
                         PIC의 기술 영업 팀과 엔지니어들은 항상 고객의 성공적인 프로젝트를 위해 긴밀히 협력하고 있습니다.
                     </p>
-                    <br/>
+                    <br />
                     <p className="text-gray-500 text-lg mb-2">
                         <em>우리가 하는 일</em> — 바로 고객의 작업을 더 쉽고 효율적으로 만드는 것입니다.
                     </p>
@@ -142,7 +152,7 @@ const PICProductInfo: React.FC = () => {
                 </div>
 
                 <div className="w-full flex items-center justify-between mt-12">
-                    {/* "더 보기" 버튼 (가운데) */}
+                    {/* 더 보기 */}
                     <div className="flex justify-center w-full text-center ml-28">
                         <AnimatePresence>
                             <motion.a
@@ -154,15 +164,15 @@ const PICProductInfo: React.FC = () => {
                                 href="https://picwire.com/Interconnect-Solutions"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                        >
-                            <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
-                                더 보기
-                            </button>
+                            >
+                                <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
+                                    더 보기
+                                </button>
                             </motion.a>
                         </AnimatePresence>
                     </div>
 
-                    {/* "제품문의" 버튼 (오른쪽) */}
+                    {/* 제품문의 */}
                     <AnimatePresence>
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}

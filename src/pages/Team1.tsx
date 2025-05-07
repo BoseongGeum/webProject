@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
+import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const blocks = [
     {
         id: 1,
         bgImage: "/images/team1/main/PIC.png",
         mbImage: "/images/team1/main/PIC-mb.jpg",
-        logoImage: "/images/team1/main/PICLogo.svg.jpg",
+        logoImage: "/images/team1/main/PICLogo.svg",
         productInfo: "/team1/picProductInfo",
         managerInfo: "/team1/picManagerInfo",
         name: "PIC",
@@ -21,7 +23,7 @@ const blocks = [
         id: 2,
         bgImage: "/images/team1/main/QuanticEvans.png",
         mbImage: "/images/team1/main/QuanticEvans-mb.jpg",
-        logoImage: "//images/team1/main/QuanticEvansLogo.png",
+        logoImage: "/images/team1/main/QuanticEvansLogo.png",
         productInfo: "/team1/quanticEvansProductInfo",
         managerInfo: "/team1/quanticEvansManagerInfo",
         name: "Quantic Evans",
@@ -37,8 +39,7 @@ const blocks = [
         mbImage: "/images/team1/main/AuraGen-mb.jpg",
         logoImage: "/images/team1/main/AuraGenLogo.png",
         productInfo: "/team1/auraGenProductInfo",
-        managerInfo:
-            "/team1/auraGenManagerInfo",
+        managerInfo: "/team1/auraGenManagerInfo",
         name: "AuraGen",
         text:
             "96파운드의 초경량 설계\n" +
@@ -48,9 +49,12 @@ const blocks = [
     },
 ];
 
-export default function App() {
+export default function Team1() {
     const [activeBlock, setActiveBlock] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
+
+    const imagePaths = blocks.flatMap(b => [b.bgImage, b.mbImage, b.logoImage]);
+    const loaded = useImagePreloader(imagePaths);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -61,6 +65,8 @@ export default function App() {
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
+
+    if (!loaded) return <LoadingScreen isWhite={false} />;
 
     const handleInteraction = (id: number) => {
         setActiveBlock(id);
@@ -95,12 +101,9 @@ export default function App() {
                             onTouchEnd={handleReset}
                         >
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-500 z-10" />
-
                             <div className="relative z-20 flex w-full h-full px-4 md:px-10 py-4 items-center justify-between">
                                 {isMobile ? (
-                                    // 모바일 레이아웃
                                     <div className="flex flex-row w-full h-full">
-                                        {/* 왼쪽 1/3: 로고 */}
                                         <div className="w-1/3 flex items-center justify-center">
                                             <AnimatePresence>
                                                 {isActive && (
@@ -118,9 +121,7 @@ export default function App() {
                                             </AnimatePresence>
                                         </div>
 
-                                        {/* 오른쪽 2/3: 텍스트 + 버튼 */}
                                         <div className="w-2/3 flex flex-col h-full">
-                                            {/* 상단 3/4 텍스트 */}
                                             <div className="flex-grow-[3] flex items-center justify-center text-center px-2">
                                                 <AnimatePresence>
                                                     {isActive && (
@@ -148,7 +149,6 @@ export default function App() {
                                                 </AnimatePresence>
                                             </div>
 
-                                            {/* 하단 1/4 버튼 */}
                                             <div className="flex-grow flex justify-center items-center space-x-2 py-1">
                                                 <AnimatePresence>
                                                     {isActive && (
@@ -190,13 +190,10 @@ export default function App() {
                                                     )}
                                                 </AnimatePresence>
                                             </div>
-
                                         </div>
                                     </div>
                                 ) : (
-                                    // PC 레이아웃
                                     <div className="flex flex-col lg:flex-row w-full h-full items-center justify-between">
-                                        {/* 로고 */}
                                         <div className="w-full lg:w-1/4 flex items-center justify-center mb-4 lg:mb-0">
                                             <AnimatePresence>
                                                 {isActive && (
@@ -208,7 +205,7 @@ export default function App() {
                                                         initial={{ opacity: 0, scale: 0.8 }}
                                                         animate={{
                                                             opacity: 1,
-                                                            scale: block.name === "AuraGen" ? 2 : 1,  // AuraGen일 때만 크기를 두 배로 설정
+                                                            scale: block.name === "AuraGen" ? 2 : 1,
                                                         }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
                                                         transition={{ duration: 0.4 }}
@@ -217,7 +214,6 @@ export default function App() {
                                             </AnimatePresence>
                                         </div>
 
-                                        {/* 텍스트 */}
                                         <div className="w-full lg:w-1/2 flex items-center justify-center mb-4 lg:mb-0 px-2 text-center">
                                             <AnimatePresence>
                                                 {isActive && (
@@ -245,7 +241,6 @@ export default function App() {
                                             </AnimatePresence>
                                         </div>
 
-                                        {/* 버튼 */}
                                         <div className="w-full lg:w-1/4 flex justify-center space-x-4">
                                             <AnimatePresence>
                                                 {isActive && (

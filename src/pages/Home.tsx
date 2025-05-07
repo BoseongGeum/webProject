@@ -1,9 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { useImagePreloader } from "../hooks/useImagePreloader";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Home() {
     const navigate = useNavigate();
+
+    const images = [
+        "/images/main/top.jpeg",
+        "/images/main/bottom.jpeg",
+        "/images/main/map_usa.png",
+        "/images/main/map_kor.png",
+    ];
+
+    const loaded = useImagePreloader(images);
+    if (!loaded) return <LoadingScreen isWhite={false} />;
 
     const handleClick = (path: string) => {
         navigate(path);
@@ -71,6 +82,7 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* 중간 배너 영역 */}
             <div className="absolute top-[30vh] left-0 w-full h-[40vh] z-10 flex">
                 <div className="w-full h-full flex items-center justify-center text-center bg-indigo-400 bg-cover bg-center relative">
                     <div className="absolute inset-0 bg-black bg-opacity-40" />
@@ -79,34 +91,27 @@ export default function Home() {
                         <div
                             onClick={() => handleClick("/team1")}
                             className="flex-1 relative group cursor-pointer overflow-hidden"
-                            style={{ backgroundImage: 'url("/images/main/map_usa.png")',
-                            backgroundSize: 'contain',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center',}}
+                            style={{
+                                backgroundImage: 'url("/images/main/map_usa.png")',
+                                backgroundSize: 'contain',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'center',
+                            }}
                         >
-                            {/* 어두운 오버레이 */}
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-300" />
-
-                            {/* 텍스트 */}
                             <div className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                <div className="flex flex-col text-center">
-                                    {/* 텍스트 */}
-                                    <motion.div
-                                        className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0"
-                                        initial={{ opacity: 0, scale: 0.8 }}  // 초기 상태에서 텍스트 크기 작게 설정
-                                        animate={{ opacity: 1, scale: 1 }}   // 호버 시 텍스트가 확대되며 나타나도록 설정
-                                        exit={{ opacity: 0, scale: 0.8 }}    // exit 애니메이션도 설정 (호버 해제 시 크기 축소)
-                                        transition={{
-                                            duration: 0.5,  // 애니메이션 지속 시간
-                                            ease: "easeOut",  // 자연스러운 효과를 위해 easeOut 사용
-                                        }}
-                                        whileHover={{ scale: 1.2 }}  // 호버 시 텍스트가 더 확대됨
-                                    >
-                                        Defence Business<br />
-                                        미국 본사<br />
-                                        Exclusive 독점 제품
-                                    </motion.div>
-                                </div>
+                                <motion.div
+                                    className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    whileHover={{ scale: 1.2 }}
+                                >
+                                    Defence Business<br />
+                                    미국 본사<br />
+                                    Exclusive 독점 제품
+                                </motion.div>
                             </div>
                         </div>
 
@@ -114,34 +119,27 @@ export default function Home() {
                         <div
                             onClick={() => handleClick("/team2")}
                             className="flex-1 relative group cursor-pointer overflow-hidden"
-                            style={{ backgroundImage: 'url("/images/main/map_kor.png")',
-                            backgroundSize: 'contain',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center',}}
+                            style={{
+                                backgroundImage: 'url("/images/main/map_kor.png")',
+                                backgroundSize: 'contain',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'center',
+                            }}
                         >
-                            {/* 어두운 오버레이 */}
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-300" />
-
-                            {/* 텍스트 */}
                             <div className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                <div className="flex flex-col text-center">
-                                    {/* 텍스트 */}
-                                    <motion.div
-                                        className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0"
-                                        initial={{ opacity: 0, scale: 0.8 }}  // 초기 상태에서 텍스트 크기 작게 설정
-                                        animate={{ opacity: 1, scale: 1 }}   // 호버 시 텍스트가 확대되며 나타나도록 설정
-                                        exit={{ opacity: 0, scale: 0.8 }}    // exit 애니메이션도 설정 (호버 해제 시 크기 축소)
-                                        transition={{
-                                            duration: 0.5,  // 애니메이션 지속 시간
-                                            ease: "easeOut",  // 자연스러운 효과를 위해 easeOut 사용
-                                        }}
-                                        whileHover={{ scale: 1.2 }}  // 호버 시 텍스트가 더 확대됨
-                                    >
-                                        Global Sourcing &<br/>
-                                        Trading Business<br/>
-                                        한국연락사무소
-                                    </motion.div>
-                                </div>
+                                <motion.div
+                                    className="absolute inset-0 flex items-center justify-center text-white text-2xl opacity-0"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    whileHover={{ scale: 1.2 }}
+                                >
+                                    Global Sourcing &<br />
+                                    Trading Business<br />
+                                    한국연락사무소
+                                </motion.div>
                             </div>
                         </div>
                     </div>

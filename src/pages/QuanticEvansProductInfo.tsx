@@ -1,19 +1,23 @@
 import React from "react";
-import {AnimatePresence, motion} from "framer-motion";
-import {Link} from "react-router-dom";
-import {ChevronRight} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
+import { useImagePreloader } from "../hooks/useImagePreloader";
+import LoadingScreen from "../components/LoadingScreen";
 
 const QuanticEvansProductInfo: React.FC = () => {
+    const images = ["/images/team1/main/QuanticEvansLogo.png"];
+    const loaded = useImagePreloader(images);
+    if (!loaded) return <LoadingScreen isWhite={true} />;
+
     return (
         <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
-
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
-
                 <div className="mb-4">
                     <AnimatePresence>
                         <motion.img
                             src="/images/team1/main/QuanticEvansLogo.png"
-                            alt={ "QuanticEvansLogo" }
+                            alt={"QuanticEvansLogo"}
                             className="h-20 object-contain"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -28,6 +32,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                         군용 항공우주 및 방위 산업의 신뢰받는 커패시터 공급업체
                     </h2>
                 </div>
+
                 <div className="text-left text-lg text-gray-500 mb-20">
                     <p className="mb-2">
                         Quantic™ Evans 커패시터는 최신 드론 대응(C-UAS) 시스템에 최적화된 제품입니다.
@@ -42,7 +47,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                         초저 ESR 특성으로 송신 펄스 주기 중 전압 강하를 최소화하며,
                         전류 제한이 없어 데드 쇼트 상태에서도 반복 방전이 가능하고 손상 없이 작동합니다.
                     </p>
-                    <br/>
+                    <br />
                     <p className="mb-2 text-yellow-600">
                         Quantic Evans는 지난 25년 동안 Tier 1 및 Tier 2 방산업체들과 긴밀하게 협력하며,
                         국가 안보를 위한 주요 프로그램과 플랫폼 지원에 기여해 왔습니다.
@@ -56,9 +61,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                             C-UAS/드론 방어 무기 시스템용 고전력 밀도 커패시터
                         </p>
                         <div className="flex mt-1 h-[1.5px]">
-                            {/* 빨간 선 */}
                             <div className="bg-red-800 w-20 border border-red-800" />
-                            {/* 이어지는 회색 선 */}
                             <div className="flex-1 bg-gray-200" />
                         </div>
                     </div>
@@ -78,13 +81,9 @@ const QuanticEvansProductInfo: React.FC = () => {
 
                 <div className="text-left space-y-10 font-bold leading-relaxed mb-20">
                     <div className="inline-block">
-                        <p className="text-blue-900 text-3xl inline-block">
-                            주요 특징
-                        </p>
+                        <p className="text-blue-900 text-3xl inline-block">주요 특징</p>
                         <div className="flex mt-1 h-[1.5px]">
-                            {/* 빨간 선 */}
                             <div className="bg-red-800 w-20 border border-red-800" />
-                            {/* 이어지는 회색 선 */}
                             <div className="flex-1 bg-gray-200" />
                         </div>
                     </div>
@@ -102,13 +101,9 @@ const QuanticEvansProductInfo: React.FC = () => {
 
                 <div className="text-left space-y-10 font-bold leading-relaxed mb-20">
                     <div className="inline-block">
-                        <p className="text-blue-900 text-3xl inline-block">
-                            Quantic Evans에 대하여
-                        </p>
+                        <p className="text-blue-900 text-3xl inline-block">Quantic Evans에 대하여</p>
                         <div className="flex mt-1 h-[1.5px]">
-                            {/* 빨간 선 */}
                             <div className="bg-red-800 w-20 border border-red-800" />
-                            {/* 이어지는 회색 선 */}
                             <div className="flex-1 bg-gray-200" />
                         </div>
                     </div>
@@ -127,7 +122,6 @@ const QuanticEvansProductInfo: React.FC = () => {
                 </div>
 
                 <div className="w-full flex items-center justify-between mt-12">
-                    {/* "더 보기" 버튼 (가운데) */}
                     <div className="flex justify-center w-full text-center ml-28">
                         <AnimatePresence>
                             <motion.a
@@ -139,15 +133,14 @@ const QuanticEvansProductInfo: React.FC = () => {
                                 href="https://www.quanticevans.com/categories/square"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                        >
-                            <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
-                                더 보기
-                            </button>
+                            >
+                                <button className="bg-red-700 text-white py-2 px-6 rounded-full text-lg font-bold hover:bg-red-800">
+                                    더 보기
+                                </button>
                             </motion.a>
                         </AnimatePresence>
                     </div>
 
-                    {/* "제품문의" 버튼 (오른쪽) */}
                     <AnimatePresence>
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}

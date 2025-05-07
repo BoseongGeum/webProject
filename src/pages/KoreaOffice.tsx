@@ -1,28 +1,41 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "../components/SlideLayout";
+import { useImagePreloader } from "../hooks/useImagePreloader";
+import LoadingScreen from "../components/LoadingScreen";
 
 const slides = [
     {
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
         title: "Your Idea, Made Real\nwith CBOL",
-        description: "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
-        rightImages: ["/images/team2/koreaOffice/koreaOffice2.jpg"]
+        description:
+            "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
+        rightImages: ["/images/team2/koreaOffice/koreaOffice2.jpg"],
     },
     {
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
         title: "Contract Manufacturing\n OEM 부품 제조와 공급 서비스",
-        description: "한국 및 아시아 전역의 우수 파트너사와 함께\n각 공정을 면밀히 검토하고,\n최상의 품질을 완성합니다.",
-        rightImages: ["/images/team2/koreaOffice/koreaOffice3.gif", "/images/team2/koreaOffice/koreaOffice4.jpg"
-            , "/images/team2/koreaOffice/koreaOffice5.jpg", "/images/team2/koreaOffice/koreaOffice6.jpg"
-            , "/images/team2/koreaOffice/koreaOffice7.jpg", "/images/team2/koreaOffice/koreaOffice8.jpg"
-        ]
-    }
+        description:
+            "한국 및 아시아 전역의 우수 파트너사와 함께\n각 공정을 면밀히 검토하고,\n최상의 품질을 완성합니다.",
+        rightImages: [
+            "/images/team2/koreaOffice/koreaOffice3.gif",
+            "/images/team2/koreaOffice/koreaOffice4.jpg",
+            "/images/team2/koreaOffice/koreaOffice5.jpg",
+            "/images/team2/koreaOffice/koreaOffice6.jpg",
+            "/images/team2/koreaOffice/koreaOffice7.jpg",
+            "/images/team2/koreaOffice/koreaOffice8.jpg",
+        ],
+    },
 ];
 
 export const KoreaOffice = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
+    const imagePaths = slides.flatMap((slide) => [slide.bgImage, ...slide.rightImages]);
+    const loaded = useImagePreloader(imagePaths);
+
     useEffect(() => {
+        if (!loaded) return;
+
         const handleWheel = (e: WheelEvent) => {
             if (e.deltaY > 50 && activeIndex < slides.length - 1) {
                 setActiveIndex((prev) => prev + 1);
@@ -33,7 +46,9 @@ export const KoreaOffice = () => {
 
         window.addEventListener("wheel", handleWheel, { passive: true });
         return () => window.removeEventListener("wheel", handleWheel);
-    }, [activeIndex]);
+    }, [activeIndex, loaded]);
+
+    if (!loaded) return <LoadingScreen isWhite={true} />;
 
     return (
         <div className="w-screen h-screen overflow-hidden">
@@ -43,7 +58,7 @@ export const KoreaOffice = () => {
                         key={i}
                         onClick={() => setActiveIndex(i)}
                         className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                            i === activeIndex ? 'bg-white' : 'bg-gray-500'
+                            i === activeIndex ? "bg-white" : "bg-gray-500"
                         }`}
                     />
                 ))}

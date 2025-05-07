@@ -5,21 +5,21 @@ type SlideLayoutProps = {
     title: string;
     description: string;
     rightImages: string[];
-    layout?: "default" | "zigzag"; // ← layout prop 추가
+    layout?: "default" | "zigzag";
 };
 
 export const SlideLayout = ({
-                                     bgImage,
-                                     title,
-                                     description,
-                                     rightImages,
-                                     layout = "default",
-                                 }: SlideLayoutProps) => {
+                                bgImage,
+                                title,
+                                description,
+                                rightImages,
+                                layout = "default",
+                            }: SlideLayoutProps) => {
     const isGridLayout = rightImages.length > 1;
 
     return (
-        <div className="w-screen h-screen flex">
-            {/* Left */}
+        <div className="w-screen h-screen flex overflow-hidden">
+            {/* Left Side */}
             <div
                 className="w-1/2 h-full relative bg-cover bg-center"
                 style={{ backgroundImage: `url(${bgImage})` }}
@@ -65,7 +65,7 @@ export const SlideLayout = ({
             </div>
 
             {/* Right Side */}
-            <div className="w-1/2 h-full">
+            <div className="w-1/2 h-full overflow-hidden">
                 {layout === "zigzag" ? (
                     <motion.div
                         className="flex flex-col justify-between w-full h-full p-8 pt-20"

@@ -1,16 +1,30 @@
 import React from "react";
-import {AnimatePresence, motion} from "framer-motion";
-import {Link} from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useImagePreloader } from "../hooks/useImagePreloader";
+import LoadingScreen from "../components/LoadingScreen";
 
 const AuraGenProductInfo: React.FC = () => {
+    const images = [
+        "/images/team1/main/AuraGenLogo-black.svg",
+        "/images/team1/AuraGen/size.jpg",
+        "/images/team1/AuraGen/cutout.gif",
+        "/images/team1/AuraGen/measure5kw.gif",
+        "/images/team1/AuraGen/measure8kw.gif",
+        "/images/team1/AuraGen/measure15kw.gif",
+        "/images/team1/AuraGen/measure20kw.gif",
+    ];
+
+    const loaded = useImagePreloader(images);
+    if (!loaded) return <LoadingScreen isWhite={true} />;
+
     return (
         <div className="w-full min-h-screen font-bold py-20 mt-8">
-
             <div className="max-w-7xl mx-auto px-4 lg:px-0 mb-4">
                 <AnimatePresence>
                     <motion.img
                         src="/images/team1/main/AuraGenLogo-black.svg"
-                        alt={ "AuraGenLogo" }
+                        alt={"AuraGenLogo"}
                         className="h-20 object-contain"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
