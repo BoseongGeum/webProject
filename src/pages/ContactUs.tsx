@@ -25,7 +25,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 {/* 지도 + 연락처 */}
-                <div className="flex flex-col lg:flex-row w-full h-[600px]">
+                <div className="flex flex-col lg:flex-row w-full h-full">
                     <div className="w-full lg:w-3/4">
                         <iframe
                             src="https://naver.me/xa5zJAh3"
