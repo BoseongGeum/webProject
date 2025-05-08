@@ -1,9 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(true);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        if (location.pathname === "/") {
+            // 현재 위치가 "/"면 강제로 새로고침
+            window.location.reload();
+        } else {
+            navigate("/");
+        }
+        setIsOpen(true);
+    };
 
     return (
         <div
@@ -15,9 +27,8 @@ export default function Navbar() {
             <div className="bg-black bg-opacity-70 text-white w-44 px-3 py-2 flex items-center justify-center rounded-b-full shadow-lg
                 sm:w-64 sm:px-4 sm:py-3"
             >
-                <Link
-                    to="/"
-                    onClick={() => setIsOpen(true)}
+                <button
+                    onClick={handleLogoClick}
                     className="transition-transform duration-300 hover:scale-105"
                 >
                     <img
@@ -25,7 +36,7 @@ export default function Navbar() {
                         alt="CBOL Logo"
                         className="h-8 w-auto sm:h-10"
                     />
-                </Link>
+                </button>
             </div>
 
             {/* 토글 버튼 */}
