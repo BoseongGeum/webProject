@@ -37,7 +37,7 @@ const blocks = [
         id: 3,
         bgImage: "/images/team1/main/AuraGen.png",
         mbImage: "/images/team1/main/AuraGen-mb.jpg",
-        logoImage: "/images/team1/main/AuraGenLogo.png",
+        logoImage: "/images/team1/main/AuraGenLogo-white.png",
         productInfo: "/team1/auraGenProductInfo",
         managerInfo: "/team1/auraGenManagerInfo",
         name: "AuraGen",
@@ -77,7 +77,7 @@ export default function Team1() {
     };
 
     return (
-        <div className="flex flex-col h-screen w-full overflow-hidden font-bold relative text-sm md:text-base touch-manipulation select-none">
+        <div className="flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
             <div className="absolute inset-0 bg-black bg-opacity-75 z-0" />
 
             <div className="flex flex-col h-full transition-all ease-in-out">
@@ -101,7 +101,7 @@ export default function Team1() {
                             onTouchEnd={handleReset}
                         >
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-500 z-10" />
-                            <div className="relative z-20 flex w-full h-full px-4 md:px-10 py-4 items-center justify-between">
+                            <div className="relative z-20 flex w-full h-full px-2 sm:px-6 md:px-10 py-4 items-center justify-between">
                                 {isMobile ? (
                                     <div className="flex flex-row w-full h-full">
                                         <div className="w-1/3 flex items-center justify-center">
@@ -127,7 +127,7 @@ export default function Team1() {
                                                     {isActive && (
                                                         <motion.div
                                                             key={`text-${block.id}`}
-                                                            className="whitespace-pre-line text-yellow-300 text-sm leading-relaxed"
+                                                            className="whitespace-pre-line text-yellow-300 text-[clamp(12px,2vw,16px)] leading-relaxed"
                                                             initial={{ opacity: 0 }}
                                                             animate={{ opacity: 1 }}
                                                             exit={{ opacity: 0 }}
@@ -160,12 +160,9 @@ export default function Team1() {
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
-                                                                className="w-24 px-2 py-1 border-2 border-y-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-lg text-center flex items-center justify-center"
+                                                                className="w-24 md:w-28 px-2 py-1 border-2 border-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-[clamp(13px,1vw,17px)] text-center flex items-center justify-center"
                                                             >
-                                                                <Link
-                                                                    to={block.productInfo}
-                                                                    className="w-full h-full flex items-center justify-center"
-                                                                >
+                                                                <Link to={block.productInfo} className="w-full h-full flex items-center justify-center">
                                                                     제품정보
                                                                 </Link>
                                                             </motion.div>
@@ -177,12 +174,9 @@ export default function Team1() {
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
-                                                                className="w-24 px-2 py-1 border-2 border-y-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-lg text-center flex items-center justify-center"
+                                                                className="w-24 md:w-28 px-2 py-1 border-2 border-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-[clamp(13px,1vw,17px)] text-center flex items-center justify-center"
                                                             >
-                                                                <Link
-                                                                    to={block.managerInfo}
-                                                                    className="w-full h-full flex items-center justify-center"
-                                                                >
+                                                                <Link to={block.managerInfo} className="w-full h-full flex items-center justify-center">
                                                                     제품문의
                                                                 </Link>
                                                             </motion.div>
@@ -203,10 +197,7 @@ export default function Team1() {
                                                         alt={`${block.name} Logo`}
                                                         className="h-16 md:h-20 object-contain"
                                                         initial={{ opacity: 0, scale: 0.8 }}
-                                                        animate={{
-                                                            opacity: 1,
-                                                            scale: block.name === "AuraGen" ? 2 : 1,
-                                                        }}
+                                                        animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
                                                         transition={{ duration: 0.4 }}
                                                     />
@@ -219,7 +210,7 @@ export default function Team1() {
                                                 {isActive && (
                                                     <motion.div
                                                         key={`text-${block.id}`}
-                                                        className="whitespace-pre-line text-yellow-300 text-sm md:text-lg leading-relaxed"
+                                                        className="whitespace-pre-line text-yellow-300 text-[clamp(14px,1.2vw,18px)] leading-relaxed"
                                                         initial={{ opacity: 0 }}
                                                         animate={{ opacity: 1 }}
                                                         exit={{ opacity: 0 }}
@@ -255,7 +246,7 @@ export default function Team1() {
                                                         >
                                                             <Link
                                                                 to={block.productInfo}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)] text-center flex items-center justify-center"
                                                             >
                                                                 제품정보
                                                             </Link>
@@ -271,7 +262,7 @@ export default function Team1() {
                                                         >
                                                             <Link
                                                                 to={block.managerInfo}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-sm md:text-base text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)] text-center flex items-center justify-center"
                                                             >
                                                                 제품문의
                                                             </Link>
