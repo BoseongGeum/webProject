@@ -85,7 +85,7 @@ export default function Home() {
                 className="absolute top-[33vh] left-0 w-full h-[33vh] z-10 flex"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.5 }}
+                transition={{ duration: 1, delay: 1.6 }}
             >
                 <div className="w-full h-full flex items-center justify-center text-center bg-indigo-400 bg-cover bg-center bg-opacity-90 relative">
                     <div className="absolute inset-0 bg-black bg-opacity-40" />
@@ -102,7 +102,7 @@ export default function Home() {
                             }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: 1.7 }}
+                            transition={{ duration: 1, delay: 2.0 }}
                         >
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-300" />
                             <div className="absolute inset-0 flex items-center justify-center text-white text-[clamp(14px,1.2vw,20px)] opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -133,7 +133,7 @@ export default function Home() {
                             }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: 2.0 }}
+                            transition={{ duration: 1, delay: 2.3 }}
                         >
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-300" />
                             <div className="absolute inset-0 flex items-center justify-center text-white text-[clamp(14px,1.2vw,20px)] opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -142,7 +142,7 @@ export default function Home() {
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    transition={{ duration: 0.5, ease: "easeOut"}}
                                     whileHover={{ scale: 1.2 }}
                                 >
                                     Global Sourcing &<br />
