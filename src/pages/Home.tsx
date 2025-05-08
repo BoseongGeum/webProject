@@ -9,8 +9,8 @@ export default function Home() {
     const images = [
         "/images/main/top.jpeg",
         "/images/main/bottom.jpeg",
-        "/images/main/map_usa.png",
-        "/images/main/map_kor.png",
+        "/images/main/map-usa.png",
+        "/images/main/map-kor.png",
     ];
 
     const loaded = useImagePreloader(images);
@@ -84,15 +84,15 @@ export default function Home() {
 
             {/* 중간 배너 영역 */}
             <div className="absolute top-[30vh] left-0 w-full h-[40vh] z-10 flex">
-                <div className="w-full h-full flex items-center justify-center text-center bg-indigo-400 bg-cover bg-center relative">
+                <div className="w-full h-full flex items-center justify-center text-center bg-indigo-400 bg-cover bg-center bg-opacity-90 relative">
                     <div className="absolute inset-0 bg-black bg-opacity-40" />
                     <div className="flex w-full h-full">
                         {/* 팀1 */}
                         <div
                             onClick={() => handleClick("/team1")}
-                            className="flex-1 relative group cursor-pointer overflow-hidden"
+                            className="flex-1 relative group cursor-pointer overflow-hidden shadow-gray-700 shadow-sm"
                             style={{
-                                backgroundImage: 'url("/images/main/map_usa.png")',
+                                backgroundImage: 'url("/images/main/map-usa.png")',
                                 backgroundSize: 'contain',
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: 'center',
@@ -118,9 +118,9 @@ export default function Home() {
                         {/* 팀2 */}
                         <div
                             onClick={() => handleClick("/team2")}
-                            className="flex-1 relative group cursor-pointer overflow-hidden"
+                            className="flex-1 relative group cursor-pointer overflow-hidden shadow-gray-700 shadow-sm"
                             style={{
-                                backgroundImage: 'url("/images/main/map_kor.png")',
+                                backgroundImage: 'url("/images/main/map-kor.png")',
                                 backgroundSize: 'contain',
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: 'center',

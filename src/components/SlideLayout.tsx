@@ -97,7 +97,7 @@ export const SlideLayout = ({
                     </motion.div>
                 ) : isGridLayout ? (
                     <motion.div
-                        className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full items-center justify-center p-4 pt-20"
+                        className="grid grid-cols-2 grid-rows-3 gap-4 w-full h-full items-center justify-center p-4 pt-20"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -107,7 +107,7 @@ export const SlideLayout = ({
                                 key={index}
                                 src={src}
                                 alt={`koreaOffice${index}`}
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-cover"
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 1.5 + index * 0.15, duration: 0.6, ease: "easeOut" }}

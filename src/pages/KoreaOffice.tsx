@@ -17,14 +17,12 @@ const slides = [
         description:
             "한국 및 아시아 전역의 우수 파트너사와 함께\n각 공정을 면밀히 검토하고,\n최상의 품질을 완성합니다.",
         rightImages: [
-            "/images/team2/koreaOffice/koreaOffice3.gif",
-            "/images/team2/koreaOffice/koreaOffice4.jpg",
-            "/images/team2/koreaOffice/koreaOffice5.jpg",
-            "/images/team2/koreaOffice/koreaOffice6.jpg",
-            "/images/team2/koreaOffice/koreaOffice7.jpg",
-            "/images/team2/koreaOffice/koreaOffice8.jpg",
-            "/images/team2/koreaOffice/koreaOffice9.jpg",
-            "/images/team2/koreaOffice/koreaOffice10.jpg",
+            "/images/team2/koreaOffice/koreaOffice3.png",
+            "/images/team2/koreaOffice/koreaOffice4.png",
+            "/images/team2/koreaOffice/koreaOffice5.png",
+            "/images/team2/koreaOffice/koreaOffice6.png",
+            "/images/team2/koreaOffice/koreaOffice7.png",
+            "/images/team2/koreaOffice/koreaOffice8.png",
         ],
     },
 ];

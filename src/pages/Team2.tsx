@@ -34,14 +34,14 @@ export default function Team2() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
             >
+                <div className="w-full pl-8">
+                    <GoMainButton />
+                </div>
                 <img
                     src="/images/team2/team2main.png"
                     alt="Team2 Banner"
                     className="w-full h-full object-contain"
                 />
-                <div className="w-full pl-8">
-                    <GoMainButton />
-                </div>
             </motion.div>
 
             {/* 우측 1/3: 로고 + 텍스트 */}
