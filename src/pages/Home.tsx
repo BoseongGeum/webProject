@@ -82,7 +82,7 @@ export default function Home() {
 
             {/* 중간 배너 영역 */}
             <motion.div
-                className="absolute top-[33vh] left-0 w-full h-[33vh] z-10 flex"
+                className="absolute top-[33vh] left-0 w-full h-[34vh] z-10 flex"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.6 }}

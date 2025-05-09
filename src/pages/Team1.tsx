@@ -8,7 +8,8 @@ const blocks = [
     {
         id: 1,
         bgImage: "/images/team1/main/PIC.png",
-        mbImage: "/images/team1/main/PIC-mb.jpg",
+        mdImage: "/images/team1/main/PIC-md.png",
+        smImage: "/images/team1/main/PIC-sm.png",
         logoImage: "/images/team1/main/PICLogo.svg",
         productInfo: "/team1/picProductInfo",
         managerInfo: "/team1/picManagerInfo",
@@ -22,7 +23,8 @@ const blocks = [
     {
         id: 2,
         bgImage: "/images/team1/main/QuanticEvans.png",
-        mbImage: "/images/team1/main/QuanticEvans-mb.jpg",
+        mdImage: "/images/team1/main/QuanticEvans-md.png",
+        smImage: "/images/team1/main/QuanticEvans-sm.png",
         logoImage: "/images/team1/main/QuanticEvansLogo.png",
         productInfo: "/team1/quanticEvansProductInfo",
         managerInfo: "/team1/quanticEvansManagerInfo",
@@ -36,7 +38,8 @@ const blocks = [
     {
         id: 3,
         bgImage: "/images/team1/main/AuraGen.png",
-        mbImage: "/images/team1/main/AuraGen-mb.jpg",
+        mdImage: "/images/team1/main/AuraGen-md.png",
+        smImage: "/images/team1/main/AuraGen-sm.png",
         logoImage: "/images/team1/main/AuraGenLogo-white.png",
         productInfo: "/team1/auraGenProductInfo",
         managerInfo: "/team1/auraGenManagerInfo",
@@ -52,18 +55,21 @@ const blocks = [
 export default function Team1() {
     const [activeBlock, setActiveBlock] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
 
-    const imagePaths = blocks.flatMap(b => [b.bgImage, b.mbImage, b.logoImage]);
+    const imagePaths = blocks.flatMap(b => [b.bgImage, b.mdImage, b.logoImage]);
     const loaded = useImagePreloader(imagePaths);
 
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 1024);
+        const updateDeviceSize = () => {
+            const width = window.innerWidth;
+            setIsMobile(width <= 640);
+            setIsTablet(width > 640 && width <= 1024);
         };
 
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
+        updateDeviceSize();
+        window.addEventListener("resize", updateDeviceSize);
+        return () => window.removeEventListener("resize", updateDeviceSize);
     }, []);
 
     if (!loaded) return <LoadingScreen isWhite={false} />;
@@ -83,7 +89,11 @@ export default function Team1() {
             <div className="flex flex-col h-full transition-all ease-in-out">
                 {blocks.map((block) => {
                     const isActive = activeBlock === block.id;
-                    const bgImage = isMobile ? block.mbImage : block.bgImage;
+                    const bgImage = isMobile
+                        ? block.smImage
+                        : isTablet
+                            ? block.mdImage
+                            : block.bgImage;
 
                     return (
                         <motion.div
@@ -93,7 +103,6 @@ export default function Team1() {
                                 backgroundImage: `url(${bgImage})`,
                                 flexGrow: isActive ? 1.15 : 1,
                                 flexBasis: 0,
-                                minHeight: "80px",
                             }}
                             onMouseEnter={() => handleInteraction(block.id)}
                             onMouseLeave={handleReset}
@@ -102,7 +111,7 @@ export default function Team1() {
                         >
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-500 z-10" />
                             <div className="relative z-20 flex w-full h-full px-2 sm:px-6 md:px-10 py-4 items-center justify-between">
-                                {isMobile ? (
+                                {isTablet ? (
                                     <div className="flex flex-row w-full h-full">
                                         <div className="w-1/3 flex items-center justify-center">
                                             <AnimatePresence>
