@@ -3,6 +3,7 @@ import { SlideLayout } from "../components/SlideLayout";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 import LoadingScreen from "../components/LoadingScreen";
 import { useSwipeable } from "react-swipeable";
+import { AnimatePresence, motion } from "framer-motion";
 
 const slides = [
     {
@@ -76,22 +77,43 @@ export const KoreaOffice = () => {
 
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
+    const indicatorButtons = (
+        <div className={`flex gap-2 ${isMobile ? "justify-center mt-4" : "absolute left-6 top-1/2 transform -translate-y-1/2 flex-col z-50"}`}>
+            {slides.map((_, i) => (
+                <button
+                    key={i}
+                    onClick={() => setActiveIndex(i)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        i === activeIndex ? "bg-white" : "bg-gray-500"
+                    }`}
+                />
+            ))}
+        </div>
+    );
+
     return (
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
-            {!isMobile && (
-                <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
-                    {slides.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => setActiveIndex(i)}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                i === activeIndex ? "bg-white" : "bg-gray-500"
-                            }`}
-                        />
-                    ))}
-                </div>
-            )}
-            <SlideLayout {...slides[activeIndex]} key={activeIndex} />
+            {!isMobile && indicatorButtons}
+
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.6 }}
+                    className="w-full h-full"
+                >
+                    <SlideLayout
+                        {...slides[activeIndex]}
+                        activeIndex={activeIndex}
+                        totalSlides={slides.length}
+                        setActiveIndex={setActiveIndex}
+                        isMobile={isMobile}
+                        indicatorButtons={isMobile ? indicatorButtons : null}
+                    />
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 };

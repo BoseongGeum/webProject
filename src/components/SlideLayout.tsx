@@ -8,6 +8,11 @@ type SlideLayoutProps = {
     description: string;
     rightImages: string[];
     layout?: "default" | "zigzag";
+    activeIndex?: number;
+    setActiveIndex?: React.Dispatch<React.SetStateAction<number>>;
+    totalSlides?: number;
+    isMobile?: boolean;
+    indicatorButtons?: React.ReactNode;
 };
 
 export const SlideLayout = ({
@@ -22,7 +27,7 @@ export const SlideLayout = ({
 
     if (isMobile) {
         return (
-            <div className="w-screen h-screen flex flex-col overflow-hidden">
+            <div className="w-screen h-screen flex flex-col overflow-hidden pt-16">
                 {/* 텍스트 + 배경 */}
                 <div
                     className="w-full h-1/2 relative bg-cover bg-center"
@@ -85,7 +90,7 @@ export const SlideLayout = ({
                             ))}
                         </div>
                     ) : isGridLayout ? (
-                        <div className="grid grid-cols-2 gap-2 p-4 w-full h-full">
+                        <div className="grid grid-cols-2 gap-2 p-4 w-full h-full overflow-y-auto">
                             {rightImages.map((src, i) => (
                                 <motion.img
                                     key={i}
@@ -102,7 +107,7 @@ export const SlideLayout = ({
                         <motion.img
                             src={rightImages[0]}
                             alt="single"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-cover"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}
@@ -186,7 +191,7 @@ export const SlideLayout = ({
                     </motion.div>
                 ) : isGridLayout ? (
                     <motion.div
-                        className="grid grid-cols-2 grid-rows-3 gap-4 w-full h-full items-center justify-center p-4 pt-20"
+                        className="grid grid-cols-2 grid-rows-3 gap-4 w-full h-full items-center justify-center p-4 pt-20 overflow-y-auto"
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
