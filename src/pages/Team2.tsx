@@ -15,7 +15,7 @@ export default function Team2() {
         if (imagesLoaded) {
             timeout = setTimeout(() => {
                 setShowContent(true);
-            }, 700); // 최소 0.7초 보여주기
+            }, 700);
         }
 
         return () => clearTimeout(timeout);
@@ -26,36 +26,39 @@ export default function Team2() {
     }
 
     return (
-        <div className="flex w-full h-[calc(100vh-96px)] mt-16 overflow-hidden py-8 bg-white text-black font-bold">
-            {/* 좌측 2/3: 이미지 + 버튼 */}
+        <div className="flex flex-col lg:flex-row w-full h-[calc(100vh-96px)] mt-16 overflow-hidden bg-white text-black font-bold">
+            {/* 좌측(데스크탑) or 상단(모바일): 버튼 + 이미지 */}
             <motion.div
-                className="w-2/3 h-full flex flex-col justify-between"
+                className="lg:w-2/3 w-full h-full flex flex-col"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
             >
-                <div className="w-full pl-8">
+                <div className="w-full pl-8 py-4 lg:pl-8 lg:py-4 order-1">
                     <GoMainButton />
                 </div>
-                <img
-                    src="/images/team2/team2main.png"
-                    alt="Team2 Banner"
-                    className="w-full h-full object-contain"
-                />
+
+                <div className="flex-1 flex items-center justify-center min-h-0 order-2 px-4">
+                    <img
+                        src="/images/team2/team2main.png"
+                        alt="Team2 Banner"
+                        className="max-w-full max-h-full object-contain"
+                    />
+                </div>
             </motion.div>
 
-            {/* 우측 1/3: 로고 + 텍스트 */}
-            <div className="w-1/3 h-full flex flex-col justify-center p-16">
+            {/* 우측(데스크탑) or 하단(모바일): 로고 + 텍스트 */}
+            <div className="lg:w-1/3 w-full h-auto lg:h-full flex flex-col items-center justify-center p-6 lg:p-16 order-3">
                 <motion.img
                     src="/images/logo.png"
                     alt="CBOL Logo"
-                    className="w-96 h-auto mb-6"
+                    className="w-40 sm:w-60 md:w-80 lg:w-96 h-auto mb-4 lg:mb-6 order-3"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1.0 }}
                 />
                 <motion.h1
-                    className="text-5xl md:text-6xl font-bold leading-snug"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left order-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1.5 }}

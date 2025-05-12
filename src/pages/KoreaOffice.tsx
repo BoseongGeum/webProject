@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SlideLayout } from "../components/SlideLayout";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 import LoadingScreen from "../components/LoadingScreen";
+import { useSwipeable } from "react-swipeable";
 
 const slides = [
     {
@@ -29,12 +30,37 @@ const slides = [
 
 export const KoreaOffice = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
     const imagePaths = slides.flatMap((slide) => [slide.bgImage, ...slide.rightImages]);
     const loaded = useImagePreloader(imagePaths);
 
+    const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            if (isMobile && activeIndex < slides.length - 1) {
+                setActiveIndex((prev) => prev + 1);
+            }
+        },
+        onSwipedRight: () => {
+            if (isMobile && activeIndex > 0) {
+                setActiveIndex((prev) => prev - 1);
+            }
+        },
+        trackTouch: true,
+        preventScrollOnSwipe: true,
+    });
+
     useEffect(() => {
-        if (!loaded) return;
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 640);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
+        if (!loaded || isMobile) return;
 
         const handleWheel = (e: WheelEvent) => {
             if (e.deltaY > 50 && activeIndex < slides.length - 1) {
@@ -46,24 +72,25 @@ export const KoreaOffice = () => {
 
         window.addEventListener("wheel", handleWheel, { passive: true });
         return () => window.removeEventListener("wheel", handleWheel);
-    }, [activeIndex, loaded]);
+    }, [activeIndex, loaded, isMobile]);
 
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
     return (
-        <div className="w-screen h-screen overflow-hidden">
-            <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
-                {slides.map((_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => setActiveIndex(i)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                            i === activeIndex ? "bg-white" : "bg-gray-500"
-                        }`}
-                    />
-                ))}
-            </div>
-
+        <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
+            {!isMobile && (
+                <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
+                    {slides.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => setActiveIndex(i)}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                i === activeIndex ? "bg-white" : "bg-gray-500"
+                            }`}
+                        />
+                    ))}
+                </div>
+            )}
             <SlideLayout {...slides[activeIndex]} key={activeIndex} />
         </div>
     );
