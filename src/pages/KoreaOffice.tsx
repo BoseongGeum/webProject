@@ -10,14 +10,14 @@ const slides = [
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
         title: "Your Idea, Made Real\nwith CBOL",
         description:
-            "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
+            "\uC804 \uC138\uACC4 \uACE0\uAC1D\uC744 \uB300\uC0C1\uC73C\uB85C \uB9DE\uCDA4\uD615 \uACF5\uAE09 \uC194\uB8E8\uC158\uC744 \uC81C\uACF5\uD569\uB2C8\uB2E4.\n\uCD5C\uC801\uD654\uB41C OEM \uBD80\uD488 \uAC1C\uBC1C \uBC0F \uC591\uC0B0 \uD488\uC9C8 \uAD00\uB9AC \uC804\uBB38\n\uD56D\uC0C1 \uC2E0\uB8B0\uD560 \uC218 \uC788\uB294 \uD488\uC9C8\uACFC \uD6A8\uC728\uC801\uC778 \uC11C\uBE44\uC2A4\uB97C \uD1B5\uD574 \n\uACE0\uAC1D\uC758 \uC131\uACF5\uC744 \uC9C0\uC6D0\uD569\uB2C8\uB2E4.",
         rightImages: ["/images/team2/koreaOffice/koreaOffice2.avif"],
     },
     {
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
-        title: "Contract Manufacturing\n OEM 부품 제조와 공급 서비스",
+        title: "Contract Manufacturing\n OEM \uBD80\uD488 \uC81C\uC870\uC640 \uACF5\uAE09 \uC11C\uBE44\uC2A4",
         description:
-            "한국 및 아시아 전역의 우수 파트너사와 함께\n각 공정을 면밀히 검토하고,\n최상의 품질을 완성합니다.",
+            "\uD55C\uAD6D \uBC0F \uC544\uC2DC\uC544 \uC804\uC5ED\uC758 \uC6B0\uC218 \uD30C\uD2B8\uB108\uC0AC\uC640 \uD568\uAED8\n\uAC01 \uACF5\uC815\uC744 \uBA74\uBCBD\uD788 \uAC80\uD1A0\uD558\uACE0,\n\uCD5C\uC0C1\uC758 \uD488\uC9C8\uC744 \uC644\uC131\uD569\uB2C8\uB2E4.",
         rightImages: [
             "/images/team2/koreaOffice/koreaOffice3.png",
             "/images/team2/koreaOffice/koreaOffice4.png",
@@ -32,21 +32,13 @@ const slides = [
 export const KoreaOffice = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [direction, setDirection] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const imagePaths = slides.flatMap((slide) => [slide.bgImage, ...slide.rightImages]);
     const loaded = useImagePreloader(imagePaths);
 
     const handlers = useSwipeable({
-        onSwipedLeft: () => {
-            if (isMobile && activeIndex < slides.length - 1) {
-                setActiveIndex((prev) => prev + 1);
-            }
-        },
-        onSwipedRight: () => {
-            if (isMobile && activeIndex > 0) {
-                setActiveIndex((prev) => prev - 1);
-            }
-        },
         trackTouch: true,
         preventScrollOnSwipe: true,
     });
@@ -64,25 +56,39 @@ export const KoreaOffice = () => {
         if (!loaded || isMobile) return;
 
         const handleWheel = (e: WheelEvent) => {
-            if (e.deltaY > 50 && activeIndex < slides.length - 1) {
-                setActiveIndex((prev) => prev + 1);
-            } else if (e.deltaY < -50 && activeIndex > 0) {
-                setActiveIndex((prev) => prev - 1);
+            if (isAnimating) return;
+            setIsAnimating(true);
+            if (e.deltaY > 50) {
+                setDirection(1);
+                setActiveIndex((prev) => (prev + 1) % slides.length);
+            } else if (e.deltaY < -50) {
+                setDirection(-1);
+                setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
             }
+            setTimeout(() => setIsAnimating(false), 800);
         };
 
         window.addEventListener("wheel", handleWheel, { passive: true });
         return () => window.removeEventListener("wheel", handleWheel);
-    }, [activeIndex, loaded, isMobile]);
+    }, [activeIndex, loaded, isMobile, isAnimating]);
 
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
     const indicatorButtons = (
-        <div className={`flex gap-2 ${isMobile ? "justify-center mt-4" : "absolute left-6 top-1/2 transform -translate-y-1/2 flex-col z-50"}`}>
+        <div
+            className={`flex gap-2 ${
+                isMobile
+                    ? "justify-center mt-4"
+                    : "absolute left-6 top-1/2 transform -translate-y-1/2 flex-col z-50"
+            }`}
+        >
             {slides.map((_, i) => (
                 <button
                     key={i}
-                    onClick={() => setActiveIndex(i)}
+                    onClick={() => {
+                        setDirection(i > activeIndex ? 1 : -1);
+                        setActiveIndex(i);
+                    }}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                         i === activeIndex ? "bg-white" : "bg-gray-500"
                     }`}
@@ -91,17 +97,27 @@ export const KoreaOffice = () => {
         </div>
     );
 
+    const variants = {
+        center: { x: 0, y: 0, opacity: 1 },
+        exit: (direction: number) =>
+            isMobile
+                ? { x: direction > 0 ? -300 : 300, opacity: 0 }
+                : { y: direction > 0 ? -300 : 300, opacity: 0 },
+    };
+
     return (
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
             {!isMobile && indicatorButtons}
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                     key={activeIndex}
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 0.6 }}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    custom={direction}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
                     className="w-full h-full"
                 >
                     <SlideLayout

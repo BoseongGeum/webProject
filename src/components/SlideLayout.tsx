@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import {Dispatch, ReactNode, SetStateAction} from "react";
 
 // Props 타입 정의
 type SlideLayoutProps = {
@@ -9,10 +10,10 @@ type SlideLayoutProps = {
     rightImages: string[];
     layout?: "default" | "zigzag";
     activeIndex?: number;
-    setActiveIndex?: React.Dispatch<React.SetStateAction<number>>;
+    setActiveIndex?: Dispatch<SetStateAction<number>>;
     totalSlides?: number;
     isMobile?: boolean;
-    indicatorButtons?: React.ReactNode;
+    indicatorButtons?: ReactNode;
 };
 
 export const SlideLayout = ({
@@ -21,13 +22,22 @@ export const SlideLayout = ({
                                 description,
                                 rightImages,
                                 layout = "default",
+                                isMobile,
+                                indicatorButtons,
                             }: SlideLayoutProps) => {
     const isGridLayout = rightImages.length > 1;
-    const isMobile = useMediaQuery({ maxWidth: 640 });
+    const isMobileView = useMediaQuery({ maxWidth: 640 });
 
-    if (isMobile) {
+    if (isMobileView || isMobile) {
         return (
-            <div className="w-screen h-screen flex flex-col overflow-hidden pt-16">
+            <div className="w-screen h-screen flex flex-col overflow-hidden pt-16 relative">
+                {/* 인디케이터 버튼 (모바일용) */}
+                {indicatorButtons && (
+                    <div className="absolute top-16 left-1/2 transform -translate-x-1/2 z-50">
+                        {indicatorButtons}
+                    </div>
+                )}
+
                 {/* 텍스트 + 배경 */}
                 <div
                     className="w-full h-1/2 relative bg-cover bg-center"
@@ -90,13 +100,13 @@ export const SlideLayout = ({
                             ))}
                         </div>
                     ) : isGridLayout ? (
-                        <div className="grid grid-cols-2 gap-2 p-4 w-full h-full overflow-y-auto">
+                        <div className="grid grid-cols-2 grid-rows-3 gap-2 p-4 w-full h-full overflow-y-auto items-center justify-center">
                             {rightImages.map((src, i) => (
                                 <motion.img
                                     key={i}
                                     src={src}
                                     alt={`img${i}`}
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full object-cover"
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
