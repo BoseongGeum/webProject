@@ -69,7 +69,7 @@ export const KoreaOffice = () => {
 
         const handleWheel = (e: WheelEvent) => {
             if (isAnimating) return;
-
+            setIsAnimating(true);
             if (e.deltaY > 50) {
                 setDirection(1);
                 setActiveIndex((prev) => (prev + 1) % slides.length);
@@ -77,9 +77,7 @@ export const KoreaOffice = () => {
                 setDirection(-1);
                 setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
             }
-
-            setIsAnimating(true);
-            setTimeout(() => setIsAnimating(false), 700);
+            setTimeout(() => setIsAnimating(false), 600);
         };
 
         window.addEventListener("wheel", handleWheel, { passive: true });
@@ -100,12 +98,8 @@ export const KoreaOffice = () => {
                 <button
                     key={i}
                     onClick={() => {
-                        if (!isAnimating) {
-                            setDirection(i > activeIndex ? 1 : -1);
-                            setActiveIndex(i);
-                            setIsAnimating(true);
-                            setTimeout(() => setIsAnimating(false), 700);
-                        }
+                        setDirection(i > activeIndex ? 1 : -1);
+                        setActiveIndex(i);
                     }}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                         i === activeIndex ? "bg-white" : "bg-gray-500"
@@ -118,39 +112,43 @@ export const KoreaOffice = () => {
     const variants = {
         enter: (direction: number) =>
             isMobile
-                ? { x: direction > 0 ? 300 : -300, opacity: 0 }
-                : { y: direction > 0 ? 300 : -300, opacity: 0 },
-        center: { x: 0, y: 0, opacity: 1 },
+                ? { x: direction > 0 ? 300 : -300, opacity: 0, position: "absolute" as const }
+                : { y: direction > 0 ? 300 : -300, opacity: 0, position: "absolute" as const },
+        center: { x: 0, y: 0, opacity: 1, position: "relative" as const },
         exit: (direction: number) =>
             isMobile
-                ? { x: direction > 0 ? -300 : 300, opacity: 0 }
-                : { y: direction > 0 ? -300 : 300, opacity: 0 },
+                ? { x: direction > 0 ? -300 : 300, opacity: 0, position: "absolute" as const }
+                : { y: direction > 0 ? -300 : 300, opacity: 0, position: "absolute" as const },
     };
 
     return (
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
             {!isMobile && indicatorButtons}
 
-            <AnimatePresence custom={direction} mode="wait">
-                <motion.div
-                    key={activeIndex}
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    custom={direction}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="w-full h-full"
-                >
-                    <SlideLayout
-                        {...slides[activeIndex]}
-                        activeIndex={activeIndex}
-                        totalSlides={slides.length}
-                        setActiveIndex={setActiveIndex}
-                        isMobile={isMobile}
-                        indicatorButtons={isMobile ? indicatorButtons : null}
-                    />
-                </motion.div>
+            <AnimatePresence custom={direction} initial={false}>
+                {slides.map((slide, index) =>
+                    index === activeIndex ? (
+                        <motion.div
+                            key={index}
+                            variants={variants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            custom={direction}
+                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                            className="w-full h-full top-0 left-0"
+                        >
+                            <SlideLayout
+                                {...slide}
+                                activeIndex={activeIndex}
+                                totalSlides={slides.length}
+                                setActiveIndex={setActiveIndex}
+                                isMobile={isMobile}
+                                indicatorButtons={isMobile ? indicatorButtons : null}
+                            />
+                        </motion.div>
+                    ) : null
+                )}
             </AnimatePresence>
         </div>
     );
