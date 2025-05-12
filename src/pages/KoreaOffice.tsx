@@ -39,6 +39,18 @@ export const KoreaOffice = () => {
     const loaded = useImagePreloader(imagePaths);
 
     const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            if (isMobile && !isAnimating) {
+                setDirection(1);
+                setActiveIndex((prev) => (prev + 1) % slides.length);
+            }
+        },
+        onSwipedRight: () => {
+            if (isMobile && !isAnimating) {
+                setDirection(-1);
+                setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+            }
+        },
         trackTouch: true,
         preventScrollOnSwipe: true,
     });
@@ -98,6 +110,10 @@ export const KoreaOffice = () => {
     );
 
     const variants = {
+        enter: (direction: number) =>
+            isMobile
+                ? { x: direction > 0 ? 300 : -300, opacity: 0 }
+                : { y: direction > 0 ? 300 : -300, opacity: 0 },
         center: { x: 0, y: 0, opacity: 1 },
         exit: (direction: number) =>
             isMobile
