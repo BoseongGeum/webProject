@@ -120,7 +120,7 @@ export default function Team1() {
                                                         key={`logo-${block.id}`}
                                                         src={block.logoImage}
                                                         alt={`${block.name} Logo`}
-                                                        className="h-16 object-contain"
+                                                        className="h-16 object-contain pl-2"
                                                         initial={{ opacity: 0, scale: 0.8 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}

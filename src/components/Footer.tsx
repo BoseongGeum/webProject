@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* 가운데: 로고 + 저작권 */}
-                <div className="flex items-center text-base gap-3">
+                <div className="flex items-center text-sm gap-3">
                     <img src="/images/logo-white.png" alt="CBOL Logo" className="h-8 w-auto" />
                     <span>© 2025 CBOL. All Rights Reserved.</span>
                 </div>

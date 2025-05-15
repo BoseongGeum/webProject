@@ -68,7 +68,7 @@ const ContactUs: React.FC = () => {
                 {/* 지도 + 연락처 */}
                 <div className="flex flex-col lg:flex-row gap-4 lg:gap-12">
                     {/* 네이버 지도 */}
-                    <div className="w-full lg:w-3/4 h-[300px] lg:h-[500px]">
+                    <div className="w-full lg:w-3/4 h-[300px] lg:h-[450px]">
                         <div
                             ref={mapRef}
                             id="naver-map"
