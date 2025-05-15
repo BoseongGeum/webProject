@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import GoMainButton from "../components/GoMainButton";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 import LoadingScreen from "../components/LoadingScreen";
 
