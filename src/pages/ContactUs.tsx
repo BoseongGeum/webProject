@@ -20,6 +20,7 @@ const ContactUs: React.FC = () => {
 
     useEffect(() => {
         const scriptId = "naver-map-script";
+        const clientId = process.env.REACT_APP_NAVER_MAP_CLIENT_ID || "";
 
         const initMap = () => {
             if (window.naver?.maps && mapRef.current) {
@@ -35,7 +36,7 @@ const ContactUs: React.FC = () => {
         if (!document.getElementById(scriptId)) {
             const script = document.createElement("script");
             script.id = scriptId;
-            script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5yak13i14x`;
+            script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
             script.async = true;
             script.onload = () => {
                 initMap();
