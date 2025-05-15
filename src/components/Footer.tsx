@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
 
     return (
         <footer className="bg-red-800 text-white py-5">
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center font-bold gap-6">
                 {/* 좌측: GoMainButton */}
                 <div>
                     <GoMainButton />
