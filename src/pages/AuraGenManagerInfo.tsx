@@ -10,7 +10,7 @@ const AuraGenManagerInfo: React.FC = () => {
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
     return (
-        <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
+        <div className="w-full bg-white text-black font-bold pt-24">
             <div className="max-w-7xl mx-auto px-4 lg:px-0">
                 <div className="mb-4">
                     <AnimatePresence>

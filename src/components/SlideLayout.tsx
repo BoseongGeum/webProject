@@ -86,19 +86,26 @@ export const SlideLayout = ({
                 {/* 이미지 영역 */}
                 <div className="w-full h-1/2 flex items-center justify-center bg-white">
                     {layout === "zigzag" ? (
-                        <div className="flex flex-col justify-center w-full h-full px-4 py-6 overflow-y-auto">
-                            {rightImages.map((src, i) => (
+                        <motion.div
+                            className="flex flex-col justify-between w-full h-full p-4"
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                        >
+                            {rightImages.map((src, index) => (
                                 <motion.div
-                                    key={i}
-                                    className="w-full h-24 my-1 mx-auto"
-                                    initial={{ opacity: 0, y: 10 }}
+                                    key={index}
+                                    className={`w-[48%] h-[calc(100%/7-4px)] ${
+                                        index % 2 === 0 ? "self-start" : "self-end"
+                                    }`}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
+                                    transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
                                 >
-                                    <img src={src} alt={`img${i}`} className="w-full h-full object-contain" />
+                                    <img src={src} alt={`zigzag${index}`} className="w-full h-full object-contain" />
                                 </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     ) : isGridLayout ? (
                         <div className="grid grid-cols-2 grid-rows-3 gap-2 p-4 w-full h-full overflow-y-auto items-center justify-center">
                             {rightImages.map((src, i) => (

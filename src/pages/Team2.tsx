@@ -26,19 +26,15 @@ export default function Team2() {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row w-full h-[calc(100vh-96px)] mt-16 overflow-hidden bg-white text-black font-bold">
-            {/* 좌측(데스크탑) or 상단(모바일): 버튼 + 이미지 */}
+        <div className="flex flex-col lg:flex-row w-full lg:h-[calc(100vh-96px)] overflow-hidden bg-white text-red-950 font-bold">
+            {/* 좌측(데스크탑) or 상단(모바일): 이미지 */}
             <motion.div
                 className="lg:w-2/3 w-full h-full flex flex-col"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
             >
-                <div className="w-full pl-8 py-4 lg:pl-8 lg:py-4 order-1">
-                    <GoMainButton />
-                </div>
-
-                <div className="flex-1 flex items-center justify-center min-h-0 order-2 px-4">
+                <div className="flex-1 flex items-center justify-center min-h-0 order-2 mt-16 py-4">
                     <img
                         src="/images/team2/team2main.png"
                         alt="Team2 Banner"
@@ -48,7 +44,7 @@ export default function Team2() {
             </motion.div>
 
             {/* 우측(데스크탑) or 하단(모바일): 로고 + 텍스트 */}
-            <div className="lg:w-1/3 w-full h-auto lg:h-full flex flex-col items-center justify-center p-6 lg:p-16 order-3">
+            <div className="lg:w-1/3 w-full h-auto lg:h-full flex flex-col items-center justify-center p-16 order-3">
                 <motion.img
                     src="/images/logo.png"
                     alt="CBOL Logo"

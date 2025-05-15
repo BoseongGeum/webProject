@@ -13,6 +13,7 @@ import AuraGenProductInfo from "./pages/AuraGenProductInfo";
 import ContactUs from "./pages/ContactUs";
 import { KoreaOffice } from "./pages/KoreaOffice";
 import { OurServices } from "./pages/OurServices";
+import Footer from "./components/Footer";
 
 function AppContent() {
     const location = useLocation();
@@ -31,10 +32,11 @@ function AppContent() {
 
     const isTeam1Page = location.pathname.startsWith("/team1/");
     const isTeam2Page = location.pathname.startsWith("/team2/");
+    const isKoreaOfficePage = location.pathname.startsWith("/team2/koreaOffice");
     const isMainNavbarPage = isTeam1Page || isTeam2Page || location.pathname.startsWith("/team2");
 
     return (
-        <>
+        <div className="flex flex-col min-h-screen">
             {/* 네브바 분기 */}
             {isMainNavbarPage ? (
                 <MainNavbar menus={isTeam1Page ? team1Menus : team2Menus} />
@@ -42,21 +44,25 @@ function AppContent() {
                 <Navbar />
             )}
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/team1" element={<Team1 />} />
-                <Route path="/team1/picProductInfo" element={<PICProductInfo />} />
-                <Route path="/team1/picManagerInfo" element={<PICManagerInfo />} />
-                <Route path="/team1/quanticEvansProductInfo" element={<QuanticEvansProductInfo />} />
-                <Route path="/team1/quanticEvansManagerInfo" element={<QuanticEvansManagerInfo />} />
-                <Route path="/team1/auraGenProductInfo" element={<AuraGenProductInfo />} />
-                <Route path="/team1/auraGenManagerInfo" element={<AuraGenManagerInfo />} />
-                <Route path="/team2" element={<Team2 />} />
-                <Route path="/team2/koreaOffice" element={<KoreaOffice />} />
-                <Route path="/team2/ourServices" element={<OurServices />} />
-                <Route path="/team2/contactUs" element={<ContactUs />} />
-            </Routes>
-        </>
+            <main className="flex-1">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/team1" element={<Team1 />} />
+                    <Route path="/team1/picProductInfo" element={<PICProductInfo />} />
+                    <Route path="/team1/picManagerInfo" element={<PICManagerInfo />} />
+                    <Route path="/team1/quanticEvansProductInfo" element={<QuanticEvansProductInfo />} />
+                    <Route path="/team1/quanticEvansManagerInfo" element={<QuanticEvansManagerInfo />} />
+                    <Route path="/team1/auraGenProductInfo" element={<AuraGenProductInfo />} />
+                    <Route path="/team1/auraGenManagerInfo" element={<AuraGenManagerInfo />} />
+                    <Route path="/team2" element={<Team2 />} />
+                    <Route path="/team2/koreaOffice" element={<KoreaOffice />} />
+                    <Route path="/team2/ourServices" element={<OurServices />} />
+                    <Route path="/team2/contactUs" element={<ContactUs />} />
+                </Routes>
+            </main>
+
+            {isMainNavbarPage && !isKoreaOfficePage && <Footer />}
+        </div>
     );
 }
 
