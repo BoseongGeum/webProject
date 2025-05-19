@@ -52,11 +52,11 @@ const MainNavbar: React.FC<MainNavbarProps> = ({ menus }) => {
                 </button>
             </div>
 
-            {/* 데스크탑 메뉴 (원본 유지) */}
+            {/* 데스크탑 메뉴 */}
             <div className="hidden sm:flex flex-1 h-full bg-red-800 text-white font-bold text-xl">
                 {menus.map((menu, index) => {
                     const targetPath = isTeam1Page ? `${menu.path}ProductInfo` : menu.path;
-                    const isActive = location.pathname === targetPath;
+                    const isActive = location.pathname === targetPath || location.pathname === `${menu.path}ManagerInfo`;
 
                     return (
                         <div
@@ -88,7 +88,7 @@ const MainNavbar: React.FC<MainNavbarProps> = ({ menus }) => {
                 <div className="absolute top-16 left-0 w-full bg-white border-t border-gray-200 sm:hidden z-40">
                     {menus.map((menu, index) => {
                         const targetPath = isTeam1Page ? `${menu.path}ProductInfo` : menu.path;
-                        const isActive = location.pathname === targetPath;
+                        const isActive = location.pathname === targetPath || location.pathname === `${menu.path}ManagerInfo`;
 
                         return (
                             <button

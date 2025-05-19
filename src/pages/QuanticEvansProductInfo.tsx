@@ -113,7 +113,7 @@ const QuanticEvansProductInfo: React.FC = () => {
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto sm:mx-auto"
                     >
-                        <button className="w-full sm:w-32 bg-red-700 text-white py-2 px-6 rounded-full text-base sm:text-lg font-bold hover:bg-red-800">
+                        <button className="w-full sm:w-28 bg-red-700 text-white py-2 px-6 rounded-full text-base sm:text-lg font-bold hover:bg-red-800">
                             더 보기
                         </button>
                     </motion.a>
@@ -124,9 +124,9 @@ const QuanticEvansProductInfo: React.FC = () => {
                         exit={{ opacity: 0, y: 10 }}
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.4 }}
-                        className="w-full sm:w-40 px-4 py-2 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 text-base sm:text-lg text-center"
+                        className="w-full sm:w-32 px-4 py-1.5 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 text-base sm:text-lg text-center"
                     >
-                        <Link to={"/team1/auraGenManagerInfo"} className="w-full h-full flex items-center justify-center">
+                        <Link to={"/team1/quanticEvansManagerInfo"} className="w-full h-full flex items-center justify-center">
                             제품문의
                         </Link>
                     </motion.div>
