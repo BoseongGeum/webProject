@@ -10,7 +10,7 @@ const slides = [
         bgImage: "/images/team2/koreaOffice/koreaOffice1.jpg",
         title: "Your Idea, Made Real\nwith CBOL",
         description:
-            "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
+            "전 세계 고객을 대상으로 맞춤형 공급 솔루션을 제공합니다.\n최적화된 OEM 부품 개발 및 양산 품질 관리 전문이며,\n항상 신뢰할 수 있는 품질과 효율적인 서비스를 통해 \n고객의 성공을 지원합니다.",
         rightImages: ["/images/team2/koreaOffice/koreaOffice2.avif"],
     },
     {
@@ -101,7 +101,7 @@ export const KoreaOffice = () => {
                         setDirection(i > activeIndex ? 1 : -1);
                         setActiveIndex(i);
                     }}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-3 h-3 rounded-full transition-all duration-150 ${
                         i === activeIndex ? "bg-white" : "bg-gray-500"
                     }`}
                 />
@@ -112,20 +112,47 @@ export const KoreaOffice = () => {
     const variants = {
         enter: (direction: number) =>
             isMobile
-                ? { x: direction > 0 ? 300 : -300, opacity: 0, position: "absolute" as const }
-                : { y: direction > 0 ? 300 : -300, opacity: 0, position: "absolute" as const },
-        center: { x: 0, y: 0, opacity: 1, position: "relative" as const },
+                ? {
+                    x: direction === 0 ? 0 : direction > 0 ? 150 : -150,
+                    y: 0,
+                    opacity: 0,
+                    position: "absolute" as const,
+                }
+                : {
+                    y: direction === 0 ? 40 : direction > 0 ? 150 : -150,
+                    x: 0,
+                    opacity: 0,
+                    position: "absolute" as const,
+                },
+
+        center: {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            position: "relative" as const,
+        },
+
         exit: (direction: number) =>
             isMobile
-                ? { x: direction > 0 ? -300 : 300, opacity: 0, position: "absolute" as const }
-                : { y: direction > 0 ? -300 : 300, opacity: 0, position: "absolute" as const },
+                ? {
+                    x: direction === 0 ? 0 : direction > 0 ? -150 : 150,
+                    y: 0,
+                    opacity: 0,
+                    position: "absolute" as const,
+                }
+                : {
+                    y: direction === 0 ? -40 : direction > 0 ? -150 : 150,
+                    x: 0,
+                    opacity: 0,
+                    position: "absolute" as const,
+                },
     };
 
     return (
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
             {!isMobile && indicatorButtons}
 
-            <AnimatePresence custom={direction} initial={false}>
+            <AnimatePresence custom={direction} initial={true}>
                 {slides.map((slide, index) =>
                     index === activeIndex ? (
                         <motion.div

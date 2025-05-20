@@ -32,7 +32,7 @@ function AppContent() {
 
     const isTeam1Page = location.pathname.startsWith("/team1/");
     const isTeam2Page = location.pathname.startsWith("/team2/");
-    const isKoreaOfficePage = location.pathname.startsWith("/team2/koreaOffice");
+    const isNotFooterPage = location.pathname.startsWith("/team2/koreaOffice") || location.pathname.startsWith("/team2/ourServices");
     const isMainNavbarPage = isTeam1Page || isTeam2Page || location.pathname.startsWith("/team2");
 
     return (
@@ -61,7 +61,7 @@ function AppContent() {
                 </Routes>
             </main>
 
-            {isMainNavbarPage && !isKoreaOfficePage && <Footer />}
+            {isMainNavbarPage && !isNotFooterPage && <Footer />}
         </div>
     );
 }
