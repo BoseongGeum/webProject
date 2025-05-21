@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import React, { Dispatch, ReactNode, SetStateAction } from "react";
+import {Link} from "react-router-dom";
 
 // Props 타입 정의
 export type CardItem = {
@@ -84,7 +85,7 @@ export const SlideLayout = ({
                     className="w-full h-[40%] relative bg-cover bg-center"
                     style={{ backgroundImage: `url(${bgImage})` }}
                 >
-                    <div className="absolute inset-0 bg-black/80 flex items-center justify-center px-6 py-8">
+                    <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center px-6 py-8">
                         <motion.div
                             className="text-white text-center max-w-[90%]"
                             initial={{ opacity: 0, y: 30 }}
@@ -121,6 +122,29 @@ export const SlideLayout = ({
                                     ))}
                             </div>
                         </motion.div>
+
+                        {layout === "zigzag" && (
+                            <div className="pt-12">
+                                <AnimatePresence>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        transition={{ duration: 0.4 }}
+                                        className="w-24 bg-white text-red-800 px-3 py-2 rounded-full font-bold text-sm hover:bg-red-800 hover:text-white"
+
+                                    >
+                                        <Link
+                                            to={"/team2/contactUs"}
+                                            className="flex justify-center"
+                                        >
+                                            문의하기
+                                        </Link>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -148,9 +172,7 @@ export const SlideLayout = ({
                             ))}
                         </motion.div>
                     ) : isGridLayout ? (
-                        <div
-                            className="grid grid-cols-2 grid-rows-3 gap-2 p-4 w-full h-full overflow-y-auto items-center justify-center"
-                        >
+                        <div className="grid grid-cols-2 grid-rows-3 gap-2 p-4 w-full h-full overflow-y-auto items-center justify-center">
                             {rightContents ? renderCards(rightContents) : renderImageGridItems()}
                         </div>
                     ) : (
@@ -168,7 +190,7 @@ export const SlideLayout = ({
         );
     }
 
-    // 데스크탑 뷰는 변경 없이 유지
+    // 데스크탑 뷰
     return (
         <div className="w-screen h-screen flex overflow-hidden">
             {/* Left */}
@@ -176,9 +198,9 @@ export const SlideLayout = ({
                 className="w-1/2 h-full relative bg-cover bg-center"
                 style={{ backgroundImage: `url(${bgImage})` }}
             >
-                <div className="absolute inset-0 bg-black/80 flex items-center px-12">
+                <div className="absolute inset-0 bg-black/80 flex flex-col justify-between p-16">
                     <motion.div
-                        className="text-white text-left max-w-[80%] ml-8"
+                        className="text-white text-left max-w-[80%] ml-8 flex flex-col h-4/5 items-start justify-center"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
@@ -213,6 +235,28 @@ export const SlideLayout = ({
                                 ))}
                         </div>
                     </motion.div>
+                    {layout === "zigzag" && (
+                        <div className="ml-8 pl-4 pt-20">
+                            <AnimatePresence>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 10 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="w-32 bg-white text-red-800 px-6 py-2 rounded-full font-bold text-base hover:bg-red-800 hover:text-white"
+
+                                >
+                                    <Link
+                                        to={"/team2/contactUs"}
+                                        className="flex justify-center"
+                                    >
+                                        문의하기
+                                    </Link>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -240,9 +284,7 @@ export const SlideLayout = ({
                         ))}
                     </motion.div>
                 ) : isGridLayout ? (
-                    <div
-                        className="grid grid-cols-2 grid-rows-3 gap-6 w-full h-full items-center justify-center p-4 pt-20 overflow-y-auto"
-                    >
+                    <div className="grid grid-cols-2 grid-rows-3 gap-6 w-full h-full items-center justify-center p-4 pt-20 overflow-y-auto">
                         {rightContents ? renderCards(rightContents) : renderImageGridItems()}
                     </div>
                 ) : (

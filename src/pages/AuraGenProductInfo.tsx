@@ -153,7 +153,7 @@ const AuraGenProductInfo: React.FC = () => {
             </section>
 
             {/* 하단 버튼 */}
-            <div className="w-full max-w-7xl mx-auto px-12 sm:px-6 lg:px-6 lg:pl-52 mt-12 flex flex-col sm:flex-row items-center justify-end gap-6">
+            <div className="w-full max-w-7xl mx-auto px-6 lg:pl-52 mt-12 flex flex-col sm:flex-row items-center justify-end gap-6">
                 <motion.a
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
