@@ -97,7 +97,7 @@ const QuanticEvansManagerInfo: React.FC = () => {
                             exit={{ opacity: 0, y: 10 }}
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.4 }}
-                            className="w-full sm:w-32 mx-4 px-4 py-1.5 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 text-sm sm:text-base text-center"
+                            className="w-full sm:w-32 mx-4 px-4 py-1.5 border-2 border-red-700 bg-red-700 text-white hover:bg-red-800 text-base sm:text-lg text-center"
                         >
                             <Link
                                 to="/team1/quanticEvansProductInfo"
