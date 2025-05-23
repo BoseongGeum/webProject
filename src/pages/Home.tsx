@@ -103,7 +103,7 @@ export default function Home() {
                 transition={{ duration: 1.2, ease: "easeOut" }}
             >
                 <img src="/images/main/top.jpeg" alt="top" className="w-full h-full object-cover absolute inset-0 z-0 transition-opacity duration-[1200ms]" />
-                <div className="absolute inset-0 bg-black bg-opacity-60 z-10 transition-all duration-[1200ms]" />
+                <div className="absolute inset-0 bg-black bg-opacity-55 z-10 transition-all duration-[1200ms]" />
                 <motion.div
                     className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-8 sm:px-12 md:px-20"
                     initial={{ opacity: 0, y: 30 }}
@@ -135,7 +135,7 @@ export default function Home() {
                         backgroundRepeat: "no-repeat"
                     }}
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+                <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
                 <motion.div
                     className="relative z-20 h-full flex flex-col justify-end items-end px-8 sm:px-12 md:px-20 pb-52 text-right"
                     initial={{ opacity: 0, y: 30 }}
