@@ -88,19 +88,24 @@ export default function Home() {
                 <div className="relative z-40">
                     <section className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center">
                         <div className="w-full md:w-3/5 flex items-center justify-center p-10">
-                            <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800">
+                            <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800 relative">
                                 <img
                                     src="/images/main/top.jpeg"
                                     alt="Top Visual"
                                     className="w-full h-full object-cover"
                                 />
+                                <div className="absolute inset-0 bg-black/20" />
                             </div>
                         </div>
-                        <div className="w-full md:w-2/5 flex items-center justify-start p-10 bg-black">
+                        <div className="w-full md:w-2/5 flex items-center justify-start p-10">
                             <div className="text-center">
-                                <div className="text-2xl sm:text-3xl md:text-4xl text-white font-bold mb-4">Welcome to our CBOL corporation</div>
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl text-yellow-300 font-bold mb-4">Multi-faceted company</h2>
-                                <p className="text-base sm:text-lg md:text-xl">
+                                <div className="text-2xl sm:text-3xl md:text-4xl text-white font-bold mb-4">
+                                    Welcome to our CBOL corporation
+                                </div>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl text-yellow-300 font-bold mb-4">
+                                    Multi-faceted company
+                                </h2>
+                                <p className="text-base sm:text-lg md:text-xl text-white">
                                     that supplies products to a wide range of industries including <br />
                                     Aerospace, Defense, Space, Energy, Industrial, and Electronics.
                                 </p>
@@ -109,24 +114,25 @@ export default function Home() {
                     </section>
 
                     <section className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center">
-                        <div className="w-full md:w-2/5 flex items-center justify-end p-10 bg-black">
+                        <div className="w-full md:w-2/5 flex items-center justify-end p-10">
                             <div className="text-center">
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl text-yellow-300 font-bold">
                                     Our worldwide network
                                 </h2>
-                                <p className="mt-4 text-base sm:text-lg md:text-xl">
+                                <p className="mt-4 text-base sm:text-lg md:text-xl text-white">
                                     High quality components, assemblies, raw materials, chemicals,<br />
                                     OEM and hard-to-find parts from global suppliers.
                                 </p>
                             </div>
                         </div>
                         <div className="w-full md:w-3/5 flex items-center justify-center p-10">
-                            <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800">
+                            <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800 relative">
                                 <img
                                     src="/images/main/bottom.jpeg"
                                     alt="Bottom Visual"
                                     className="w-full h-full object-cover"
                                 />
+                                <div className="absolute inset-0 bg-black/10" />
                             </div>
                         </div>
                     </section>
