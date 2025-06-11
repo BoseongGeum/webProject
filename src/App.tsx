@@ -38,10 +38,12 @@ function AppContent() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* 네브바 분기 */}
-            {isMainNavbarPage ? (
-                <MainNavbar menus={isTeam1Page ? team1Menus : team2Menus} />
-            ) : (
-                <Navbar />
+            {location.pathname !== '/' && (
+                isMainNavbarPage ? (
+                    <MainNavbar menus={isTeam1Page ? team1Menus : team2Menus} />
+                ) : (
+                    <Navbar />
+                )
             )}
 
             <main className="flex-1">
