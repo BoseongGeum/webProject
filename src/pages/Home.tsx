@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useImagePreloader } from '../hooks/useImagePreloader';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
+import TiltCard from "../components/TiltCard";
 
 const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', delayOrder = 0) => {
     const distance = 60;
@@ -38,6 +39,21 @@ export default function Home() {
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
     const [refSection2, inViewSection2] = useInView({ triggerOnce: true, threshold: 0.2 });
     const [refSection3, inViewSection3] = useInView({ triggerOnce: true, threshold: 0.2 });
+
+    const [section2Entered, setSection2Entered] = useState(false);
+    const [section3Entered, setSection3Entered] = useState(false);
+
+    useEffect(() => {
+        if (inViewSection2 && !section2Entered) {
+            setSection2Entered(true);
+        }
+    }, [inViewSection2, section2Entered]);
+
+    useEffect(() => {
+        if (inViewSection3 && !section3Entered) {
+            setSection3Entered(true);
+        }
+    }, [inViewSection3, section3Entered]);
 
     useEffect(() => {
         if (!loaded) return;
@@ -76,7 +92,7 @@ export default function Home() {
 
     return (
         <main className="bg-black text-white relative overflow-hidden">
-            {/* Loading Curtain Effects */}
+            {/* Curtains */}
             <div className="fixed inset-0 bg-black z-10 pointer-events-none" />
             <div className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none">
                 {redSteps.map(step => (
@@ -97,33 +113,49 @@ export default function Home() {
 
             {phase === 'content' && (
                 <>
-                    <div className="relative z-50"><Navbar /></div>
+                    {/* Navbar */}
+                    <motion.div
+                        className="relative z-50"
+                        initial={{ y: -50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.8, ease: 'easeOut' }}
+                    >
+                        <Navbar />
+                    </motion.div>
 
                     <div className="relative z-40">
                         {/* Section 1 */}
                         <motion.section
                             className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center"
-                            initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
+                            initial="hidden"
+                            animate="visible"
+                            variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
                         >
-                            <motion.div className="w-full md:w-3/5 flex items-center justify-center p-10" variants={dynamicVariants('left', 0)}>
-                                <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800 relative">
+                            <motion.div
+                                className="w-full md:w-3/5 flex items-center justify-center p-10"
+                                variants={dynamicVariants('left', 0)}
+                            >
+                                <TiltCard clip className="w-[80%] aspect-[3/2] border border-gray-800 shadow-xl">
                                     <img src="/images/main/top.jpeg" alt="Top Visual" className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 bg-black/20" />
-                                </div>
+                                </TiltCard>
                             </motion.div>
 
-                            <motion.div className="w-full md:w-2/5 flex flex-col items-center justify-start p-10 space-y-3"
-                                        initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                            <motion.div
+                                className="w-full md:w-2/5 flex flex-col items-center justify-start p-10 space-y-3"
+                                initial="hidden"
+                                animate="visible"
                             >
                                 {textLines1.map((line, i) => (
                                     <div className="overflow-hidden" key={i}>
-                                        <motion.p className={`text-center ${line.style}`}
-                                                  variants={{
-                                                      hidden: { y: '100%', opacity: 0 },
-                                                      visible: { y: '0%', opacity: 1, transition: { duration: 0.8, ease: 'easeOut', delay: i * 0.2 } },
-                                                  }}
-                                                  initial="hidden" animate="visible"
-                                        >{line.text}</motion.p>
+                                        <motion.p
+                                            className={`text-center ${line.style}`}
+                                            initial={{ y: '100%', opacity: 0 }}
+                                            animate={{ y: '0%', opacity: 1 }}
+                                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 + i * 0.3 }}
+                                        >
+                                            {line.text}
+                                        </motion.p>
                                     </div>
                                 ))}
                             </motion.div>
@@ -131,42 +163,47 @@ export default function Home() {
 
                         {/* Section 2 */}
                         <section ref={refSection2} className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center">
-                            <motion.div className="w-full md:w-2/5 flex items-center justify-end p-10"
-                                        initial="hidden" animate={inViewSection2 ? 'visible' : 'hidden'}
-                                        variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                            <motion.div
+                                className="w-full md:w-2/5 flex items-center justify-end p-10"
+                                initial="hidden"
+                                animate={section2Entered ? 'visible' : 'hidden'}
                             >
                                 <div className="text-center w-full">
                                     {textLines2.map((line, i) => (
                                         <div className="overflow-hidden" key={i}>
-                                            <motion.p className={`text-center ${line.style}`}
-                                                      variants={{
-                                                          hidden: { y: '100%', opacity: 0 },
-                                                          visible: {
-                                                              y: '0%', opacity: 1,
-                                                              transition: { duration: 0.8, ease: 'easeOut', delay: i * 0.2 },
-                                                          },
-                                                      }}
-                                                      initial="hidden" animate={inViewSection2 ? 'visible' : 'hidden'}
-                                            >{line.text}</motion.p>
+                                            <motion.p
+                                                className={`text-center ${line.style}`}
+                                                initial={{ y: '100%', opacity: 0 }}
+                                                animate={section2Entered ? { y: '0%', opacity: 1 } : {}}
+                                                transition={{ duration: 0.8, ease: 'easeOut', delay: i * 0.3 }}
+                                            >
+                                                {line.text}
+                                            </motion.p>
                                         </div>
                                     ))}
                                 </div>
                             </motion.div>
 
-                            <motion.div className="w-full md:w-3/5 flex items-center justify-center p-10"
-                                        initial="hidden" animate={inViewSection2 ? 'visible' : 'hidden'} variants={dynamicVariants('down', 1)}
+                            <motion.div
+                                className="w-full md:w-3/5 flex items-center justify-center p-10"
+                                initial="hidden"
+                                animate={section2Entered ? 'visible' : 'hidden'}
+                                variants={dynamicVariants('down', 0)}
                             >
-                                <div className="w-[80%] aspect-[3/2] rounded-xl overflow-hidden shadow-xl border border-gray-800 relative">
+                                <TiltCard className="w-[80%] aspect-[3/2] shadow-xl border border-gray-800 relative bg-black" clip>
                                     <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 bg-black/10" />
-                                </div>
+                                </TiltCard>
                             </motion.div>
                         </section>
 
                         {/* Section 3 */}
                         <section ref={refSection3} className="px-6 py-24 bg-black text-white">
-                            <motion.div className="text-center mb-16"
-                                        initial="hidden" animate={inViewSection3 ? 'visible' : 'hidden'} variants={dynamicVariants('up', 0)}
+                            <motion.div
+                                className="text-center mb-16"
+                                initial="hidden"
+                                animate={section3Entered ? 'visible' : 'hidden'}
+                                variants={dynamicVariants('up', 0)}
                             >
                                 <h2 className="text-5xl font-semibold text-white tracking-tight">Explore Our Teams</h2>
                                 <p className="text-lg text-white mt-4">Click on a region to learn more</p>
@@ -184,15 +221,22 @@ export default function Home() {
                                     img: '/images/main/map-kor.png',
                                     path: '/team2',
                                 }].map((card, i) => (
-                                    <motion.div key={i} onClick={() => navigate(card.path)}
-                                                whileHover={{ y: -6, scale: 1.02 }} transition={{ duration: 0.5 }}
-                                                initial="hidden" animate={inViewSection3 ? 'visible' : 'hidden'}
-                                                variants={dynamicVariants(i % 2 === 0 ? 'left' : 'right', i)}
-                                                className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden shadow-xl cursor-pointer"
+                                    <motion.div
+                                        key={i}
+                                        onClick={() => navigate(card.path)}
+                                        whileHover={{ y: -6, scale: 1.02 }}
+                                        transition={{ duration: 0.5 }}
+                                        initial="hidden"
+                                        animate={section3Entered ? 'visible' : 'hidden'}
+                                        variants={dynamicVariants(i % 2 === 0 ? 'left' : 'right', i)}
+                                        className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden shadow-xl cursor-pointer"
                                     >
                                         <div className="w-full h-80 overflow-hidden">
-                                            <img src={card.img} alt={card.title}
-                                                 className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
+                                            <img
+                                                src={card.img}
+                                                alt={card.title}
+                                                className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                                            />
                                         </div>
                                         <div className="bg-gray-950 border border-gray-700 p-6">
                                             <h3 className="text-2xl font-semibold text-yellow-300 mb-4">{card.title}</h3>
