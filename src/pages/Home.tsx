@@ -79,15 +79,15 @@ export default function Home() {
 
     const textLines1 = [
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
-        { text: "Multi-faceted company", style: "text-3xl sm:text-4xl md:text-5xl text-yellow-300 font-bold" },
-        { text: "that supplies products to a wide range of industries including", style: "text-base sm:text-lg md:text-xl" },
-        { text: "Aerospace, Defense, Space, Energy, Industrial, and Electronics.", style: "text-base sm:text-lg md:text-xl" },
+        { text: "다양한 역량을 갖춘 글로벌 기업", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-300 font-bold" },
+        { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl" },
+        { text: "다양한 산업 분야에 제품을 공급하고 있습니다.", style: "text-base sm:text-lg md:text-xl" },
     ];
 
     const textLines2 = [
-        { text: "Our worldwide network", style: "text-3xl sm:text-4xl md:text-5xl text-yellow-300 font-bold" },
-        { text: "High quality components, assemblies, raw materials, chemicals,", style: "text-base sm:text-lg md:text-xl text-white mt-4" },
-        { text: "OEM and hard-to-find parts from global suppliers.", style: "text-base sm:text-lg md:text-xl text-white" },
+        { text: "전 세계에 구축된 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-300 font-bold" },
+        { text: "글로벌 공급처로부터 고품질 부품, 조립품, 원자재,", style: "text-base sm:text-lg md:text-xl text-white mt-4" },
+        { text: " 화학제품을 비롯해 OEM 및 희귀 부품까지 제공합니다.", style: "text-base sm:text-lg md:text-xl text-white" },
     ];
 
     return (
@@ -205,19 +205,19 @@ export default function Home() {
                                 animate={section3Entered ? 'visible' : 'hidden'}
                                 variants={dynamicVariants('up', 0)}
                             >
-                                <h2 className="text-5xl font-semibold text-white tracking-tight">Explore Our Teams</h2>
-                                <p className="text-lg text-white mt-4">Click on a region to learn more</p>
+                                <h2 className="text-5xl font-semibold text-white tracking-tight">CBOL을 만나보세요</h2>
+                                <p className="text-lg text-white mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
                             </motion.div>
 
                             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                                 {[{
-                                    title: 'United States HQ',
-                                    desc: 'Defense Sector | Exclusive Technology Provider',
+                                    title: '미국 본사',
+                                    desc: '방위 산업 | 독점 기술 제공',
                                     img: '/images/main/map-usa.png',
                                     path: '/team1',
                                 }, {
-                                    title: 'Korea Liaison Office',
-                                    desc: 'Sourcing | Manufacturing | Export Supervision',
+                                    title: '한국 연락 사무소',
+                                    desc: '소싱 | 제조 | 수출 관리',
                                     img: '/images/main/map-kor.png',
                                     path: '/team2',
                                 }].map((card, i) => (
