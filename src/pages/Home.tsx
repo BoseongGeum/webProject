@@ -44,7 +44,7 @@ export default function Home() {
         '/images/main/map-kor.png',
     ];
     const loaded = useImagePreloader(images);
-    const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
+    const [, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
 
     useEffect(() => {
         if (!loaded) return;
