@@ -14,8 +14,8 @@ const TiltCard: React.FC<TiltCardProps> = ({
                                                children,
                                                className = '',
                                                maxTilt = 1,
-                                               maxTranslate = 15,
-                                               maxImageTranslate = 30,
+                                               maxTranslate = 20,
+                                               maxImageTranslate = 40,
                                                disabled = false,
                                                clip = true,
                                            }) => {
