@@ -14,8 +14,8 @@ const TiltCard: React.FC<TiltCardProps> = ({
                                                children,
                                                className = '',
                                                maxTilt = 1,
-                                               maxTranslate = 20,
-                                               maxImageTranslate = 40,
+                                               maxTranslate = 15,
+                                               maxImageTranslate = 30,
                                                disabled = false,
                                                clip = true,
                                            }) => {
@@ -108,7 +108,7 @@ const TiltCard: React.FC<TiltCardProps> = ({
             // 이미지도 같은 easing 사용
             startImgX = imgX;
             startImgY = imgY;
-            targetImgX = offsetX * maxImageTranslate;
+            targetImgX = (offsetX * 1.6) * maxImageTranslate;
             targetImgY = -offsetY * maxImageTranslate;
 
             progress = 0;
