@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
 import { useImagePreloader } from '../hooks/useImagePreloader';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
@@ -22,9 +21,18 @@ const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', del
             opacity: 1,
             x: 0,
             y: 0,
-            transition: { duration: 0.8, ease: 'easeOut', delay: delayOrder * 0.25 },
+            transition: { duration: 0.8, ease: 'easeOut', delay: delayOrder },
         },
     };
+};
+
+const lineVariants = {
+    hidden: { y: '100%', opacity: 0 },
+    visible: (i: number) => ({
+        y: '0%',
+        opacity: 1,
+        transition: { duration: 0.8, ease: 'easeOut', delay: 0.8 + i * 0.4 },
+    }),
 };
 
 export default function Home() {
@@ -37,23 +45,6 @@ export default function Home() {
     ];
     const loaded = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
-    const [refSection2, inViewSection2] = useInView({ triggerOnce: true, threshold: 0.2 });
-    const [refSection3, inViewSection3] = useInView({ triggerOnce: true, threshold: 0.2 });
-
-    const [section2Entered, setSection2Entered] = useState(false);
-    const [section3Entered, setSection3Entered] = useState(false);
-
-    useEffect(() => {
-        if (inViewSection2 && !section2Entered) {
-            setSection2Entered(true);
-        }
-    }, [inViewSection2, section2Entered]);
-
-    useEffect(() => {
-        if (inViewSection3 && !section3Entered) {
-            setSection3Entered(true);
-        }
-    }, [inViewSection3, section3Entered]);
 
     useEffect(() => {
         if (!loaded) return;
@@ -61,21 +52,14 @@ export default function Home() {
         const t1 = setTimeout(() => setPhase('curtain1'), 400);
         const t2 = setTimeout(() => setPhase('curtain2'), 1400);
         const t3 = setTimeout(() => setPhase('content'), 3000);
-        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+        return () => {
+            clearTimeout(t1);
+            clearTimeout(t2);
+            clearTimeout(t3);
+        };
     }, [loaded]);
 
     if (!loaded) return <LoadingScreen isWhite={false} />;
-
-    const createSteps = (color: string) =>
-        Array.from({ length: 10 }).map((_, i) => ({
-            id: i,
-            delay: Math.random() * 0.5 + 0.05,
-            bg: color,
-            top: `${(100 / 10) * i}%`,
-        }));
-
-    const redSteps = createSteps('#3c0d0d');
-    const blackSteps = createSteps('#000000');
 
     const textLines1 = [
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
@@ -87,168 +71,164 @@ export default function Home() {
     const textLines2 = [
         { text: "전 세계에 구축된 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-300 font-bold" },
         { text: "글로벌 공급처로부터 고품질 부품, 조립품, 원자재,", style: "text-base sm:text-lg md:text-xl text-white mt-4" },
-        { text: " 화학제품을 비롯해 OEM 및 희귀 부품까지 제공합니다.", style: "text-base sm:text-lg md:text-xl text-white" },
+        { text: "화학제품을 비롯해 OEM 및 희귀 부품까지 제공합니다.", style: "text-base sm:text-lg md:text-xl text-white" },
     ];
 
     return (
-        <main className="bg-black text-white relative overflow-hidden">
-            {/* Curtains */}
-            <div className="fixed inset-0 bg-black z-10 pointer-events-none" />
-            <div className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none">
-                {redSteps.map(step => (
-                    <motion.div key={`red-${step.id}`} initial={{ x: '100%' }}
-                                animate={phase !== 'loading' && phase !== 'black' ? { x: 0 } : {}}
-                                transition={{ duration: 1, delay: step.delay, ease: 'easeInOut' }}
-                                className="absolute w-full" style={{ height: '10%', top: step.top, backgroundColor: step.bg }} />
-                ))}
-            </div>
-            <div className="fixed top-0 left-0 w-full h-full z-30 pointer-events-none">
-                {blackSteps.map(step => (
-                    <motion.div key={`black-${step.id}`} initial={{ x: '100%' }}
-                                animate={phase === 'curtain2' || phase === 'content' ? { x: 0 } : {}}
-                                transition={{ duration: 1, delay: step.delay, ease: 'easeInOut' }}
-                                className="absolute w-full" style={{ height: '10%', top: step.top, backgroundColor: step.bg }} />
-                ))}
-            </div>
+        <main
+            className="snap-y snap-mandatory overflow-y-scroll h-screen bg-black text-white"
+        >
+            {/* Navbar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 z-50"
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+                <Navbar />
+            </motion.div>
 
-            {phase === 'content' && (
-                <>
-                    {/* Navbar */}
-                    <motion.div
-                        className="relative z-50"
-                        initial={{ y: -50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, ease: 'easeOut' }}
-                    >
-                        <Navbar />
-                    </motion.div>
+            {/* Section 1 */}
+            <motion.section
+                className="snap-start h-screen flex flex-col md:flex-row items-center justify-center"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                <motion.div
+                    className="w-full md:w-3/5 flex items-center justify-center p-10"
+                    variants={dynamicVariants('left', 0)}
+                >
+                    <TiltCard clip className="w-[80%] aspect-[3/2] border border-gray-800 shadow-xl">
+                        <img src="/images/main/top.jpeg" alt="Top Visual" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/20" />
+                    </TiltCard>
+                </motion.div>
 
-                    <div className="relative z-40">
-                        {/* Section 1 */}
-                        <motion.section
-                            className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center"
-                            initial="hidden"
-                            animate="visible"
-                            variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
+                <motion.div
+                    className="w-full md:w-2/5 flex flex-col items-center justify-start p-10 space-y-3"
+                >
+                    {textLines1.map((line, i) => (
+                        <div className="overflow-hidden" key={i}>
+                            <motion.p
+                                className={`text-center ${line.style}`}
+                                initial={{ y: '100%', opacity: 0 }}
+                                animate={{ y: '0%', opacity: 1 }}
+                                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.8 + i * 0.4 }}
+                            >
+                                {line.text}
+                            </motion.p>
+                        </div>
+                    ))}
+                </motion.div>
+            </motion.section>
+
+            {/* Section 2 */}
+            <motion.section
+                className="snap-start h-screen flex flex-col md:flex-row items-center justify-center"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: 0.3 } },
+                }}
+            >
+                <motion.div
+                    className="w-full md:w-2/5 flex items-center justify-end flex-col p-10 space-y-3"
+                    variants={{
+                        hidden: {},
+                        visible: { transition: { staggerChildren: 0.2 } },
+                    }}
+                >
+                    {textLines2.map((line, i) => (
+                        <div className="overflow-hidden" key={i}>
+                            <motion.p
+                                className={`text-center ${line.style}`}
+                                variants={lineVariants}
+                                custom={i}
+                            >
+                                {line.text}
+                            </motion.p>
+                        </div>
+                    ))}
+                </motion.div>
+
+                <motion.div
+                    className="w-full md:w-3/5 flex items-center justify-center p-10"
+                    variants={dynamicVariants('right', 0)}
+                >
+                    <TiltCard className="w-[80%] aspect-[3/2] shadow-xl border border-gray-800 relative bg-black" clip>
+                        <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/10" />
+                    </TiltCard>
+                </motion.div>
+            </motion.section>
+
+            {/* Section 3 */}
+            <motion.section
+                className="snap-start h-screen px-6 py-24 bg-black text-white flex flex-col justify-center relative overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={dynamicVariants('up', 0)}
+            >
+                {/* 반원형 흰색 배경 애니메이션 */}
+                <motion.div
+                    initial={{
+                        y: 200,
+                        scaleY: 0.2,
+                    }}
+                    whileInView={{
+                        y: 0,
+                        scaleX: 1,
+                        scaleY: 1,
+                        borderTopLeftRadius: "100% 100%",
+                        borderTopRightRadius: "100% 100%",
+                    }}
+                    transition={{
+                        duration: 0.8,
+                        ease: [0.4, 0, 0.2, 1],
+                    }}
+                    viewport={{ once: true }}
+                    className="absolute bottom-0 left-0 w-full h-[70vh] bg-[#F0EEEB]"
+                />
+
+                {/* 텍스트 콘텐츠 */}
+                <motion.div className="text-center mb-16 relative">
+                    <h2 className="text-5xl font-semibold text-white tracking-tight">CBOL을 만나보세요</h2>
+                    <p className="text-lg text-white mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
+                </motion.div>
+
+                {/* 지도 콘텐츠 */}
+                <motion.div
+                    className="relative w-full max-w-xl mx-auto aspect-[4/3]"
+                    variants={dynamicVariants('up', 1.0)}
+                >
+                    {/* 파란 블롭 백그라운드 */}
+                    <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[120%] h-[100%]">
+                        <TiltCard
+                            className="w-full h-full"
+                            clip
+                            maxTilt={0}
+                            maxTranslate={5}
                         >
-                            <motion.div
-                                className="w-full md:w-3/5 flex items-center justify-center p-10"
-                                variants={dynamicVariants('left', 0)}
-                            >
-                                <TiltCard clip className="w-[80%] aspect-[3/2] border border-gray-800 shadow-xl">
-                                    <img src="/images/main/top.jpeg" alt="Top Visual" className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-black/20" />
-                                </TiltCard>
-                            </motion.div>
-
-                            <motion.div
-                                className="w-full md:w-2/5 flex flex-col items-center justify-start p-10 space-y-3"
-                                initial="hidden"
-                                animate="visible"
-                            >
-                                {textLines1.map((line, i) => (
-                                    <div className="overflow-hidden" key={i}>
-                                        <motion.p
-                                            className={`text-center ${line.style}`}
-                                            initial={{ y: '100%', opacity: 0 }}
-                                            animate={{ y: '0%', opacity: 1 }}
-                                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 + i * 0.3 }}
-                                        >
-                                            {line.text}
-                                        </motion.p>
-                                    </div>
-                                ))}
-                            </motion.div>
-                        </motion.section>
-
-                        {/* Section 2 */}
-                        <section ref={refSection2} className="flex flex-col md:flex-row w-full min-h-screen items-center justify-center">
-                            <motion.div
-                                className="w-full md:w-2/5 flex items-center justify-end p-10"
-                                initial="hidden"
-                                animate={section2Entered ? 'visible' : 'hidden'}
-                            >
-                                <div className="text-center w-full">
-                                    {textLines2.map((line, i) => (
-                                        <div className="overflow-hidden" key={i}>
-                                            <motion.p
-                                                className={`text-center ${line.style}`}
-                                                initial={{ y: '100%', opacity: 0 }}
-                                                animate={section2Entered ? { y: '0%', opacity: 1 } : {}}
-                                                transition={{ duration: 0.8, ease: 'easeOut', delay: i * 0.3 }}
-                                            >
-                                                {line.text}
-                                            </motion.p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                className="w-full md:w-3/5 flex items-center justify-center p-10"
-                                initial="hidden"
-                                animate={section2Entered ? 'visible' : 'hidden'}
-                                variants={dynamicVariants('down', 0)}
-                            >
-                                <TiltCard className="w-[80%] aspect-[3/2] shadow-xl border border-gray-800 relative bg-black" clip>
-                                    <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-black/10" />
-                                </TiltCard>
-                            </motion.div>
-                        </section>
-
-                        {/* Section 3 */}
-                        <section ref={refSection3} className="px-6 py-24 bg-black text-white">
-                            <motion.div
-                                className="text-center mb-16"
-                                initial="hidden"
-                                animate={section3Entered ? 'visible' : 'hidden'}
-                                variants={dynamicVariants('up', 0)}
-                            >
-                                <h2 className="text-5xl font-semibold text-white tracking-tight">CBOL을 만나보세요</h2>
-                                <p className="text-lg text-white mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
-                            </motion.div>
-
-                            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-                                {[{
-                                    title: '미국 본사',
-                                    desc: '방위 산업 | 독점 기술 제공',
-                                    img: '/images/main/map-usa.png',
-                                    path: '/team1',
-                                }, {
-                                    title: '한국 연락 사무소',
-                                    desc: '소싱 | 제조 | 수출 관리',
-                                    img: '/images/main/map-kor.png',
-                                    path: '/team2',
-                                }].map((card, i) => (
-                                    <motion.div
-                                        key={i}
-                                        onClick={() => navigate(card.path)}
-                                        whileHover={{ y: -6, scale: 1.02 }}
-                                        transition={{ duration: 0.5 }}
-                                        initial="hidden"
-                                        animate={section3Entered ? 'visible' : 'hidden'}
-                                        variants={dynamicVariants(i % 2 === 0 ? 'left' : 'right', i)}
-                                        className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden shadow-xl cursor-pointer"
-                                    >
-                                        <div className="w-full h-80 overflow-hidden">
-                                            <img
-                                                src={card.img}
-                                                alt={card.title}
-                                                className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
-                                            />
-                                        </div>
-                                        <div className="bg-gray-950 border border-gray-700 p-6">
-                                            <h3 className="text-2xl font-semibold text-yellow-300 mb-4">{card.title}</h3>
-                                            <p className="text-gray-300">{card.desc}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </section>
+                            <div className="w-full h-full bg-[#3A5BA0]" />
+                        </TiltCard>
                     </div>
-                </>
-            )}
+
+                    {/* 지도 이미지 */}
+                    <motion.img
+                        src="/images/main/map-kor.png"
+                        alt="한국 지도"
+                        className="relative w-full h-full object-contain cursor-pointer"
+                        onClick={() => navigate('/team2')}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.6 }}
+                    />
+                </motion.div>
+            </motion.section>
+
         </main>
     );
 }
