@@ -224,7 +224,7 @@ export default function Home() {
                         className="relative w-full h-full object-contain cursor-pointer"
                         onClick={() => navigate('/team2')}
                         whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.3 }}
                     />
                 </motion.div>
             </motion.section>
