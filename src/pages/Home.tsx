@@ -44,7 +44,7 @@ export default function Home() {
         '/images/main/map-kor.png',
     ];
     const loaded = useImagePreloader(images);
-    const [, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
+    const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
 
     useEffect(() => {
         if (!loaded) return;
@@ -61,6 +61,17 @@ export default function Home() {
 
     if (!loaded) return <LoadingScreen isWhite={false} />;
 
+    const createSteps = (color: string) =>
+        Array.from({ length: 10 }).map((_, i) => ({
+            id: i,
+            delay: Math.random() * 0.5 + 0.05,
+            bg: color,
+            top: `${(100 / 10) * i}%`,
+        }));
+
+    const redSteps = createSteps('#3c0d0d');
+    const blackSteps = createSteps('#000000');
+
     const textLines1 = [
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
         { text: "다양한 역량을 갖춘 글로벌 기업", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-300 font-bold" },
@@ -75,26 +86,46 @@ export default function Home() {
     ];
 
     return (
-        <main
-            className="snap-y snap-mandatory overflow-y-scroll h-screen bg-black text-white"
-        >
-            {/* Navbar */}
-            <motion.div
-                className="fixed top-0 left-0 right-0 z-50"
-                initial={{ y: -50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-                <Navbar />
-            </motion.div>
+        <main className="snap-y snap-mandatory overflow-y-scroll h-screen bg-black text-white">
 
-            {/* Section 1 */}
-            <motion.section
-                className="snap-start h-screen flex flex-col md:flex-row items-center justify-center"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-            >
+            {/* Curtains */}
+            <div className="fixed inset-0 bg-black z-10 pointer-events-none" />
+            <div className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none">
+                {redSteps.map(step => (
+                    <motion.div key={`red-${step.id}`} initial={{ x: '100%' }}
+                                animate={phase !== 'loading' && phase !== 'black' ? { x: 0 } : {}}
+                                transition={{ duration: 1, delay: step.delay, ease: 'easeInOut' }}
+                                className="absolute w-full" style={{ height: '10%', top: step.top, backgroundColor: step.bg }} />
+                ))}
+            </div>
+            <div className="fixed top-0 left-0 w-full h-full z-30 pointer-events-none">
+                {blackSteps.map(step => (
+                    <motion.div key={`black-${step.id}`} initial={{ x: '100%' }}
+                                animate={phase === 'curtain2' || phase === 'content' ? { x: 0 } : {}}
+                                transition={{ duration: 1, delay: step.delay, ease: 'easeInOut' }}
+                                className="absolute w-full" style={{ height: '10%', top: step.top, backgroundColor: step.bg }} />
+                ))}
+            </div>
+
+            {phase === 'content' && (
+                <div className="relative z-50">
+                {/* Navbar */}
+                <motion.div
+                    className="relative"
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    <Navbar />
+                </motion.div>
+
+                {/* Section 1 */}
+                <motion.section
+                    className="snap-start h-screen flex flex-col md:flex-row items-center justify-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
                 <motion.div
                     className="w-full md:w-3/5 flex items-center justify-center p-10"
                     variants={dynamicVariants('left', 0)}
@@ -228,7 +259,8 @@ export default function Home() {
                     />
                 </motion.div>
             </motion.section>
-
+                </div>
+        )}
         </main>
     );
 }
