@@ -223,7 +223,7 @@ export default function Home() {
                         alt="한국 지도"
                         className="relative w-full h-full object-contain cursor-pointer"
                         onClick={() => navigate('/team2')}
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.6 }}
                     />
                 </motion.div>
