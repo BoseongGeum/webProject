@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         suit: ["'SUIT'", "sans-serif"],
-      }
+      },
       },
   },
   plugins: [],

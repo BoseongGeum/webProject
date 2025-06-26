@@ -38,3 +38,12 @@ code {
 .card-back {
   transform: rotateY(180deg);
 }
+
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useImagePreloader } from '../hooks/useImagePreloader';
@@ -36,6 +36,7 @@ const lineVariants = {
 };
 
 export default function Home() {
+
     const navigate = useNavigate();
     const images = [
         '/images/main/top.jpeg',
@@ -47,6 +48,7 @@ export default function Home() {
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'intro' | 'content'>('loading');
     const [introGone, setIntroGone] = useState(false);
     const [isStartHovering, setIsStartHovering] = useState(false);
+    const controls = useAnimation();
 
     useEffect(() => {
         if (!loaded) return;
@@ -60,6 +62,48 @@ export default function Home() {
             clearTimeout(t3);
         };
     }, [loaded]);
+
+    useEffect(() => {
+        // phase가 'intro' 상태가 아닐 땐 아무것도 안 함
+        if (phase !== 'intro') return;
+
+        // START 클릭 시 퇴장 애니메이션
+        if (introGone) {
+            controls.start({
+                x: 0,
+                y: '-100%',
+                transition: { duration: 0.8, ease: 'easeInOut' },
+            });
+            return;
+        }
+
+        // START 버튼에 hover 중일 때
+        if (isStartHovering) {
+            controls.start({
+                x: 0,
+                y: '-10%',              // 원하시는 hover 오프셋으로 조정
+                transition: { duration: 0.6, ease: 'easeInOut' },
+            });
+        } else {
+            // hover 해제 시 원위치
+            controls.start({
+                x: 0,
+                y: 0,
+                transition: { duration: 0.6, ease: 'easeInOut' },
+            });
+        }
+    }, [phase, isStartHovering, introGone, controls]);
+
+    useEffect(() => {
+        if (phase === 'intro') {
+            console.log('[Home] phase=intro → entrance animation 시작');
+            controls.start({
+                x: 0,
+                y: 0,
+                transition: { duration: 0.8, ease: 'easeInOut' },
+            });
+        }
+    }, [phase, controls]);
 
     if (!loaded) return <LoadingScreen isWhite={false} />;
 
@@ -113,29 +157,38 @@ export default function Home() {
             {phase === 'intro' && (
                 <motion.div
                     initial={{ x: '100%', y: 0 }}
-                    animate={
-                        introGone
-                            ? { x: 0, y: '-100%' }
-                            : isStartHovering
-                                ? { x: 0, y: [0, -12, 6, -3, 1.5, 0] }
-                                : { x: 0, y: 0 }
-                    }
-                    transition={
-                        introGone
-                            ? { duration: 0.8, ease: 'easeInOut' }
-                            : isStartHovering
-                                ? {
-                                    duration: 1.2,
-                                    ease: [0.25, 0.1, 0.25, 1]
-                                }
-                                : { duration: 0.8 }
-                    }
-                    onAnimationComplete={() => {
-                        if (introGone) setPhase('content');
-                    }}
-                    className="fixed inset-0 z-50 bg-[#3c0d0d] pt-16 pb-4 flex flex-col"
+                    animate={controls}
+                    className="fixed inset-0 z-50 bg-red-900 pt-4 pb-4 flex flex-col"
                 >
-                {/* 흰색 콘텐츠 박스 */}
+                <div className="w-full h-10 overflow-hidden relative mb-4">
+                        {/* 배경 이미지 A */}
+                        <div
+                            className="absolute top-0 left-0 w-full h-full"
+                            style={{
+                                backgroundImage: `url("/images/favicon.png")`,
+                                backgroundRepeat: 'repeat-x',
+                                backgroundSize: '120px auto',
+                                backgroundPosition: 'top',
+                                animation: 'scrollLoop 10s linear infinite',
+                            }}
+
+                        />
+
+                        {/* 배경 이미지 B (연결용) */}
+                        <div
+                            className="absolute top-0 left-full w-full h-full"
+                            style={{
+                                backgroundImage: `url("/images/favicon.png")`,
+                                backgroundRepeat: 'repeat-x',
+                                backgroundSize: '120px auto',
+                                backgroundPosition: 'top',
+                                animation: 'scrollLoop 10s linear infinite',
+                            }}
+
+                        />
+                    </div>
+
+                    {/* 흰색 콘텐츠 박스 */}
                     <div className="flex-1 bg-[#F0EEEB] flex flex-col lg:flex-row font-bold overflow-hidden">
                         {/* 좌측 이미지 */}
                         <div
@@ -174,12 +227,8 @@ export default function Home() {
                     {/* 하단 바 중앙 START 버튼 */}
                     <div className="w-full flex justify-center mt-4">
                         <motion.button
-                            onMouseEnter={() => {
-                                setIsStartHovering(false);
-                                setTimeout(() => setIsStartHovering(true), 20); // 진동 재트리거
-                            }}
+                            onMouseEnter={() => setIsStartHovering(true)}
                             onMouseLeave={() => setIsStartHovering(false)}
-                            whileHover={{ scale: 1.08 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setIntroGone(true)}
                             className="text-white text-xl font-bold border-2 border-white px-6 py-2 rounded-full"
