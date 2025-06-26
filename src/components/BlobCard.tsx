@@ -10,7 +10,7 @@ interface TiltCardProps {
     clip?: boolean;
 }
 
-const TiltCard: React.FC<TiltCardProps> = ({
+const BlobCard: React.FC<TiltCardProps> = ({
                                                children,
                                                className = '',
                                                maxTilt = 1,
@@ -157,4 +157,4 @@ const TiltCard: React.FC<TiltCardProps> = ({
     );
 };
 
-export default TiltCard;
+export default BlobCard;

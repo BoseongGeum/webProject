@@ -6,7 +6,7 @@ type LoadingScreenProps = {
 
 export default function LoadingScreen({ isWhite }: LoadingScreenProps) {
     return (
-        <div className={`fixed inset-0 z-50 flex items-center justify-center ${isWhite ? "bg-white" : "bg-black"}`}>
+        <div className={`fixed inset-0 z-50 flex items-center justify-center ${isWhite ? "bg-[#F0EEEB]" : "bg-black"}`}>
             <motion.img
                 src="/images/logo.png"
                 alt="Loading Logo"
