@@ -1,4 +1,4 @@
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useImagePreloader } from '../hooks/useImagePreloader';
@@ -37,8 +37,9 @@ const lineVariants = {
 };
 
 export default function Home() {
-
     const navigate = useNavigate();
+
+    // Main preloader and animation phase
     const images = [
         '/images/main/top.jpeg',
         '/images/main/bottom.jpeg',
@@ -46,17 +47,17 @@ export default function Home() {
         '/images/main/map-kor.png',
     ];
     const loaded = useImagePreloader(images);
-    const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'intro' | 'content'>('loading');
-    const [introGone, setIntroGone] = useState(false);
-    const [isStartHovering, setIsStartHovering] = useState(false);
-    const controls = useAnimation();
+    const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
+
+    const [, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
     useEffect(() => {
         if (!loaded) return;
         setPhase('black');
         const t1 = setTimeout(() => setPhase('curtain1'), 200);
         const t2 = setTimeout(() => setPhase('curtain2'), 1200);
-        const t3 = setTimeout(() => setPhase('intro'), 2200);
+        const t3 = setTimeout(() => setPhase('content'), 2200);
         return () => {
             clearTimeout(t1);
             clearTimeout(t2);
@@ -65,46 +66,24 @@ export default function Home() {
     }, [loaded]);
 
     useEffect(() => {
-        // phase가 'intro' 상태가 아닐 땐 아무것도 안 함
-        if (phase !== 'intro') return;
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
 
-        // START 클릭 시 퇴장 애니메이션
-        if (introGone) {
-            controls.start({
-                x: 0,
-                y: '-100%',
-                transition: { duration: 0.8, ease: 'easeInOut' },
-            });
-            return;
-        }
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // 아래로 스크롤: 네브바 숨김
+                setShowNavbar(false);
+            } else {
+                // 위로 스크롤: 네브바 보이기
+                setShowNavbar(true);
+            }
 
-        // START 버튼에 hover 중일 때
-        if (isStartHovering) {
-            controls.start({
-                x: 0,
-                y: '-10%',              // 원하시는 hover 오프셋으로 조정
-                transition: { duration: 0.6, ease: 'easeInOut' },
-            });
-        } else {
-            // hover 해제 시 원위치
-            controls.start({
-                x: 0,
-                y: 0,
-                transition: { duration: 0.6, ease: 'easeInOut' },
-            });
-        }
-    }, [phase, isStartHovering, introGone, controls]);
+            setLastScrollY(currentScrollY);
+        };
 
-    useEffect(() => {
-        if (phase === 'intro') {
-            console.log('[Home] phase=intro → entrance animation 시작');
-            controls.start({
-                x: 0,
-                y: 0,
-                transition: { duration: 0.8, ease: 'easeInOut' },
-            });
-        }
-    }, [phase, controls]);
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
@@ -133,7 +112,7 @@ export default function Home() {
     ];
 
     return (
-        <main className="snap-y snap-mandatory overflow-y-scroll h-screen bg-[#F0EEEB] text-black">
+        <main className="snap-y snap-mandatory h-screen bg-[#F0EEEB] text-black">
 
             {/* Curtains */}
             <div className="fixed inset-0 bg-[#F0EEEB] z-10 pointer-events-none" />
@@ -147,117 +126,69 @@ export default function Home() {
             </div>
             <div className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none">
                 {whiteSteps.map(step => (
-                    <motion.div key={`black-${step.id}`} initial={{ x: '100%' }}
-                                animate={(phase === 'curtain2' || phase === 'intro') ? { x: 0 } : {}}
+                    <motion.div key={`white-${step.id}`} initial={{ x: '100%' }}
+                                animate={(phase === 'curtain2' || phase === 'content') ? { x: 0 } : {}}
                                 transition={{ duration: 0.8, delay: step.delay, ease: 'easeInOut' }}
                                 className="absolute w-full" style={{ height: '10%', top: step.top, backgroundColor: step.bg }} />
                 ))}
             </div>
 
-            {/* Intro Frame */}
-            {phase === 'intro' && (
-                <motion.div
-                    initial={{ x: '100%', y: 0 }}
-                    animate={controls}
-                    className="fixed inset-0 z-50 bg-red-900 pt-4 pb-4 flex flex-col"
-                >
-                <div className="w-full h-10 overflow-hidden relative mb-4">
-                        {/* 배경 이미지 A */}
-                        <div
-                            className="absolute top-0 left-0 w-full h-full"
-                            style={{
-                                backgroundImage: `url("/images/favicon.png")`,
-                                backgroundRepeat: 'repeat-x',
-                                backgroundSize: '120px auto',
-                                backgroundPosition: 'top',
-                                animation: 'scrollLoop 10s linear infinite',
-                            }}
-
-                        />
-
-                        {/* 배경 이미지 B (연결용) */}
-                        <div
-                            className="absolute top-0 left-full w-full h-full"
-                            style={{
-                                backgroundImage: `url("/images/favicon.png")`,
-                                backgroundRepeat: 'repeat-x',
-                                backgroundSize: '120px auto',
-                                backgroundPosition: 'top',
-                                animation: 'scrollLoop 10s linear infinite',
-                            }}
-
-                        />
-                    </div>
-
-                    {/* 흰색 콘텐츠 박스 */}
-                    <div className="flex-1 bg-[#F0EEEB] flex flex-col lg:flex-row font-bold overflow-hidden">
-                        {/* 좌측 이미지 */}
-                        <div
-                            className="lg:w-2/3 w-full h-full flex flex-col"
-                        >
-                            <div className="flex-1 flex items-center justify-center min-h-0 py-4">
-                                <img
-                                    src="/images/team2/team2main.png"
-                                    alt="Team2 Banner"
-                                    className="max-w-full max-h-full object-contain"
-                                />
-                            </div>
-                        </div>
-
-                        {/* 우측 로고 + 텍스트 */}
-                        <div className="lg:w-1/3 w-full h-auto lg:h-full flex flex-col items-center justify-center text-red-950">
-                            <motion.img
-                                src="/images/logo.png"
-                                alt="CBOL Logo"
-                                className="w-40 sm:w-60 md:w-80 lg:w-96 h-auto mb-4 lg:mb-6"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 1.0 }}
-                            />
-                            <motion.h1
-                                className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 1.5 }}
-                            >
-                                생각과 제조를<br />연결하다
-                            </motion.h1>
-                        </div>
-                    </div>
-
-                    {/* 하단 바 중앙 START 버튼 */}
-                    <div className="w-full flex justify-center mt-4">
-                        <motion.button
-                            onMouseEnter={() => setIsStartHovering(true)}
-                            onMouseLeave={() => setIsStartHovering(false)}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => setIntroGone(true)}
-                            className="text-black text-xl font-bold border-2 border-white px-6 py-2 rounded-full"
-                        >
-                            START
-                        </motion.button>
-                    </div>
-                </motion.div>
-            )}
-
             {/* Main Content */}
-            {(phase === 'intro' || phase === 'content') && (
+            { phase === 'content' && (
                 <div className="relative z-40">
                     {/* Navbar */}
                     <motion.div
                         className="relative"
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, ease: 'easeOut' }}
+                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
                     >
                         <Navbar />
                     </motion.div>
+
+                    {/* Intro Section */}
+                    <motion.section
+                        className="snap-start h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        <motion.div
+                            className="lg:w-2/3 w-full h-full flex items-center justify-center p-10"
+                            variants={dynamicVariants('left', 0.4)}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            <img
+                                src="/images/team2/team2main.png"
+                                alt="Team2 Banner"
+                                className="max-w-full max-h-full object-contain"
+                            />
+                        </motion.div>
+                        <motion.div
+                            className="lg:w-1/3 w-full flex flex-col items-center justify-center p-16"
+                            variants={dynamicVariants('right', 0.8)}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            <img
+                                src="/images/logo.png"
+                                alt="CBOL Logo"
+                                className="w-40 sm:w-60 md:w-80 lg:w-96 mb-4"
+                            />
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left">
+                                생각과 제조를<br />연결하다
+                            </h1>
+                        </motion.div>
+                    </motion.section>
 
                     {/* Section 1 */}
                     <motion.section className="snap-start h-screen flex flex-col md:flex-row items-center justify-center">
                         <motion.div
                             className="w-full md:w-3/5 flex items-center justify-center p-10"
-                            variants={dynamicVariants('left', 1)}
+                            variants={dynamicVariants('left', 0.4)}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -276,14 +207,16 @@ export default function Home() {
                             </TextCard>
                         </motion.div>
 
-                        <motion.div className="w-full md:w-2/5 flex flex-col items-center justify-start p-10 space-y-3">
+                        <motion.div className="w-full md:w-2/5 flex items-center justify-end flex-col p-10 space-y-3">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
                                         className={`text-center ${line.style}`}
-                                        initial={{ y: '100%', opacity: 0 }}
-                                        animate={{ y: '0%', opacity: 1 }}
-                                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 + i * 0.4 }}
+                                        variants={lineVariants}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true }}
+                                        custom={i}
                                     >
                                         {line.text}
                                     </motion.p>
@@ -313,7 +246,7 @@ export default function Home() {
 
                         <motion.div
                             className="w-full md:w-3/5 flex items-center justify-center p-10"
-                            variants={dynamicVariants('right', 0)}
+                            variants={dynamicVariants('right', 0.4)}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -338,8 +271,6 @@ export default function Home() {
                             initial={{ y: 200, scaleY: 0.2 }}
                             whileInView={{
                                 y: 0, scaleX: 1, scaleY: 1,
-                                borderTopLeftRadius: "100% 100%",
-                                borderTopRightRadius: "100% 100%",
                             }}
                             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                             viewport={{ once: true }}
@@ -347,7 +278,7 @@ export default function Home() {
                         />
 
                         {/* 텍스트 */}
-                        <motion.div className="text-center mb-16 relative">
+                        <motion.div className="text-center mb-32 relative">
                             <h2 className="text-5xl font-bold text-black tracking-tight">CBOL을 만나보세요</h2>
                             <p className="text-lg text-black font-bold mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
                         </motion.div>
@@ -365,7 +296,7 @@ export default function Home() {
                                 className="relative w-full h-full object-contain cursor-pointer"
                                 onClick={() => navigate('/team2')}
                                 whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.4 }}
                             />
                         </motion.div>
                     </motion.section>
