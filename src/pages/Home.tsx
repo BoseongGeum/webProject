@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import { useImagePreloader } from '../hooks/useImagePreloader';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
+import Stickybar from '../components/Stickybar';
 import BlobCard from "../components/BlobCard";
 import TextCard from "../components/TextCard";
 
@@ -32,9 +34,15 @@ const lineVariants = {
     visible: (i: number) => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.8, ease: 'easeInOut', delay: 0.4 + i * 0.4 },
+        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.4 + i * 0.2 },
     }),
 };
+
+const menus = [
+    { name: "PIC", path: "/team1/pic" },
+    { name: "Quantic Evans", path: "/team1/quanticEvans" },
+    { name: "Aura Gen", path: "/team1/auraGen" },
+];
 
 export default function Home() {
     const navigate = useNavigate();
@@ -49,8 +57,20 @@ export default function Home() {
     const loaded = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
 
-    const [, setShowNavbar] = useState(true);
+    const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [activeSection, setActiveSection] = useState<'INTRO'|'GLOBAL'|'NETWORK'|'WELCOME'>('INTRO');
+
+    const [refSection1, inViewSection1] = useInView({ threshold: 0.5 });
+    const [refSection2, inViewSection2] = useInView({ threshold: 0.5 });
+    const [refSection3, inViewSection3] = useInView({ threshold: 0.5 });
+
+    useEffect(() => {
+        if (inViewSection1)  setActiveSection('GLOBAL');
+        else if (inViewSection2) setActiveSection('NETWORK');
+        else if (inViewSection3) setActiveSection('WELCOME');
+        else setActiveSection('INTRO');
+    }, [inViewSection1, inViewSection2, inViewSection3]);
 
     useEffect(() => {
         if (!loaded) return;
@@ -134,16 +154,20 @@ export default function Home() {
             </div>
 
             {/* Main Content */}
-            { phase === 'content' && (
+            {phase === 'content' && (
                 <div className="relative z-40">
                     {/* Navbar */}
                     <motion.div
-                        className="relative"
-                        initial={{ y: -50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+                        className="fixed top-0 left-0 w-full z-50"
+                        initial={{ y: -65, opacity: 1 }}
+                        animate={{
+                            y: showNavbar ? 0 : -65,
+                            opacity: 1,
+                            pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
+                        }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
                     >
-                        <Navbar />
+                        <Navbar menus={menus}/>
                     </motion.div>
 
                     {/* Intro Section */}
@@ -154,7 +178,7 @@ export default function Home() {
                         viewport={{ once: true }}
                     >
                         <motion.div
-                            className="lg:w-2/3 w-full h-full flex items-center justify-center p-10"
+                            className="lg:w-2/3 w-full h-full flex p-10"
                             variants={dynamicVariants('left', 0.4)}
                             initial="hidden"
                             whileInView="visible"
@@ -167,7 +191,7 @@ export default function Home() {
                             />
                         </motion.div>
                         <motion.div
-                            className="lg:w-1/3 w-full flex flex-col items-center justify-center p-16"
+                            className="lg:w-1/3 w-full flex flex-col p-16"
                             variants={dynamicVariants('right', 0.8)}
                             initial="hidden"
                             whileInView="visible"
@@ -184,17 +208,21 @@ export default function Home() {
                         </motion.div>
                     </motion.section>
 
+                    <Stickybar title={activeSection} topOffset={showNavbar ? 60 : 0} />
+
                     {/* Section 1 */}
-                    <motion.section className="snap-start h-screen flex flex-col md:flex-row items-center justify-center">
+                    <motion.section
+                        ref={refSection1}
+                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28">
                         <motion.div
-                            className="w-full md:w-3/5 flex items-center justify-center p-10"
+                            className="w-full md:w-3/5 flex items-center justify-center pt-60"
                             variants={dynamicVariants('left', 0.4)}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                         >
                             <TextCard
-                                className="w-[80%] aspect-[3/2]"
+                                className="w-full aspect-[9/8]"
                                 maskText="CBOL"
                                 fontSize={0.38}
                                 fontWeight={900}
@@ -207,7 +235,7 @@ export default function Home() {
                             </TextCard>
                         </motion.div>
 
-                        <motion.div className="w-full md:w-2/5 flex items-center justify-end flex-col p-10 space-y-3">
+                        <motion.div className="w-full md:w-2/5 flex items-center justify-center flex-col pr-10 space-y-3">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
@@ -226,8 +254,10 @@ export default function Home() {
                     </motion.section>
 
                     {/* Section 2 */}
-                    <motion.section className="snap-start h-screen flex flex-col md:flex-row items-center justify-center">
-                        <motion.div className="w-full md:w-2/5 flex items-center justify-end flex-col p-10 space-y-3">
+                    <motion.section
+                        ref={refSection2}
+                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28">
+                        <motion.div className="w-full md:w-2/5 flex items-center justify-center flex-col pl-10 space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
@@ -245,13 +275,13 @@ export default function Home() {
                         </motion.div>
 
                         <motion.div
-                            className="w-full md:w-3/5 flex items-center justify-center p-10"
+                            className="w-full md:w-3/5 flex pt-60 items-center justify-center"
                             variants={dynamicVariants('right', 0.4)}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                         >
-                            <TextCard className="w-[80%] aspect-[3/2]" maskText="CBOL">
+                            <TextCard className="w-full aspect-[9/8]" maskText="CBOL">
                                 <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/10" />
                             </TextCard>
@@ -260,7 +290,8 @@ export default function Home() {
 
                     {/* Section 3 */}
                     <motion.section
-                        className="snap-start h-screen px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden"
+                        ref={refSection3}
+                        className="snap-start h-screen px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
@@ -268,23 +299,24 @@ export default function Home() {
                     >
                         {/* 배경 */}
                         <motion.div
-                            initial={{ y: 200, scaleY: 0.2 }}
-                            whileInView={{
-                                y: 0, scaleX: 1, scaleY: 1,
-                            }}
+                            initial="hidden"
+                            whileInView="visible"
                             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                             viewport={{ once: true }}
-                            className="absolute bottom-0 left-0 w-full h-[70vh] bg-black"
+                            className="absolute bottom-0 left-0 w-full h-[65vh] bg-black"
                         />
 
                         {/* 텍스트 */}
-                        <motion.div className="text-center mb-32 relative">
+                        <motion.div className="text-center relative">
                             <h2 className="text-5xl font-bold text-black tracking-tight">CBOL을 만나보세요</h2>
                             <p className="text-lg text-black font-bold mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
                         </motion.div>
 
                         {/* 지도 */}
-                        <motion.div className="relative w-full max-w-xl mx-auto aspect-[4/3]" variants={dynamicVariants('up', 1.0)}>
+                        <motion.div
+                            className="relative w-full max-w-xl mx-auto aspect-[4/3]"
+                            variants={dynamicVariants('up', 1.0)}
+                        >
                             <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[120%] h-[100%]">
                                 <BlobCard className="w-full h-full" clip maxTilt={0} maxTranslate={5}>
                                     <div className="w-full h-full bg-[#3A5BA0]" />

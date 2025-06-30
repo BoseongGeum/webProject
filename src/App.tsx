@@ -42,7 +42,7 @@ function AppContent() {
                 isMainNavbarPage ? (
                     <MainNavbar menus={isTeam1Page ? team1Menus : team2Menus} />
                 ) : (
-                    <Navbar />
+                    <Navbar menus={isTeam1Page ? team1Menus : team2Menus} />
                 )
             )}
 
