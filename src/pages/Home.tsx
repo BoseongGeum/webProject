@@ -303,7 +303,7 @@ export default function Home() {
                             whileInView="visible"
                             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                             viewport={{ once: true }}
-                            className="absolute bottom-0 left-0 w-full h-[65vh] bg-black"
+                            className="absolute bottom-0 left-0 w-full h-[70vh] bg-black"
                         />
 
                         {/* 텍스트 */}
