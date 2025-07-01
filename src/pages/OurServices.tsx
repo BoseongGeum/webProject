@@ -154,7 +154,6 @@ export const OurServices = () => {
                         <motion.div
                             key={index}
                             custom={direction}
-                            transition={{ duration: 0.6, ease: "easeInOut" }}
                             className="w-full h-full top-0 left-0"
                         >
                             <SlideLayout

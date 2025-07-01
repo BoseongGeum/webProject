@@ -53,7 +53,6 @@ function AppContent() {
             )}
 
                 <main className="flex-1 relative bg-[#F0EEEB]">
-                    {location.pathname !== "/" && (
                 <AnimatePresence mode="sync">
                     <motion.div
                         key={location.pathname}
@@ -105,7 +104,6 @@ function AppContent() {
                         </Routes>
                     </motion.div>
                 </AnimatePresence>
-                    )}
                     <Routes location={location} key={location.pathname}>
                         <Route path="/" element={<Home />} />
                     </Routes>
