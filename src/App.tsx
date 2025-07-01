@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Team1 from "./pages/Team1";
 import Team2 from "./pages/Team2";
 import Navbar from "./components/Navbar";
-import MainNavbar from "./components/MainNavbar";
 import PICManagerInfo from "./pages/PICManagerInfo";
 import PICProductInfo from "./pages/PICProductInfo";
 import QuanticEvansManagerInfo from "./pages/QuanticEvansManagerInfo";
@@ -39,11 +38,7 @@ function AppContent() {
         <div className="flex flex-col min-h-screen">
             {/* 네브바 분기 */}
             {location.pathname !== '/' && (
-                isMainNavbarPage ? (
-                    <MainNavbar menus={isTeam1Page ? team1Menus : team2Menus} />
-                ) : (
-                    <Navbar menus={isTeam1Page ? team1Menus : team2Menus} />
-                )
+                <Navbar menus={isTeam1Page ? team1Menus : team2Menus} />
             )}
 
             <main className="flex-1">

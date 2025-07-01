@@ -60,15 +60,15 @@ export default function Navbar( {menus}: MainNavbarProps ) {
                     <img
                         src="/images/logo.png"
                         alt="CBOL Logo"
-                        className="h-8 w-auto sm:h-10"
+                        className="h-6 w-auto sm:h-8"
                     />
                 </button>
 
                 {/* 데스크탑 메뉴 */}
-                <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2 h-full whitespace-nowrap items-center justify-center space-x-8 font-extrabold text-xl">
+                <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2 h-full whitespace-nowrap items-center justify-center space-x-8 font-extrabold text-l">
                     {menus.map((menu, index) => {
-                        const targetPath = isTeam1Page ? `${menu.path}ProductInfo` : menu.path;
-                        const isActive = location.pathname === targetPath || location.pathname === `${menu.path}ManagerInfo`;
+                        const targetPath = menu.path;
+                        const isActive = location.pathname === targetPath;
 
                         return (
                             <div
@@ -78,15 +78,15 @@ export default function Navbar( {menus}: MainNavbarProps ) {
                                 <button
                                     key={index}
                                     onClick={() => handleMenuClick(targetPath)}
-                                    className={`relative transition-colors duration-200 group 
-                                    ${isActive ? 'text-white' : 'text-black'}`}
+                                    className={`relative transition-colors duration-200 group`}
                                 >
                                     {menu.name}
                                     {/* underline */}
                                     <span
                                         className={`absolute left-0 bottom-0 w-full h-0.5 bg-current transform 
                                         scale-x-0 origin-right transition-transform duration-300 
-                                        group-hover:scale-x-100 group-hover:origin-left`}
+                                        group-hover:scale-x-100 group-hover:origin-left
+                                        ${isActive ? 'scale-x-100 origin-left' : ''}`}
                                     />
                                 </button>
                             </div>

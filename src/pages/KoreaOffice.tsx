@@ -102,7 +102,7 @@ export const KoreaOffice = () => {
                         setActiveIndex(i);
                     }}
                     className={`w-3 h-3 rounded-full transition-all duration-150 ${
-                        i === activeIndex ? "bg-white" : "bg-gray-500"
+                        i === activeIndex ? "bg-[#F0EEEB]" : "bg-gray-500"
                     }`}
                 />
             ))}
@@ -149,6 +149,7 @@ export const KoreaOffice = () => {
     };
 
     return (
+        <main className="bg-[#F0EEEB]">
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
             {!isMobile && indicatorButtons}
 
@@ -178,5 +179,6 @@ export const KoreaOffice = () => {
                 )}
             </AnimatePresence>
         </div>
+        </main>
     );
 };

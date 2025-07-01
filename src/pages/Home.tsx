@@ -48,9 +48,9 @@ const sectionFade = {
 };
 
 const menus = [
-    { name: "PIC", path: "/team1/pic" },
-    { name: "Quantic Evans", path: "/team1/quanticEvans" },
-    { name: "Aura Gen", path: "/team1/auraGen" },
+    { name: "회사소개", path: "/team2/koreaOffice" },
+    { name: "서비스", path: "/team2/ourServices" },
+    { name: "CONTACT", path: "/team2/contactUs" },
 ];
 
 export default function Home() {
@@ -70,6 +70,7 @@ export default function Home() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [activeSection, setActiveSection] = useState<'INTRO'|'GLOBAL'|'NETWORK'|'WELCOME'>('INTRO');
 
+    const [refIntroSection, inViewIntroSection] = useInView({ threshold: 0.5 });
     const [refSection1, inViewSection1] = useInView({ threshold: 0.5 });
     const [refSection2, inViewSection2] = useInView({ threshold: 0.5 });
     const [refSection3, inViewSection3] = useInView({ threshold: 0.5 });
@@ -78,8 +79,8 @@ export default function Home() {
         if (inViewSection1)  setActiveSection('GLOBAL');
         else if (inViewSection2) setActiveSection('NETWORK');
         else if (inViewSection3) setActiveSection('WELCOME');
-        else setActiveSection('INTRO');
-    }, [inViewSection1, inViewSection2, inViewSection3]);
+        else if (inViewIntroSection) setActiveSection('INTRO');
+    }, [inViewSection1, inViewSection2, inViewSection3, inViewIntroSection]);
 
     useEffect(() => {
         if (!loaded) return;
@@ -168,9 +169,9 @@ export default function Home() {
                     {/* Navbar */}
                     <motion.div
                         className="fixed top-0 left-0 w-full z-50"
-                        initial={{ y: -65, opacity: 1 }}
+                        initial={{ y: -57, opacity: 1 }}
                         animate={{
-                            y: showNavbar ? 0 : -65,
+                            y: showNavbar ? 0 : -57,
                             opacity: 1,
                             pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
                         }}
@@ -181,6 +182,7 @@ export default function Home() {
 
                     {/* Intro Section */}
                     <motion.section
+                        ref={refIntroSection}
                         className="snap-start h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold"
                         initial="hidden"
                         whileInView="visible"
@@ -217,7 +219,7 @@ export default function Home() {
                         </motion.div>
                     </motion.section>
 
-                    <Stickybar title={activeSection} topOffset={showNavbar ? 60 : 0} />
+                    <Stickybar title={activeSection} topOffset={showNavbar ? 52 : 0} />
 
                     {/* Section 1 */}
                     <motion.section

@@ -14,7 +14,8 @@ const ContactUs: React.FC = () => {
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
     return (
-        <div className="w-full h-full bg-white text-black font-bold pt-24 px-4 lg:px-0">
+        <main className="h-screen bg-[#F0EEEB]">
+        <div className="w-full h-full bg-[#F0EEEB] text-black font-bold pt-24 px-4 lg:px-0">
             <div className="max-w-7xl mx-auto">
                 <div className="text-left mb-8">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
@@ -78,6 +79,7 @@ const ContactUs: React.FC = () => {
                 </div>
             </div>
         </div>
+        </main>
     );
 };
 
