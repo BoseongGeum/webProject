@@ -45,7 +45,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
             }`}
         >
             {/* 네비게이션 바 */}
-            <div className="relative bg-[#F0EEEB] text-black w-full px-6 py-2 flex items-center sm:px-10 sm:py-3 border-b border-gray-700">
+            <div className="relative bg-[#F0EEEB] text-black w-full px-6 py-2 flex items-center sm:px-10 sm:py-3 border-b border-red-950">
                 <button
                     onClick={handleLogoClick}
                     className="transition-transform duration-300 hover:scale-105"
