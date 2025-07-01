@@ -38,6 +38,15 @@ const lineVariants = {
     }),
 };
 
+const sectionFade = {
+    hidden: { opacity: 0, y: 30 },                         // 보이지 않고 살짝 아래로
+    visible: {
+        opacity: 1,
+        y: 0,                                                 // 원래 자리로
+        transition: { duration: 0.6, ease: 'easeInOut' }
+    }
+};
+
 const menus = [
     { name: "PIC", path: "/team1/pic" },
     { name: "Quantic Evans", path: "/team1/quanticEvans" },
@@ -165,7 +174,7 @@ export default function Home() {
                             opacity: 1,
                             pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
                         }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
                         <Navbar menus={menus}/>
                     </motion.div>
@@ -213,7 +222,11 @@ export default function Home() {
                     {/* Section 1 */}
                     <motion.section
                         ref={refSection1}
-                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28">
+                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28"
+                        variants={sectionFade}
+                        initial="hidden"
+                        animate={inViewSection1 ? 'visible' : 'hidden'}
+                    >
                         <motion.div
                             className="w-full md:w-3/5 flex items-center justify-center pt-60"
                             variants={dynamicVariants('left', 0.4)}
@@ -256,7 +269,11 @@ export default function Home() {
                     {/* Section 2 */}
                     <motion.section
                         ref={refSection2}
-                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28">
+                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center pt-28"
+                        variants={sectionFade}
+                        initial="hidden"
+                        animate={inViewSection2 ? 'visible' : 'hidden'}
+                    >
                         <motion.div className="w-full md:w-2/5 flex items-center justify-center flex-col pl-10 space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
