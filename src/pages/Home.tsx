@@ -61,8 +61,11 @@ export default function Home() {
     const images = [
         '/images/main/top.jpeg',
         '/images/main/bottom.jpeg',
-        '/images/main/map-usa.png',
         '/images/main/map-kor.png',
+        '/images/team2/team2main.png',
+        '/images/logo.png',
+        '/images/logo-white.png',
+        '/masks/blob-mask.svg',
     ];
     const loaded = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
