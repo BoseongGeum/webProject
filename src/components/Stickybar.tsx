@@ -44,14 +44,8 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
             style={{ top: topOffset }}
         >
             <div
-                className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden"
-                style={{
-                    borderTop: '1px solid transparent',
-                    borderBottom: '1px solid transparent',
-                    borderImageSource: 'repeating-linear-gradient(to right, #000 0 4px, transparent 0px 16px)',
-                    borderImageSlice: 1,
-                    minHeight: '120px',
-                }}
+                className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden border-b border-t border-gray-700"
+                style={{ minHeight: '120px' }}
             >
                 <AnimatePresence mode="sync" initial={false}>
                     <motion.h2

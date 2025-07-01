@@ -45,14 +45,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
             }`}
         >
             {/* 네비게이션 바 */}
-            <div className="relative bg-[#F0EEEB] text-black w-full px-6 py-2 flex items-center sm:px-10 sm:py-3"
-                 style={{
-                     // 기본 투명 2px border-bottom
-                     borderBottom: '1px solid transparent',
-                     borderImageSource: 'repeating-linear-gradient(to right, #000 0 4px, transparent 0px 16px)',
-                     borderImageSlice: 1,  // 반드시 1 이어야 합니다
-                 }}
-            >
+            <div className="relative bg-[#F0EEEB] text-black w-full px-6 py-2 flex items-center sm:px-10 sm:py-3 border-b border-gray-700">
                 <button
                     onClick={handleLogoClick}
                     className="transition-transform duration-300 hover:scale-105"
