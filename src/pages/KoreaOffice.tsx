@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "../components/SlideLayout";
 import { useImagePreloader } from "../hooks/useImagePreloader";
-import LoadingScreen from "../components/LoadingScreen";
 import { useSwipeable } from "react-swipeable";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -83,8 +82,6 @@ export const KoreaOffice = () => {
         window.addEventListener("wheel", handleWheel, { passive: true });
         return () => window.removeEventListener("wheel", handleWheel);
     }, [activeIndex, loaded, isMobile, isAnimating]);
-
-    if (!loaded) return <LoadingScreen isWhite={true} />;
 
     const indicatorButtons = (
         <div

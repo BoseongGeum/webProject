@@ -1,17 +1,13 @@
 import React from "react";
-import { useImagePreloader } from "../hooks/useImagePreloader";
-import LoadingScreen from "../components/LoadingScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faMapMarkerAlt,
     faPhoneAlt,
     faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../components/Footer";
 
 const ContactUs: React.FC = () => {
-    const loaded = useImagePreloader([]);
-
-    if (!loaded) return <LoadingScreen isWhite={true} />;
 
     return (
         <main className="h-screen bg-[#F0EEEB]">
@@ -78,6 +74,7 @@ const ContactUs: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
         </main>
     );
