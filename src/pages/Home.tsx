@@ -52,7 +52,7 @@ const sectionFade = {
 const menus = [
     { name: "회사소개", path: "/team2/koreaOffice" },
     { name: "서비스", path: "/team2/ourServices" },
-    { name: "CONTACT", path: "/team2/contactUs" },
+    { name: "Contact", path: "/team2/contactUs" },
 ];
 
 export default function Home() {
@@ -371,7 +371,7 @@ export default function Home() {
                                 src="/images/main/map-kor.png"
                                 alt="한국 지도"
                                 className="relative w-full h-full object-contain cursor-pointer"
-                                onClick={() => navigate('/team2')}
+                                onClick={() => navigate('/team2/koreaOffice')}
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ duration: 0.4 }}
                             />

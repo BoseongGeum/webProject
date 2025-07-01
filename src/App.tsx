@@ -24,9 +24,9 @@ function AppContent() {
     ];
 
     const team2Menus = [
-        { name: "CBOL Korea Office", path: "/team2/koreaOffice" },
-        { name: "Our Services", path: "/team2/ourServices" },
-        { name: "Contact Us", path: "/team2/contactUs" },
+        { name: "회사소개", path: "/team2/koreaOffice" },
+        { name: "서비스", path: "/team2/ourServices" },
+        { name: "Contact", path: "/team2/contactUs" },
     ];
 
     const isTeam1Page = location.pathname.startsWith("/team1/");
