@@ -15,7 +15,7 @@ import { KoreaOffice } from "./pages/KoreaOffice";
 import { OurServices } from "./pages/OurServices";
 
 const pageVariants = {
-    initial: { y: "100%", rotate: 5, opacity: 0.8 },
+    initial: { y: "80%", rotate: 5, opacity: 0.8 },
     animate: {
         y: "0%",
         rotate: 0,

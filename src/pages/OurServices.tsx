@@ -143,46 +143,6 @@ export const OurServices = () => {
         </div>
     );
 
-    const variants = {
-        enter: (direction: number) =>
-            isMobile
-                ? {
-                    x: direction === 0 ? 0 : direction > 0 ? 150 : -150,
-                    y: 0,
-                    opacity: 0,
-                    position: "absolute" as const,
-                }
-                : {
-                    y: direction === 0 ? 40 : direction > 0 ? 150 : -150,
-                    x: 0,
-                    opacity: 0,
-                    position: "absolute" as const,
-                },
-
-        center: {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            position: "relative" as const,
-        },
-
-        exit: (direction: number) =>
-            isMobile
-                ? {
-                    x: direction === 0 ? 0 : direction > 0 ? -150 : 150,
-                    y: 0,
-                    opacity: 0,
-                    position: "absolute" as const,
-                }
-                : {
-                    y: direction === 0 ? -40 : direction > 0 ? -150 : 150,
-                    x: 0,
-                    opacity: 0,
-                    position: "absolute" as const,
-                },
-    };
-
-
     return (
         <main className="bg-[#F0EEEB]">
         <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
@@ -193,10 +153,6 @@ export const OurServices = () => {
                     index === activeIndex ? (
                         <motion.div
                             key={index}
-                            variants={variants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
                             custom={direction}
                             transition={{ duration: 0.6, ease: "easeInOut" }}
                             className="w-full h-full top-0 left-0"
