@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Stickybar from '../components/Stickybar';
 import BlobCard from "../components/BlobCard";
 import TextCard from "../components/TextCard";
+import Footer from "../components/Footer";
 
 const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', delayOrder = 0) => {
     const distance = 60;
@@ -350,6 +351,7 @@ export default function Home() {
                                 transition={{ duration: 0.4 }}
                             />
                         </motion.div>
+                        <Footer />
                     </motion.section>
                 </div>
             )}

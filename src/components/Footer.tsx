@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import GoMainButton from "./GoMainButton";
 
 const Footer: React.FC = () => {
     const location = useLocation();
@@ -17,12 +16,8 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="bg-red-800 text-white py-5">
+        <footer className="bg-black text-white py-5 z-30 absolute bottom-0 left-0 w-full">
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center font-bold gap-6">
-                {/* 좌측: GoMainButton */}
-                <div>
-                    <GoMainButton />
-                </div>
 
                 {/* 가운데: 로고 + 저작권 */}
                 <div className="flex items-center text-sm gap-3">
@@ -36,9 +31,14 @@ const Footer: React.FC = () => {
                         궁금한 점이 있으신가요?
                         <button
                             onClick={handleContactClick}
-                            className="hover:text-red-950 transition"
+                            className={`relative transition-colors duration-200 group`}
                         >
                             → 문의하기
+                            <span
+                                className={`absolute left-0 bottom-0 w-full h-[1px] bg-current transform 
+                                        scale-x-0 origin-right transition-transform duration-300 
+                                        group-hover:scale-x-100 group-hover:origin-left`}
+                            />
                         </button>
                     </div>
                 )}
