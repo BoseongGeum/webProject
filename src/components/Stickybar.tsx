@@ -44,7 +44,7 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
             style={{ top: topOffset }}
         >
             <div
-                className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden border-b-[1.5px] border-t-[1.5px] border-red-950"
+                className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden border-b-2 border-t-2 border-red-950"
                 style={{ minHeight: '120px' }}
             >
                 <AnimatePresence mode="sync" initial={false}>
