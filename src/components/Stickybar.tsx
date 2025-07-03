@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from "react";
 
 interface StickybarProps {
     title: string;
+    subtitle?: string;
     topOffset: number;
 }
 
-export default function Stickybar({ title, topOffset }: StickybarProps) {
+export default function Stickybar({ title, subtitle, topOffset }: StickybarProps) {
     const prevScrollYRef = useRef<number>(0);
     const [scrollDir, setScrollDir] = useState<'down' | 'up'>('down');
 
@@ -38,10 +39,12 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
 
     return (
         <motion.div
-            className="sticky z-30 bg-[#F0EEEB] text-5xl font-bold"
-            animate={{ top: topOffset }}
+            className="z-30 bg-[#F0EEEB] text-5xl font-bold"
+            animate={{ y: topOffset }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            style={{ top: topOffset }}
+            style={{
+                position: 'sticky',
+                top: 0 }}
         >
             <div
                 className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden border-b-2 border-t-2 border-red-950"
@@ -66,6 +69,25 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
                             </motion.span>
                         ))}
                     </motion.h2>
+                    {subtitle && (
+                        <motion.span
+                            className="absolute right-2 bottom-2 text-2xl text-extrabold text-black/80"
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            variants={containerVariants}
+                        >
+                            {subtitle.split("").map((ch, i) => (
+                                <motion.span
+                                    key={`${ch}-${i}`}
+                                    variants={letterVariants}
+                                    style={{ display: 'inline-block' }}
+                                >
+                                    {ch === " " ? "\u00A0" : ch}
+                                </motion.span>
+                            ))}
+                        </motion.span>
+                    )}
                 </AnimatePresence>
             </div>
         </motion.div>

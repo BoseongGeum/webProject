@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Stickybar from "../components/Stickybar";
-import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 const lineVariants = {
@@ -8,9 +7,21 @@ const lineVariants = {
     visible: (i: number) => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.2 + i * 0.3 },
+        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.4 + i * 0.2 },
     }),
 };
+
+const titles = [
+    "ABOUT HQ",
+    "KOREA OFFICE",
+    "BLAH BLAH",
+];
+
+const subtitles = [
+    "CBOL Corporation 미국 본사",
+    "KOREA OFFICE",
+    "BLAH BLAH",
+];
 
 const paragraphs = [
     [
@@ -35,21 +46,9 @@ const paragraphs = [
     ],
 ];
 
-
 const KoreaOffice = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
-    const [activeSection, setActiveSection] = useState<'ABOUT HQ' | 'KOREA OFFICE' | 'ABOUT B'>('ABOUT HQ');
-
-    const [ref1, inView1] = useInView({ threshold: 0.5 });
-    const [ref2, inView2] = useInView({ threshold: 0.5 });
-    const [ref3, inView3] = useInView({ threshold: 0.5 });
-
-    useEffect(() => {
-        if (inView1) setActiveSection('ABOUT HQ');
-        else if (inView2) setActiveSection('KOREA OFFICE');
-        else if (inView3) setActiveSection('ABOUT B');
-    }, [inView1, inView2, inView3]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -68,12 +67,10 @@ const KoreaOffice = () => {
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">
-
-            {/* Stickybar */}
-            <Stickybar title={activeSection} topOffset={showNavbar ? 52 : 0} />
-
-            <div className="pt-24 px-8 pb-32 leading-relaxed space-y-40">
-                <section ref={ref1} className="min-h-screen">
+                {/* SECTION 1 */}
+                <section className="min-h-screen">
+                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} />
+                    <div className="pt-16 px-8 pb-32 leading-relaxed">
                     {paragraphs.map((group, groupIdx) => (
                         <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
                             {group.map((line, lineIdx) => (
@@ -84,7 +81,7 @@ const KoreaOffice = () => {
                                         initial="hidden"
                                         whileInView="visible"
                                         viewport={{ once: true }}
-                                        custom={groupIdx * 2 + lineIdx}
+                                        custom={groupIdx * 3 + lineIdx}
                                     >
                                         {line}
                                     </motion.p>
@@ -92,20 +89,28 @@ const KoreaOffice = () => {
                             ))}
                         </div>
                     ))}
+                    </div>
                 </section>
 
-                {/* Section 2 */}
-                <section ref={ref2} className="min-h-screen">
-                    <h2 className="text-2xl font-bold mb-4">ABOUT A</h2>
-                    <p>내용을 여기에 채워주세요.</p>
+                {/* SECTION 2 */}
+                <section className="min-h-screen">
+                    <Stickybar title={titles[1]} topOffset={showNavbar ? 52 : 0} />
+                    <div className="pt-16 px-8 pb-32 leading-relaxed">
+                    <div className="mt-10">
+                        <p>한국 사무소에 대한 내용을 여기에 작성하세요.</p>
+                    </div>
+                    </div>
                 </section>
 
-                {/* Section 3 */}
-                <section ref={ref3} className="min-h-screen">
-                    <h2 className="text-2xl font-bold mb-4">ABOUT B</h2>
-                    <p>내용을 여기에 채워주세요.</p>
+                {/* SECTION 3 */}
+                <section className="min-h-screen">
+                    <Stickybar title={titles[2]} topOffset={showNavbar ? 52 : 0} />
+                    <div className="pt-16 px-8 pb-32 leading-relaxed">
+                    <div className="mt-10">
+                        <p>다른 지사 혹은 추가 정보 등을 여기에 작성하세요.</p>
+                    </div>
+                    </div>
                 </section>
-            </div>
         </main>
     );
 };
