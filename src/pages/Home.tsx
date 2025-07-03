@@ -41,10 +41,9 @@ const lineVariants = {
 };
 
 const sectionFade = {
-    hidden: { opacity: 0, y: 30 },                         // 보이지 않고 살짝 아래로
+    hidden: { opacity: 0 },                         // 보이지 않고 살짝 아래로
     visible: {
-        opacity: 1,
-        y: 0,                                                 // 원래 자리로
+        opacity: 1,                                                // 원래 자리로
         transition: { duration: 0.6, ease: 'easeInOut' }
     }
 };
