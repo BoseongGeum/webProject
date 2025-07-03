@@ -36,7 +36,7 @@ const lineVariants = {
     visible: (i: number) => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.4 + i * 0.2 },
+        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.3 + i * 0.3 },
     }),
 };
 

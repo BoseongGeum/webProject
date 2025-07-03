@@ -50,7 +50,7 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
                 <AnimatePresence mode="sync" initial={false}>
                     <motion.h2
                         key={title}
-                        className="absolute left-8 top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 leading-tight font-sans font-extrabold tracking-tighter flex overflow-hidden w-max"
+                        className="absolute left-8 top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 leading-tight font-sans font-extrabold tracking-tighter flex overflow-hidden w-full"
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
@@ -62,7 +62,7 @@ export default function Stickybar({ title, topOffset }: StickybarProps) {
                                 variants={letterVariants}
                                 style={{ display: 'inline-block' }}
                             >
-                                {ch}
+                                {ch === " " ? "\u00A0" : ch}
                             </motion.span>
                         ))}
                     </motion.h2>

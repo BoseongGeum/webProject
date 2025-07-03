@@ -40,7 +40,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
 
     return (
         <div
-            className={`fixed flex top-0 left-0 right-0 w-full transform z-50 transition-transform duration-500 ${
+            className={`fixed flex top-0 left-0 right-0 w-full transform transition-transform duration-500 ${
                 isOpen ? "translate-y-0" : "-translate-y-[100%]"
             }`}
         >

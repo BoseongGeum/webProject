@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/Home";
 import Team1 from "./pages/Team1";
 import Team2 from "./pages/Team2";
-import Navbar from "./components/Navbar";
 import PICManagerInfo from "./pages/PICManagerInfo";
 import PICProductInfo from "./pages/PICProductInfo";
 import QuanticEvansManagerInfo from "./pages/QuanticEvansManagerInfo";
@@ -11,8 +10,10 @@ import QuanticEvansProductInfo from "./pages/QuanticEvansProductInfo";
 import AuraGenManagerInfo from "./pages/AuraGenManagerInfo";
 import AuraGenProductInfo from "./pages/AuraGenProductInfo";
 import ContactUs from "./pages/ContactUs";
-import { KoreaOffice } from "./pages/KoreaOffice";
+import KoreaOffice from "./pages/KoreaOffice";
 import { OurServices } from "./pages/OurServices";
+import {useEffect, useState} from "react";
+import Navbar from "./components/Navbar";
 
 const pageVariants = {
     initial: { y: "80%", rotate: 5, opacity: 0.8 },
@@ -29,27 +30,48 @@ const pageVariants = {
     },
 };
 
+const menus = [
+    { name: "회사소개", path: "/team2/koreaOffice" },
+    { name: "서비스", path: "/team2/ourServices" },
+    { name: "Contact", path: "/team2/contactUs" },
+];
+
 function AppContent() {
     const location = useLocation();
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const isHome = location.pathname === "/";
 
-    const team1Menus = [
-        { name: "PIC", path: "/team1/pic" },
-        { name: "Quantic Evans", path: "/team1/quanticEvans" },
-        { name: "Aura Gen", path: "/team1/auraGen" },
-    ];
-
-    const team2Menus = [
-        { name: "회사소개", path: "/team2/koreaOffice" },
-        { name: "서비스", path: "/team2/ourServices" },
-        { name: "Contact", path: "/team2/contactUs" },
-    ];
-
-    const isTeam1Page = location.pathname.startsWith("/team1/");
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+            setLastScrollY(currentScrollY);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     return (
         <div className="flex flex-col min-h-screen">
-            {location.pathname !== "/" && (
-                <Navbar menus={isTeam1Page ? team1Menus : team2Menus} />
+            {/* 공통 네브바 */}
+            {!isHome && (
+                <motion.div
+                    className="fixed top-0 left-0 w-full z-50"
+                    initial={{ y: -57, opacity: 1 }}
+                    animate={{
+                        y: showNavbar ? 0 : -57,
+                        opacity: 1,
+                        pointerEvents: showNavbar ? 'auto' : 'none',
+                    }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                    <Navbar menus={menus} />
+                </motion.div>
             )}
 
                 <main className="flex-1 relative bg-[#F0EEEB]">
