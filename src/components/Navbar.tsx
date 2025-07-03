@@ -58,7 +58,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
                 </button>
 
                 {/* 데스크탑 메뉴 */}
-                <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2 h-full whitespace-nowrap items-center justify-center space-x-8 font-extrabold text-l">
+                <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2 h-full whitespace-nowrap items-center justify-center space-x-8 font-extrabold text-xl">
                     {menus.map((menu, index) => {
                         const targetPath = menu.path;
                         const isActive = location.pathname === targetPath;
