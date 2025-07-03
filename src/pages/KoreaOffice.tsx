@@ -84,7 +84,7 @@ const KoreaOffice = () => {
                                         initial="hidden"
                                         whileInView="visible"
                                         viewport={{ once: true }}
-                                        custom={groupIdx * 5 + lineIdx}
+                                        custom={groupIdx * 3 + lineIdx}
                                     >
                                         {line}
                                     </motion.p>
