@@ -5,9 +5,10 @@ interface StickybarProps {
     title: string;
     subtitle?: string;
     topOffset: number;
+    align?: string;
 }
 
-export default function Stickybar({ title, subtitle, topOffset }: StickybarProps) {
+export default function Stickybar({ title, subtitle, topOffset, align }: StickybarProps) {
     const prevScrollYRef = useRef<number>(0);
     const [scrollDir, setScrollDir] = useState<'down' | 'up'>('down');
 
@@ -53,7 +54,13 @@ export default function Stickybar({ title, subtitle, topOffset }: StickybarProps
                 <AnimatePresence mode="sync" initial={false}>
                     <motion.h2
                         key={title}
-                        className="absolute left-8 top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 leading-tight font-sans font-extrabold tracking-tighter flex overflow-hidden w-full"
+                        className={`absolute top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 
+                        leading-tight font-sans font-extrabold tracking-tighter flex overflow-hidden
+                        ${
+                            align === "center"
+                                ? "left-1/2 -translate-x-1/2"
+                                : "left-8"
+                        }`}
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
@@ -71,7 +78,7 @@ export default function Stickybar({ title, subtitle, topOffset }: StickybarProps
                     </motion.h2>
                     {subtitle && (
                         <motion.span
-                            className="absolute right-2 bottom-2 text-2xl text-extrabold text-black/80"
+                            className="absolute right-4 bottom-2 text-2xl text-extrabold text-black/80"
                             initial="hidden"
                             animate="visible"
                             exit="exit"

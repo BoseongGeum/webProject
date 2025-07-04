@@ -1,23 +1,65 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useImagePreloader } from "../hooks/useImagePreloader";
-import LoadingScreen from "../components/LoadingScreen";
+import GoBackButton from "../components/GoBackButton";
+import Lenis from "@studio-freight/lenis";
+// import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const PICProductInfo: React.FC = () => {
-    const images = [
-        "/images/team1/main/PICLogo.svg",
-        "/images/team1/PIC/picProductInfo1.png",
-        "/images/team1/PIC/picProductInfo2.png",
-        "/images/team1/PIC/picProductInfo3.png",
-        "/images/team1/PIC/picProductInfo4.png"
-    ];
-    const loaded = useImagePreloader(images);
-    if (!loaded) return <LoadingScreen isWhite={true} />;
+    // const images = [
+    //     "/images/team1/main/PICLogo.svg",
+    //     "/images/team1/PIC/picProductInfo1.png",
+    //     "/images/team1/PIC/picProductInfo2.png",
+    //     "/images/team1/PIC/picProductInfo3.png",
+    //     "/images/team1/PIC/picProductInfo4.png"
+    // ];
+    // const loaded = useImagePreloader(images);
+
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0);
+        // Lenis 기본 init: window 스크롤을 JS로 제어
+        const lenis = new Lenis({
+            duration: 1.2,                                    // 관성 지속시간 (초)
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 자연스러운 감쇠 곡선
+            smoothWheel: true,                                // 휠 스크롤 부드럽게
+            syncTouch: true,                                  // 터치 관성 적용
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        return () => lenis.destroy();
+    }, []);
 
     return (
-        <div className="w-full min-h-screen bg-white text-black font-bold py-20 mt-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="bg-[#F0EEEB]">
+            <div className="pl-8">
+                <GoBackButton topOffset={showNavbar ? 52 : 0} />
+            </div>
+        <div className="w-full min-h-screen text-black font-bold pb-20">
+            <div className="pt-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* 로고 */}
                 <div className="mb-6">
                     <AnimatePresence>
@@ -97,7 +139,7 @@ const PICProductInfo: React.FC = () => {
                     ].map((item, i) => (
                         <div key={i} className="flex flex-col h-full rounded-lg shadow bg-white overflow-hidden">
                             {/* 상단: 제목 + 설명 */}
-                            <div className="flex flex-col justify-start flex-1 bg-gray-100 min-h-[140px]">
+                            <div className="flex flex-col justify-start flex-1 bg-white min-h-[140px]">
                                 <div className="relative h-12 bg-gray-900 text-white text-sm sm:text-base font-bold flex items-center justify-center overflow-hidden">
                                     <div className="absolute top-0 left-[-8px] w-12 h-full bg-red-600 transform -skew-x-12 origin-left" />
                                     <span className="relative z-10">{item.title}</span>
@@ -152,6 +194,7 @@ const PICProductInfo: React.FC = () => {
                 </div>
             </div>
         </div>
+        </main>
     );
 };
 

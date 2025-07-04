@@ -8,7 +8,7 @@ const lineVariants = {
     visible: (i: number) => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.4 + i * 0.2 },
+        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.1 * i },
     }),
 };
 
@@ -78,8 +78,8 @@ const paragraphs2 = [
     ],
 ];
 
-
 const KoreaOffice = () => {
+
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -100,6 +100,7 @@ const KoreaOffice = () => {
 
     useEffect(() => {
 
+        window.scrollTo(0, 0);
         // Lenis 기본 init: window 스크롤을 JS로 제어
         const lenis = new Lenis({
             duration: 1.2,                                    // 관성 지속시간 (초)
@@ -121,58 +122,62 @@ const KoreaOffice = () => {
         <main className="bg-[#F0EEEB] min-h-screen relative">
                 {/* SECTION 1 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} />
-                    <div className="pt-24 px-8 pb-32 leading-relaxed">
-                    {paragraphs1.map((group, groupIdx) => (
-                        <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
-                            {group.map((line, lineIdx) => (
-                                <div key={lineIdx} className="overflow-hidden">
-                                    <motion.p
-                                        className={lineIdx === 0 ? "" : "mt-2"}
-                                        variants={lineVariants}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
-                                        custom={groupIdx * 3 + lineIdx}
-                                    >
-                                        {line}
-                                    </motion.p>
+                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
+                    <div className="flex flex-col items-center">
+                        <motion.div className="pt-24 pb-32 text-2xl leading-relaxed">
+                            {paragraphs1.map((group, groupIdx) => (
+                                <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
+                                    {group.map((line, lineIdx) => (
+                                        <div key={lineIdx} className="overflow-hidden">
+                                            <motion.p
+                                                className={lineIdx === 0 ? "" : "mt-2"}
+                                                variants={lineVariants}
+                                                initial="hidden"
+                                                whileInView="visible"
+                                                viewport={{ once: true }}
+                                                custom={groupIdx * 2 + lineIdx}
+                                            >
+                                                {line}
+                                            </motion.p>
+                                        </div>
+                                    ))}
                                 </div>
                             ))}
-                        </div>
-                    ))}
+                        </motion.div>
                     </div>
                 </section>
 
                 {/* SECTION 2 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 52 : 0} />
-                    <div className="pt-16 px-8 pb-32 leading-relaxed">
-                        {paragraphs2.map((group, groupIdx) => (
-                            <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
-                                {group.map((line, lineIdx) => (
-                                    <div key={lineIdx} className="overflow-hidden">
-                                        <motion.p
-                                            className={lineIdx === 0 ? "" : "mt-2"}
-                                            variants={lineVariants}
-                                            initial="hidden"
-                                            whileInView="visible"
-                                            viewport={{ once: true }}
-                                            custom={groupIdx * 3 + lineIdx}
-                                        >
-                                            {line}
-                                        </motion.p>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
+                    <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 52 : 0} align={"center"} />
+                    <div className="flex flex-col items-center">
+                        <motion.div className="pt-20 pb-32 text-2xl leading-relaxed">
+                            {paragraphs2.map((group, groupIdx) => (
+                                <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
+                                    {group.map((line, lineIdx) => (
+                                        <div key={lineIdx} className="overflow-hidden">
+                                            <motion.p
+                                                className={lineIdx === 0 ? "" : "mt-2"}
+                                                variants={lineVariants}
+                                                initial="hidden"
+                                                whileInView="visible"
+                                                viewport={{ once: true }}
+                                                custom={groupIdx * 2 + lineIdx}
+                                            >
+                                                {line}
+                                            </motion.p>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </motion.div>
                     </div>
                 </section>
 
                 {/* SECTION 3 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[2]} topOffset={showNavbar ? 52 : 0} />
-                    <div className="pt-24 px-8 pb-32 leading-relaxed">
+                    <Stickybar title={titles[2]} topOffset={showNavbar ? 52 : 0} align={"center"} />
+                    <div className="pt-24 pb-32 leading-relaxed">
                     <div className="mt-10">
                         <p>다른 지사 혹은 추가 정보 등을 여기에 작성하세요.</p>
                     </div>

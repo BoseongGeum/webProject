@@ -1,25 +1,67 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useImagePreloader } from "../hooks/useImagePreloader";
-import LoadingScreen from "../components/LoadingScreen";
+//import { useImagePreloader } from "../hooks/useImagePreloader";
+import GoBackButton from "../components/GoBackButton";
+import Lenis from "@studio-freight/lenis";
 
 const AuraGenProductInfo: React.FC = () => {
-    const images = [
-        "/images/team1/main/AuraGenLogo-black.svg",
-        "/images/team1/AuraGen/size.jpg",
-        "/images/team1/AuraGen/cutout.gif",
-        "/images/team1/AuraGen/measure5kw.gif",
-        "/images/team1/AuraGen/measure8kw.gif",
-        "/images/team1/AuraGen/measure15kw.gif",
-        "/images/team1/AuraGen/measure20kw.gif",
-    ];
+    // const images = [
+    //     "/images/team1/main/AuraGenLogo-black.svg",
+    //     "/images/team1/AuraGen/size.jpg",
+    //     "/images/team1/AuraGen/cutout.gif",
+    //     "/images/team1/AuraGen/measure5kw.gif",
+    //     "/images/team1/AuraGen/measure8kw.gif",
+    //     "/images/team1/AuraGen/measure15kw.gif",
+    //     "/images/team1/AuraGen/measure20kw.gif",
+    // ];
 
-    const loaded = useImagePreloader(images);
-    if (!loaded) return <LoadingScreen isWhite={true} />;
+//    const loaded = useImagePreloader(images);
+
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0);
+        // Lenis 기본 init: window 스크롤을 JS로 제어
+        const lenis = new Lenis({
+            duration: 1.2,                                    // 관성 지속시간 (초)
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 자연스러운 감쇠 곡선
+            smoothWheel: true,                                // 휠 스크롤 부드럽게
+            syncTouch: true,                                  // 터치 관성 적용
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        return () => lenis.destroy();
+    }, []);
 
     return (
-        <div className="w-full min-h-screen font-bold py-20 mt-8">
+        <main className="bg-[#F0EEEB]">
+            <div className="pl-8 bg-white">
+                <GoBackButton topOffset={showNavbar ? 52 : 0} />
+            </div>
+        <div className="w-full min-h-screen bg-white font-bold pt-32 pb-20">
             {/* 로고 */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
                 <AnimatePresence>
@@ -35,7 +77,7 @@ const AuraGenProductInfo: React.FC = () => {
             </div>
 
             {/* 사이즈 비교 섹션 */}
-            <section className="py-16 bg-white px-4 sm:px-6 lg:px-8">
+            <section className="py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto text-center">
                     <img
                         src="/images/team1/AuraGen/size.jpg"
@@ -184,6 +226,7 @@ const AuraGenProductInfo: React.FC = () => {
                 </motion.div>
             </div>
         </div>
+        </main>
     );
 };
 

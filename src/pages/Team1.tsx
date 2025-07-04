@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import LoadingScreen from "../components/LoadingScreen";
-import { useImagePreloader } from "../hooks/useImagePreloader";
+// import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const blocks = [
     {
@@ -57,8 +56,8 @@ export default function Team1() {
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
 
-    const imagePaths = blocks.flatMap(b => [b.bgImage, b.mdImage, b.logoImage]);
-    const loaded = useImagePreloader(imagePaths);
+    // const imagePaths = blocks.flatMap(b => [b.bgImage, b.mdImage, b.logoImage]);
+    //const loaded = useImagePreloader(imagePaths);
 
     useEffect(() => {
         const updateDeviceSize = () => {
@@ -72,8 +71,6 @@ export default function Team1() {
         return () => window.removeEventListener("resize", updateDeviceSize);
     }, []);
 
-    if (!loaded) return <LoadingScreen isWhite={false} />;
-
     const handleInteraction = (id: number) => {
         setActiveBlock(id);
     };
@@ -83,8 +80,9 @@ export default function Team1() {
     };
 
     return (
-        <div className="flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
-            <div className="absolute inset-0 bg-black bg-opacity-75 z-0" />
+        <main className="bg-[#F0EEEB]">
+        <div className="px-24 pt-24 flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
+            <div className="absolute inset-0 z-0" />
 
             <div className="flex flex-col h-full transition-all ease-in-out">
                 {blocks.map((block) => {
@@ -98,7 +96,7 @@ export default function Team1() {
                     return (
                         <motion.div
                             key={block.id}
-                            className="relative group bg-cover bg-no-repeat bg-center cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
+                            className="mb-10 rounded-2xl relative group bg-cover bg-no-repeat bg-center cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
                             style={{
                                 backgroundImage: `url(${bgImage})`,
                                 flexGrow: isActive ? 1.15 : 1,
@@ -109,7 +107,7 @@ export default function Team1() {
                             onTouchStart={() => handleInteraction(block.id)}
                             onTouchEnd={handleReset}
                         >
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-500 z-10" />
+                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-90 transition-all duration-500 z-10" />
                             <div className="relative z-20 flex w-full h-full px-2 sm:px-6 md:px-10 py-4 items-center justify-between">
                                 {isTablet || isMobile ? (
                                     <div className="flex flex-row w-full h-full">
@@ -288,5 +286,6 @@ export default function Team1() {
                 })}
             </div>
         </div>
+        </main>
     );
 }
