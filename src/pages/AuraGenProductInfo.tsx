@@ -58,10 +58,10 @@ const AuraGenProductInfo: React.FC = () => {
 
     return (
         <main className="bg-[#F0EEEB]">
-            <div className="pl-8 bg-white">
+            <div className="pl-8">
                 <GoBackButton topOffset={showNavbar ? 52 : 0} />
             </div>
-        <div className="w-full min-h-screen bg-white font-bold pt-32 pb-20">
+        <div className="w-full min-h-screen font-bold pt-32 pb-20">
             {/* 로고 */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
                 <AnimatePresence>
