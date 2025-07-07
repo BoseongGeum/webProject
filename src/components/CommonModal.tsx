@@ -71,7 +71,7 @@ const CommonModal: React.FC<CommonModalProps> = ({ isOpen, onClose, title, child
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-16 right-4 text-gray-600 hover:text-gray-800"
+                    className="absolute top-10 right-4 text-gray-600 hover:text-gray-800"
                 >
                     <X size={24} />
                 </button>
