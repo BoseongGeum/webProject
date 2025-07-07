@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import CommonModal from "../components/CommonModal";
+import PICProductInfo from "./PICProductInfo";
+import QuanticEvansProductInfo from "./QuanticEvansProductInfo";
+import AuraGenProductInfo from "./AuraGenProductInfo";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const blocks = [
@@ -10,7 +14,7 @@ const blocks = [
         mdImage: "/images/team1/main/PIC-md.png",
         smImage: "/images/team1/main/PIC-sm.png",
         logoImage: "/images/team1/main/PICLogo.svg",
-        productInfo: "/team1/picProductInfo",
+        productInfo: PICProductInfo,
         managerInfo: "/team1/picManagerInfo",
         name: "PIC",
         text:
@@ -25,7 +29,7 @@ const blocks = [
         mdImage: "/images/team1/main/QuanticEvans-md.png",
         smImage: "/images/team1/main/QuanticEvans-sm.png",
         logoImage: "/images/team1/main/QuanticEvansLogo.png",
-        productInfo: "/team1/quanticEvansProductInfo",
+        productInfo: QuanticEvansProductInfo,
         managerInfo: "/team1/quanticEvansManagerInfo",
         name: "Quantic Evans",
         text:
@@ -40,7 +44,7 @@ const blocks = [
         mdImage: "/images/team1/main/AuraGen-md.png",
         smImage: "/images/team1/main/AuraGen-sm.png",
         logoImage: "/images/team1/main/AuraGenLogo-white.png",
-        productInfo: "/team1/auraGenProductInfo",
+        productInfo: AuraGenProductInfo,
         managerInfo: "/team1/auraGenManagerInfo",
         name: "AuraGen",
         text:
@@ -55,6 +59,8 @@ export default function Team1() {
     const [activeBlock, setActiveBlock] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [SelectedInfo, setSelectedInfo] = useState<React.FC | null>(null);
 
     // const imagePaths = blocks.flatMap(b => [b.bgImage, b.mdImage, b.logoImage]);
     //const loaded = useImagePreloader(imagePaths);
@@ -169,9 +175,9 @@ export default function Team1() {
                                                                 transition={{ duration: 0.4 }}
                                                                 className="w-24 md:w-28 px-2 py-1 border-2 border-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-[clamp(13px,1vw,17px)] text-center flex items-center justify-center"
                                                             >
-                                                                <Link to={block.productInfo} className="w-full h-full flex items-center justify-center">
+                                                                <button className="w-full h-full flex items-center justify-center">
                                                                     제품정보
-                                                                </Link>
+                                                                </button>
                                                             </motion.div>
 
                                                             <motion.div
@@ -251,12 +257,23 @@ export default function Team1() {
                                                             whileHover={{ scale: 1.05 }}
                                                             transition={{ duration: 0.4 }}
                                                         >
-                                                            <Link
-                                                                to={block.productInfo}
+                                                            <button
+                                                                onClick={() => {
+                                                                    setSelectedInfo(() => block.productInfo);
+                                                                    setOpenModal(true)
+                                                                }}
                                                                 className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)] text-center flex items-center justify-center"
                                                             >
                                                                 제품정보
-                                                            </Link>
+                                                            </button>
+                                                            <CommonModal
+                                                                isOpen={openModal}
+                                                                onClose={() => setOpenModal(false)}
+                                                            >
+                                                                {SelectedInfo
+                                                                ? <SelectedInfo />
+                                                                : <p>정보를 불러올 수 없습니다.</p>}
+                                                            </CommonModal>
                                                         </motion.div>
 
                                                         <motion.div

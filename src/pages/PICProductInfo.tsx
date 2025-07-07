@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import GoBackButton from "../components/GoBackButton";
-import Lenis from "@studio-freight/lenis";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const PICProductInfo: React.FC = () => {
@@ -15,51 +13,10 @@ const PICProductInfo: React.FC = () => {
     // ];
     // const loaded = useImagePreloader(images);
 
-    const [showNavbar, setShowNavbar] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setShowNavbar(false);
-            } else {
-                setShowNavbar(true);
-            }
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
-
-    useEffect(() => {
-
-        window.scrollTo(0, 0);
-        // Lenis 기본 init: window 스크롤을 JS로 제어
-        const lenis = new Lenis({
-            duration: 1.2,                                    // 관성 지속시간 (초)
-            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 자연스러운 감쇠 곡선
-            smoothWheel: true,                                // 휠 스크롤 부드럽게
-            syncTouch: true,                                  // 터치 관성 적용
-        });
-
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        return () => lenis.destroy();
-    }, []);
-
     return (
         <main className="bg-[#F0EEEB]">
-            <div className="pl-8">
-                <GoBackButton topOffset={showNavbar ? 52 : 0} />
-            </div>
         <div className="w-full min-h-screen text-black font-bold pb-20">
-            <div className="pt-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* 로고 */}
                 <div className="mb-6">
                     <AnimatePresence>

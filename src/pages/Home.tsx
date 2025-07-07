@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -85,26 +84,6 @@ export default function Home() {
     ];
     const loaded = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
-
-    useEffect(() => {
-        if (!loaded) return;
-
-        // Lenis 기본 init: window 스크롤을 JS로 제어
-        const lenis = new Lenis({
-            duration: 1.2,                                    // 관성 지속시간 (초)
-            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 자연스러운 감쇠 곡선
-            smoothWheel: true,                                // 휠 스크롤 부드럽게
-            syncTouch: true,                                  // 터치 관성 적용
-        });
-
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        return () => lenis.destroy();
-    }, [loaded]);
 
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);

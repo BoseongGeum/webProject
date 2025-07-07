@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Stickybar from "../components/Stickybar";
 import { motion } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
 
 const lineVariants = {
     hidden: { y: '100%', opacity: 0 },
@@ -97,26 +96,6 @@ const KoreaOffice = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
-
-    useEffect(() => {
-
-        window.scrollTo(0, 0);
-        // Lenis 기본 init: window 스크롤을 JS로 제어
-        const lenis = new Lenis({
-            duration: 1.2,                                    // 관성 지속시간 (초)
-            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 자연스러운 감쇠 곡선
-            smoothWheel: true,                                // 휠 스크롤 부드럽게
-            syncTouch: true,                                  // 터치 관성 적용
-        });
-
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        return () => lenis.destroy();
-    }, []);
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">

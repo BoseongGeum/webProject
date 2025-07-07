@@ -14,6 +14,7 @@ import KoreaOffice from "./pages/KoreaOffice";
 import { OurServices } from "./pages/OurServices";
 import {useEffect, useState} from "react";
 import Navbar from "./components/Navbar";
+import Lenis from "@studio-freight/lenis";
 
 const pageVariants = {
     initial: { y: "80%", rotate: 5, opacity: 0.8 },
@@ -55,6 +56,25 @@ function AppContent() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
+
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            syncTouch: true,
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen">
