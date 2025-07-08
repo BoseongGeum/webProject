@@ -68,7 +68,7 @@ const OurServices = () => {
     useEffect(() => {
         // subscribe to progress changes
         const unsubscribe = progress.onChange((p) => {
-            const idx = Math.round(p * (items.length + 1));
+            const idx = Math.round(p * (items.length + 0.5));
             setActiveIndex(idx);
         });
         return () => unsubscribe();
@@ -78,7 +78,7 @@ const OurServices = () => {
     const x = useTransform(progress, (p) => {
         const width = window.innerWidth;
         const slideWidth = width * 0.5;                       // 50vw
-        const scrollDistance = slideWidth * (items.length + 1.5);
+        const scrollDistance = slideWidth * (items.length + 1);
         const adjustedMaxX = scrollDistance - slideWidth / 2;
         const startX = width / 2 - slideWidth / 2;            // 첫 슬라이드 중앙 맞추기
         // p=0 → startX, p=1 → startX - scrollDistance
