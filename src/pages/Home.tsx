@@ -9,6 +9,7 @@ import Stickybar from '../components/Stickybar';
 import BlobCard from "../components/BlobCard";
 import TextCard from "../components/TextCard";
 import Footer from "../components/Footer";
+import {MENUS} from "../constants/menus";
 
 const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', delayOrder = 0) => {
     const distance = 60;
@@ -46,13 +47,6 @@ const sectionFade = {
         transition: { duration: 0.6, ease: 'easeInOut' }
     }
 };
-
-const menus = [
-    { name: "회사소개", path: "/team2/koreaOffice" },
-    { name: "서비스", path: "/team2/ourServices" },
-    { name: "Contact", path: "/team2/contactUs" },
-    { name: "Team1(임시)", path: "/team1" },
-];
 
 export default function Home() {
     const navigate = useNavigate();
@@ -198,7 +192,7 @@ export default function Home() {
                         }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                        <Navbar menus={menus}/>
+                        <Navbar menus={MENUS}/>
                     </motion.div>
 
                     {/* Intro Section */}

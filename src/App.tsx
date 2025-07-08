@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/Home";
 import Team1 from "./pages/Team1";
@@ -15,6 +15,8 @@ import { OurServices } from "./pages/OurServices";
 import {useEffect, useState} from "react";
 import Navbar from "./components/Navbar";
 import Lenis from "@studio-freight/lenis";
+import ScrollToTop from "./components/ScrollToTop";
+import {MENUS} from "./constants/menus";
 
 const pageVariants = {
     initial: { y: "100%", rotate: 5 },
@@ -29,13 +31,6 @@ const pageVariants = {
         transition: { duration: 0.6, ease: "easeInOut" },
     },
 };
-
-const menus = [
-    { name: "회사소개", path: "/team2/koreaOffice" },
-    { name: "서비스", path: "/team2/ourServices" },
-    { name: "Contact", path: "/team2/contactUs" },
-    { name: "Team1(임시)", path: "/team1" },
-];
 
 function AppContent() {
     const location = useLocation();
@@ -90,7 +85,7 @@ function AppContent() {
                     }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                    <Navbar menus={menus} />
+                    <Navbar menus={MENUS} />
                 </motion.div>
             )}
 
@@ -104,6 +99,7 @@ function AppContent() {
                         exit="exit"
                         className="absolute inset-0"
                     >
+                        <ScrollToTop />
                         <Routes location={location} key={location.pathname}>
                             <Route path="/team1" element={<Team1 />} />
                             <Route
