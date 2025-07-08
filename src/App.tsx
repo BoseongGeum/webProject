@@ -17,16 +17,15 @@ import Navbar from "./components/Navbar";
 import Lenis from "@studio-freight/lenis";
 
 const pageVariants = {
-    initial: { y: "80%", rotate: 5, opacity: 0.8 },
+    initial: { y: "100%", rotate: 5 },
     animate: {
         y: "0%",
         rotate: 0,
-        opacity: 1,
         transition: { duration: 0.6, ease: "easeInOut" },
     },
     exit: {
         y: "0%",
-        opacity: 0.8,
+        opacity: 0.9,
         transition: { duration: 0.6, ease: "easeInOut" },
     },
 };

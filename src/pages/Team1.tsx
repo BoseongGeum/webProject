@@ -266,14 +266,6 @@ export default function Team1() {
                                                             >
                                                                 제품정보
                                                             </button>
-                                                            <CommonModal
-                                                                isOpen={openModal}
-                                                                onClose={() => setOpenModal(false)}
-                                                            >
-                                                                {SelectedInfo
-                                                                ? <SelectedInfo />
-                                                                : <p>정보를 불러올 수 없습니다.</p>}
-                                                            </CommonModal>
                                                         </motion.div>
 
                                                         <motion.div
@@ -301,6 +293,12 @@ export default function Team1() {
                         </motion.div>
                     );
                 })}
+                <CommonModal
+                  isOpen={openModal}
+                  onClose={() => setOpenModal(false)}
+                >
+                  {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
+                </CommonModal>
             </div>
         </div>
         </main>

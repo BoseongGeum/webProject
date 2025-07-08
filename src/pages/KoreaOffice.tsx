@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Stickybar from "../components/Stickybar";
 import { motion } from "framer-motion";
+import Footer from "../components/Footer";
 
 const lineVariants = {
     hidden: { y: '100%', opacity: 0 },
@@ -162,6 +163,8 @@ const KoreaOffice = () => {
                     </div>
                     </div>
                 </section>
+
+            <Footer />
         </main>
     );
 };

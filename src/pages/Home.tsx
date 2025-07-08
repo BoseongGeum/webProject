@@ -137,11 +137,11 @@ export default function Home() {
     if (!loaded) return <LoadingScreen isWhite={true} />;
 
     const createSteps = (color: string) =>
-        Array.from({ length: 10 }).map((_, i) => ({
+        Array.from({ length: 11 }).map((_, i) => ({
             id: i,
             delay: Math.random() * 0.5 + 0.05,
             bg: color,
-            top: `${(100 / 10) * i}%`,
+            top: `${(100 / 11) * i}%`,
         }));
 
     const redSteps = createSteps('#3c0d0d');
