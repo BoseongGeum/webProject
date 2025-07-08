@@ -79,6 +79,9 @@ const paragraphs2 = [
 ];
 
 const KoreaOffice = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
