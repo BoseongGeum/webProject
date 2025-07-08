@@ -137,7 +137,7 @@ const OurServices = () => {
                     style={{
                         position: "sticky",
                         top: 180,
-                        height: "100vh",
+                        height: "80vh",
                         overflow: "hidden",
                     }}
                 >
@@ -165,7 +165,7 @@ const OurServices = () => {
                                     onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
                                     className={`flex flex-col justify-center items-center bg-white rounded-lg 
                                     shadow p-8 max-w-sm h-52 transition-transform duration-500 
-                                    ${i === activeIndex ? 'scale-150 ring-2 ring-blue-500' : 'opacity-50'}`}
+                                    ${i === activeIndex ? 'scale-150 border-2 border-red-900' : 'opacity-50'}`}
                                     disabled={i !== activeIndex}
                                 >
                                     <h3 className="text-xl font-semibold mb-6">{item.title}</h3>
@@ -175,6 +175,8 @@ const OurServices = () => {
                         ))}
                         <CommonModal
                             isOpen={openModal}
+                            showStickyBar={true}
+                            showNavBar={showNavbar}
                             onClose={() => setOpenModal(false)}
                         >
                             {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}

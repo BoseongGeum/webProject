@@ -40,7 +40,7 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
 
     return (
         <motion.div
-            className="z-30 bg-[#F0EEEB] text-5xl font-bold"
+            className="z-40 bg-[#F0EEEB] text-5xl font-bold"
             animate={{ y: topOffset }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
             style={{

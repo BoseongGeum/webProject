@@ -6,6 +6,7 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 interface CommonModalProps {
     isOpen: boolean;
+    showStickyBar?: boolean; showNavBar?: boolean;
     onClose: () => void;
     title?: string;
     children: React.ReactNode;
@@ -25,7 +26,7 @@ const pageVariants = {
     },
 };
 
-const CommonModal: React.FC<CommonModalProps> = ({ isOpen, onClose, title, children }) => {
+const CommonModal: React.FC<CommonModalProps> = ({ isOpen, showStickyBar, showNavBar, onClose, title, children }) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -92,7 +93,10 @@ const CommonModal: React.FC<CommonModalProps> = ({ isOpen, onClose, title, child
                         {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className="absolute top-10 right-4 text-gray-600 hover:text-gray-800"
+                            className={`absolute duration-200
+                            ${ showNavBar && showStickyBar ? 'top-40' :
+                                showStickyBar ? 'top-[108px]' :
+                                    'top-10' } right-4 text-red-950 hover:text-gray-400`}
                         >
                             <X size={24} />
                         </button>
