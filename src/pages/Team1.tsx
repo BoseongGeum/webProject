@@ -113,7 +113,7 @@ export default function Team1() {
                             onTouchStart={() => handleInteraction(block.id)}
                             onTouchEnd={handleReset}
                         >
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-90 transition-all duration-500 z-10" />
+                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-95 transition-all duration-500 z-10" />
                             <div className="relative z-20 flex w-full h-full px-2 sm:px-6 md:px-10 py-4 items-center justify-between">
                                 {isTablet || isMobile ? (
                                     <div className="flex flex-row w-full h-full">
