@@ -11,7 +11,7 @@ import AuraGenManagerInfo from "./pages/AuraGenManagerInfo";
 import AuraGenProductInfo from "./pages/AuraGenProductInfo";
 import ContactUs from "./pages/ContactUs";
 import KoreaOffice from "./pages/KoreaOffice";
-import { OurServices } from "./pages/OurServices";
+import OurServices from "./pages/OurServices";
 import {useEffect, useState} from "react";
 import Navbar from "./components/Navbar";
 import Lenis from "@studio-freight/lenis";

@@ -1,174 +1,209 @@
-import { useEffect, useState } from "react";
-import { SlideLayout } from "../components/SlideLayout";
-import { useImagePreloader } from "../hooks/useImagePreloader";
-import { useSwipeable } from "react-swipeable";
-import { AnimatePresence, motion } from "framer-motion";
-import { Factory, Handshake, PackageSearch, BadgeCheck, ShieldCheck, Mail } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import Stickybar from "../components/Stickybar";
+import { motion, useTransform, useScroll } from "framer-motion";
+import Footer from "../components/Footer";
+import CommonModal from "../components/CommonModal";
+import ServicePage1 from "./ServicePage1";
+import ServicePage2 from "./ServicePage2";
+import ServicePage3 from "./ServicePage3";
+import ServicePage4 from "./ServicePage4";
+import ServicePage5 from "./ServicePage5";
 
-const cardItems = [
+const titles = [
+    "PARTNERSHIP",
+    "GREETING",
+    "KOREA OFFICE",
+];
+
+const subtitles = [
+    "글로벌 진출을 위한 파트너쉽",
+    "인사말",
+    "한국연락 사무소",
+];
+
+const items = [
     {
-        icon: <PackageSearch className="h-8 w-8 text-red-700" />,
         title: "사양 전달",
-        description: "고객사의 요구사항을 제조 파트너에게 상세히 전달하고 협력합니다."
+        description: "고객사의 요구사항을 제조 파트너에게 상세히 전달하고 협력합니다.",
+        page: ServicePage1,
     },
     {
-        icon: <Handshake className="h-8 w-8 text-red-700" />,
         title: "조건 협의 / 생산 대응",
-        description: "납기, 수량, 공정 조건 등을 협의하며, 제조사는 생산에 집중할 수 있습니다."
+        description: "납기, 수량, 공정 조건 등을 협의하며, 제조사는 생산에 집중할 수 있습니다.",
+        page: ServicePage2,
     },
     {
-        icon: <ShieldCheck className="h-8 w-8 text-red-700" />,
         title: "품질관리 / 납품",
-        description: "생산 완료 후 품질 검수 및 납품 절차를 관리합니다."
+        description: "생산 완료 후 품질 검수 및 납품 절차를 관리합니다.",
+        page: ServicePage3,
     },
     {
-        icon: <BadgeCheck className="h-8 w-8 text-red-700" />,
         title: "서류 관리 / 수출 대응",
-        description: "계약, 수출입 관련 서류는 CBOL Korea가 전담합니다."
+        description: "계약, 수출입 관련 서류는 CBOL Korea가 전담합니다.",
+        page: ServicePage4,
     },
     {
-        icon: <Factory className="h-8 w-8 text-red-700" />,
         title: "지속적인 협업 기회",
-        description: "단발성 거래가 아닌, 장기적인 파트너십 기반으로 반복 수주가 가능합니다."
-    },
-    {
-        icon: <Mail className="h-8 w-8 text-red-700" />,
-        title: "간편한 소통 / 정산",
-        description: "국내 통화로 정산이 가능하며, 빠르고 간결한 커뮤니케이션을 보장합니다."
+        description: "단발성 거래가 아닌, 장기적인 파트너십 기반으로 반복 수주가 가능합니다.",
+        page: ServicePage5,
     },
 ];
 
-const slides = [
-    {
-        bgImage: "/images/team2/ourServices/ourServices1.jpg",
-        title: "글로벌 진출을 위한 파트너십",
-        description:
-            "CBOL Korea는 해외 고객사의 민수 제품 요청에 따라,\n한국 및 아시아 제조사와 함께 생산을 진행하는 연결자 역할을 합니다.\n귀사의 생산 역량을 세계 시장으로 확장해 보세요.",
-        rightContents: cardItems,
-        rightImages: []
-    },
-    {
-        bgImage: "/images/team2/ourServices/ourServices1.jpg",
-        title: "주요 고객사",
-        description:
-            "30년간의 경험으로 구축한 프로세스와 네트워크를 통해\n여러 주요 기업들에 OEM 부품을 공급한 바 있습니다.",
-        rightImages: [
-            "/images/team2/ourServices/ourServices2.png",
-            "/images/team2/ourServices/ourServices3.png",
-            "/images/team2/ourServices/ourServices4.png",
-            "/images/team2/ourServices/ourServices5.png",
-            "/images/team2/ourServices/ourServices6.png",
-            "/images/team2/ourServices/ourServices7.jpg",
-            "/images/team2/ourServices/ourServices8.png",
-        ],
-        layout: "zigzag" as const,
-    },
-];
+const OurServices = () => {
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(0);
+    const [containerHeight, setContainerHeight] = useState(0);
+    const sectionRef = useRef<HTMLElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const { scrollY } = useScroll();
 
-export const OurServices = () => {
+    const [openModal, setOpenModal] = useState(false);
+    const [SelectedInfo, setSelectedInfo] = useState<React.FC | null>(null);
+
+    // Map scrollY to a 0-1 progress value over the adjusted scroll range
+    const progress = useTransform(scrollY, [start, end], [0, 1], { clamp: true });
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(false);
-    const [direction, setDirection] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(false);
+    useEffect(() => {
+        // subscribe to progress changes
+        const unsubscribe = progress.onChange((p) => {
+            const idx = Math.round(p * (items.length + 1));
+            setActiveIndex(idx);
+        });
+        return () => unsubscribe();
+    }, [progress]);
 
-    const imagePaths = slides.flatMap((slide) => [slide.bgImage, ...(slide.rightImages || [])]);
-    const loaded = useImagePreloader(imagePaths);
-
-    const handlers = useSwipeable({
-        onSwipedLeft: () => {
-            if (isMobile && !isAnimating) {
-                setDirection(1);
-                setActiveIndex((prev) => (prev + 1) % slides.length);
-            }
-        },
-        onSwipedRight: () => {
-            if (isMobile && !isAnimating) {
-                setDirection(-1);
-                setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
-            }
-        },
-        trackTouch: true,
-        preventScrollOnSwipe: true,
+    // Calculate horizontal translation so last item centers in viewport
+    const x = useTransform(progress, (p) => {
+        const width = window.innerWidth;
+        const slideWidth = width * 0.5;                       // 50vw
+        const scrollDistance = slideWidth * (items.length + 1.5);
+        const adjustedMaxX = scrollDistance - slideWidth / 2;
+        const startX = width / 2 - slideWidth / 2;            // 첫 슬라이드 중앙 맞추기
+        // p=0 → startX, p=1 → startX - scrollDistance
+        return startX - p * adjustedMaxX;
     });
 
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 640);
+        const onResize = () => {
+            const width = window.innerWidth;
+            const slideWidth = width * 0.5;                       // 50vw
+            const scrollDistance = slideWidth * (items.length + 1);
+            const adjustedMaxX = scrollDistance - slideWidth / 2;
+            // Section height = (scrollDistance) + (뷰포트 높이)
+            const height = adjustedMaxX + window.innerHeight;
+            setContainerHeight(height);
+
+            // Calculate scroll start/end positions for the section
+            const rect = sectionRef.current!.getBoundingClientRect();
+            const top = window.scrollY + rect.top;
+            setStart(top);
+            setEnd(top + adjustedMaxX);
         };
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
+
+        onResize();
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
     }, []);
 
     useEffect(() => {
-        if (!loaded || isMobile) return;
-
-        const handleWheel = (e: WheelEvent) => {
-            if (isAnimating) return;
-            setIsAnimating(true);
-            if (e.deltaY > 50) {
-                setDirection(1);
-                setActiveIndex((prev) => (prev + 1) % slides.length);
-            } else if (e.deltaY < -50) {
-                setDirection(-1);
-                setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
             }
-            setTimeout(() => setIsAnimating(false), 600);
+            setLastScrollY(currentScrollY);
         };
 
-        window.addEventListener("wheel", handleWheel, { passive: true });
-        return () => window.removeEventListener("wheel", handleWheel);
-    }, [activeIndex, loaded, isMobile, isAnimating]);
-
-    const indicatorButtons = (
-        <div
-            className={`flex gap-2 ${
-                isMobile
-                    ? "justify-center mt-4"
-                    : "absolute left-6 top-1/2 transform -translate-y-1/2 flex-col z-50"
-            }`}
-        >
-            {slides.map((_, i) => (
-                <button
-                    key={i}
-                    onClick={() => {
-                        setDirection(i > activeIndex ? 1 : -1);
-                        setActiveIndex(i);
-                    }}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        i === activeIndex ? "bg-[#F0EEEB]" : "bg-gray-500"
-                    }`}
-                />
-            ))}
-        </div>
-    );
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     return (
-        <main className="bg-[#F0EEEB]">
-        <div className="w-screen h-screen overflow-hidden relative" {...handlers}>
-            {!isMobile && indicatorButtons}
+        <main className="bg-[#F0EEEB] min-h-screen relative">
+            {/* SECTION 1: Services Slider */}
+            <section ref={sectionRef} style={{ height: containerHeight }}>
+                <Stickybar
+                    title={titles[0]}
+                    subtitle={subtitles[0]}
+                    topOffset={showNavbar ? 52 : 0}
+                    align="center"
+                />
 
-            <AnimatePresence custom={direction} initial={true}>
-                {slides.map((slide, index) =>
-                    index === activeIndex ? (
-                        <motion.div
-                            key={index}
-                            custom={direction}
-                            className="w-full h-full top-0 left-0"
+                <div
+                    style={{
+                        position: "sticky",
+                        top: 180,
+                        height: "100vh",
+                        overflow: "hidden",
+                    }}
+                >
+                    <div className="flex flex-col items-center justify-center space-y-2 text-2xl leading-relaxed pb-32">
+                        <p>CBOL Korea는 해외 고객사의 민수 제품 요청에 따라,</p>
+                        <p>한국 및 아시아 제조사와 함께 생산을 진행하는 연결자 역할을 합니다.</p>
+                        <p>귀사의 생산 역량을 세계 시장으로 확장해 보세요.</p>
+                    </div>
+
+                    <motion.div
+                        ref={trackRef}
+                        style={{
+                            display: "flex",
+                            width: `${items.length * 50}vw`,
+                            x,
+                        }}
+                    >
+                        {items.map((item, i) => (
+                            <div
+                                key={i}
+                                style={{ width: "50vw", flexShrink: 0 }}
+                                className="flex justify-center"
+                            >
+                                <button
+                                    onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
+                                    className={`flex flex-col justify-center items-center bg-white rounded-lg 
+                                    shadow p-8 max-w-sm h-52 transition-transform duration-500 
+                                    ${i === activeIndex ? 'scale-150 ring-2 ring-blue-500' : 'opacity-50'}`}
+                                    disabled={i !== activeIndex}
+                                >
+                                    <h3 className="text-xl font-semibold mb-6">{item.title}</h3>
+                                    <p className="text-base leading-relaxed text-center">{item.description}</p>
+                                </button>
+                            </div>
+                        ))}
+                        <CommonModal
+                            isOpen={openModal}
+                            onClose={() => setOpenModal(false)}
                         >
-                            <SlideLayout
-                                {...slide}
-                                activeIndex={activeIndex}
-                                totalSlides={slides.length}
-                                setActiveIndex={setActiveIndex}
-                                isMobile={isMobile}
-                                indicatorButtons={isMobile ? indicatorButtons : null}
-                            />
-                        </motion.div>
-                    ) : null
-                )}
-            </AnimatePresence>
-        </div>
+                            {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
+                        </CommonModal>
+                    </motion.div>
+
+                    <div className="progress-bar-bg">
+                        <motion.div className="progress-bar-active" style={{ scaleX: progress }} />
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 2: Greeting */}
+            <section className="min-h-screen">
+                <Stickybar
+                    title={titles[1]}
+                    subtitle={subtitles[1]}
+                    topOffset={showNavbar ? 52 : 0}
+                    align="center"
+                />
+                <div className="pt-24 pb-32 leading-relaxed">
+                    <div className="mt-10">
+                        <p>내 용 추 가</p>
+                    </div>
+                </div>
+            </section>
+            <Footer />
         </main>
     );
 };
+
+export default OurServices;

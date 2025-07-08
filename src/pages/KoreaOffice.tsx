@@ -3,12 +3,21 @@ import Stickybar from "../components/Stickybar";
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            when: "beforeChildren",  // children 애니 시작 전
+            staggerChildren: 0.2,    // 0.2s 간격으로
+        },
+    },
+};
+
 const lineVariants = {
-    hidden: { y: '100%', opacity: 0 },
-    visible: (i: number) => ({
+    hidden: { y: '100%' },
+    visible: () => ({
         y: '0%',
-        opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.1 * i },
+        transition: { duration: 0.6, ease: 'easeInOut' },
     }),
 };
 
@@ -103,22 +112,25 @@ const KoreaOffice = () => {
                 <section className="min-h-screen">
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div className="flex flex-col items-center">
-                        <motion.div className="pt-24 pb-32 text-2xl leading-relaxed">
-                            {paragraphs1.map((group, groupIdx) => (
-                                <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
-                                    {group.map((line, lineIdx) => (
-                                        <div key={lineIdx} className="overflow-hidden">
-                                            <motion.p
-                                                className={lineIdx === 0 ? "" : "mt-2"}
-                                                variants={lineVariants}
-                                                initial="hidden"
-                                                whileInView="visible"
-                                                viewport={{ once: true }}
-                                                custom={groupIdx * 2 + lineIdx}
-                                            >
-                                                {line}
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={containerVariants}
+                            className="pt-24 pb-32 text-2xl leading-relaxed"
+                        >
+                            {paragraphs1.map((group, gIdx) => (
+                                <div
+                                    key={gIdx}
+                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                >
+                                    {group.map((sentence, sIdx) => (
+                                        <div key={sIdx} className="overflow-hidden">
+                                            <motion.p variants={lineVariants}>
+                                                {sentence}
                                             </motion.p>
                                         </div>
+
                                     ))}
                                 </div>
                             ))}
@@ -130,22 +142,25 @@ const KoreaOffice = () => {
                 <section className="min-h-screen">
                     <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div className="flex flex-col items-center">
-                        <motion.div className="pt-20 pb-32 text-2xl leading-relaxed">
-                            {paragraphs2.map((group, groupIdx) => (
-                                <div key={groupIdx} className={groupIdx === 0 ? "" : "mt-10"}>
-                                    {group.map((line, lineIdx) => (
-                                        <div key={lineIdx} className="overflow-hidden">
-                                            <motion.p
-                                                className={lineIdx === 0 ? "" : "mt-2"}
-                                                variants={lineVariants}
-                                                initial="hidden"
-                                                whileInView="visible"
-                                                viewport={{ once: true }}
-                                                custom={groupIdx * 2 + lineIdx}
-                                            >
-                                                {line}
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={containerVariants}
+                            className="pt-24 pb-32 text-2xl leading-relaxed"
+                        >
+                            {paragraphs2.map((group, gIdx) => (
+                                <div
+                                    key={gIdx}
+                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                >
+                                    {group.map((sentence, sIdx) => (
+                                        <div key={sIdx} className="overflow-hidden">
+                                            <motion.p variants={lineVariants}>
+                                                {sentence}
                                             </motion.p>
                                         </div>
+
                                     ))}
                                 </div>
                             ))}
@@ -158,7 +173,7 @@ const KoreaOffice = () => {
                     <Stickybar title={titles[2]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div className="pt-24 pb-32 leading-relaxed">
                     <div className="mt-10">
-                        <p>다른 지사 혹은 추가 정보 등을 여기에 작성하세요.</p>
+                        <p>내 용 추 가</p>
                     </div>
                     </div>
                 </section>
