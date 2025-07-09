@@ -147,6 +147,9 @@ const OurServices = () => {
                         <p>귀사의 생산 역량을 세계 시장으로 확장해 보세요.</p>
                     </div>
 
+                    <div className="progress-bar-bg">
+                        <motion.div className="progress-bar-active" style={{ scaleX: progress }} />
+                    </div>
                     <motion.div
                         ref={trackRef}
                         style={{
@@ -163,9 +166,9 @@ const OurServices = () => {
                             >
                                 <button
                                     onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
-                                    className={`flex flex-col justify-center items-center bg-white rounded-lg 
-                                    shadow p-8 max-w-sm h-52 transition-transform duration-500 
-                                    ${i === activeIndex ? 'scale-150 border-2 border-red-900' : 'opacity-50'}`}
+                                    className={`flex flex-col justify-center gray-200items-center bg-white rounded-lg 
+                                    shadow p-8 max-w-sm h-52 transition-transform duration-500
+                                    ${i === activeIndex ? 'scale-150 border-2 border-red-900' : 'opacity-70'}`}
                                     disabled={i !== activeIndex}
                                 >
                                     <h3 className="text-xl font-semibold mb-6">{item.title}</h3>
@@ -182,10 +185,6 @@ const OurServices = () => {
                             {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
                         </CommonModal>
                     </motion.div>
-
-                    <div className="progress-bar-bg">
-                        <motion.div className="progress-bar-active" style={{ scaleX: progress }} />
-                    </div>
                 </div>
             </section>
 
