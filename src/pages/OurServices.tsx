@@ -99,7 +99,7 @@ const OurServices = () => {
         const baseDistance = trackWidth - slideWidth;
 
         // containerHeight spans baseDistance scroll + viewport + extraOffset
-        setContainerHeight(baseDistance + window.innerHeight + slideWidth);
+        setContainerHeight(trackWidth + window.innerHeight);
 
         const { top } = sliderRef.current.getBoundingClientRect();
         const startY = window.scrollY + top;
@@ -158,9 +158,13 @@ const OurServices = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentY = window.scrollY;
-            setShowNavbar(currentY < lastScrollY);
-            setLastScrollY(currentY);
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+            setLastScrollY(currentScrollY);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);

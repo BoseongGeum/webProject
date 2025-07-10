@@ -95,9 +95,15 @@ export default function Home() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentY = window.scrollY;
-            setShowNavbar(currentY < lastScrollY);
-            setLastScrollY(currentY);
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // 아래로 스크롤: 네브바 숨김
+                setShowNavbar(false);
+            } else {
+                // 위로 스크롤: 네브바 보이기
+                setShowNavbar(true);
+            }
+            setLastScrollY(currentScrollY);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
