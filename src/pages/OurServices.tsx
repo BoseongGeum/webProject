@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef, useCallback} from "react";
 import Stickybar from "../components/Stickybar";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Footer from "../components/Footer";
@@ -8,18 +8,24 @@ import ServicePage2 from "./ServicePage2";
 import ServicePage3 from "./ServicePage3";
 import ServicePage4 from "./ServicePage4";
 import ServicePage5 from "./ServicePage5";
+import {useInView} from "react-intersection-observer";
+import Team1 from "./Team1";
 
 const titles = [
     "PARTNERSHIP",
-    "GREETING",
+    "TEAM1",
     "KOREA OFFICE",
-];
+] as const;
+
+type Title = typeof titles[number];
 
 const subtitles = [
     "글로벌 진출을 위한 파트너쉽",
-    "인사말",
+    "팀1(임시)",
     "한국연락 사무소",
-];
+] as const;
+
+type Subtitle = typeof subtitles[number];
 
 const items = [
     {
@@ -49,18 +55,56 @@ const items = [
     },
 ];
 
+const inViewOpts = {
+    threshold:   0,
+    rootMargin:  "-50% 0px -50% 0px",
+    triggerOnce: false,    // 명시적이지만, 기본값이 false이므로 생략 가능
+};
+
 const OurServices = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(0);
     const [containerHeight, setContainerHeight] = useState(0);
-    const sectionRef = useRef<HTMLElement>(null);
+    const sliderRef = useRef<HTMLElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
 
     const [openModal, setOpenModal] = useState(false);
     const [SelectedInfo, setSelectedInfo] = useState<React.FC | null>(null);
+
+    const [activeSectionTitle, setActiveSectionTitle] = useState<Title>(titles[0]);
+    const [activeSectionSubtitle, setActiveSectionSubtitle] = useState<Subtitle>(subtitles[0]);
+
+    const [inViewSection1Ref, inViewSection1] = useInView(inViewOpts);
+    const [section2Ref, inViewSection2] = useInView(inViewOpts);
+    const [, inViewSection3] = useInView(inViewOpts);
+
+    const section1Ref = useCallback(
+        (node: HTMLElement | null) => {
+            // a) slider 측정용 ref 에도 붙이고
+            sliderRef.current = node;
+            // b) intersection observer ref 콜백에도 node 전달
+            inViewSection1Ref(node);
+        },
+        [inViewSection1Ref]
+    );
+
+    useEffect(() => {
+        if (inViewSection1)  {
+            setActiveSectionTitle(titles[0]);
+            setActiveSectionSubtitle(subtitles[0]);
+        }
+        else if (inViewSection2) {
+            setActiveSectionTitle(titles[1]);
+            setActiveSectionSubtitle(subtitles[1]);
+        }
+        else if (inViewSection3) {
+            setActiveSectionTitle(titles[2]);
+            setActiveSectionSubtitle(subtitles[2]);
+        }
+    }, [inViewSection1, inViewSection2, inViewSection3]);
 
     // Map scrollY to a 0-1 progress value over the adjusted scroll range
     const progress = useTransform(scrollY, [start, end], [0, 1], { clamp: true });
@@ -96,7 +140,7 @@ const OurServices = () => {
             setContainerHeight(height);
 
             // Calculate scroll start/end positions for the section
-            const rect = sectionRef.current!.getBoundingClientRect();
+            const rect = sliderRef.current!.getBoundingClientRect();
             const top = window.scrollY + rect.top;
             setStart(top);
             setEnd(top + adjustedMaxX);
@@ -124,15 +168,14 @@ const OurServices = () => {
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">
-            {/* SECTION 1: Services Slider */}
-            <section ref={sectionRef} style={{ height: containerHeight }}>
-                <Stickybar
-                    title={titles[0]}
-                    subtitle={subtitles[0]}
-                    topOffset={showNavbar ? 52 : 0}
-                    align="center"
-                />
+            <Stickybar
+                title={activeSectionTitle}
+                subtitle={activeSectionSubtitle}
+                topOffset={showNavbar ? 52 : 0}
+            />
 
+            {/* SECTION 1: Services Slider */}
+            <section ref={section1Ref} style={{ height: containerHeight }}>
                 <div
                     style={{
                         position: "sticky",
@@ -189,16 +232,12 @@ const OurServices = () => {
             </section>
 
             {/* SECTION 2: Greeting */}
-            <section className="min-h-screen">
-                <Stickybar
-                    title={titles[1]}
-                    subtitle={subtitles[1]}
-                    topOffset={showNavbar ? 52 : 0}
-                    align="center"
-                />
+            <section
+                ref={section2Ref}
+                className="min-h-screen">
                 <div className="pt-24 pb-32 leading-relaxed">
                     <div className="mt-10">
-                        <p>내 용 추 가</p>
+                        <Team1 />
                     </div>
                 </div>
             </section>

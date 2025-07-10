@@ -87,7 +87,7 @@ export default function Team1() {
 
     return (
         <main className="bg-[#F0EEEB]">
-        <div className="px-24 pt-24 flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
+        <div className="px-24 pt-36 flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
             <div className="absolute inset-0 z-0" />
 
             <div className="flex flex-col h-full transition-all ease-in-out">
@@ -102,7 +102,7 @@ export default function Team1() {
                     return (
                         <motion.div
                             key={block.id}
-                            className="mb-10 rounded-2xl relative group bg-cover bg-no-repeat bg-center cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
+                            className="mb-6 rounded-2xl relative group bg-cover bg-no-repeat bg-center cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
                             style={{
                                 backgroundImage: `url(${bgImage})`,
                                 flexGrow: isActive ? 1.15 : 1,
