@@ -7,6 +7,11 @@ import QuanticEvansProductInfo from "./QuanticEvansProductInfo";
 import AuraGenProductInfo from "./AuraGenProductInfo";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
+interface Team1Props {
+    showStickyBar: boolean;
+    showNavBar: boolean;
+}
+
 const blocks = [
     {
         id: 1,
@@ -55,7 +60,7 @@ const blocks = [
     },
 ];
 
-export default function Team1() {
+export default function Team1({showNavBar, showStickyBar}: Team1Props) {
     const [activeBlock, setActiveBlock] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
@@ -87,7 +92,7 @@ export default function Team1() {
 
     return (
         <main className="bg-[#F0EEEB]">
-        <div className="px-24 pt-36 flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
+        <div className="px-24 pt-4 pb-36 flex flex-col h-screen w-full overflow-hidden font-bold relative text-[clamp(14px,1.2vw,18px)] select-none">
             <div className="absolute inset-0 z-0" />
 
             <div className="flex flex-col h-full transition-all ease-in-out">
@@ -173,7 +178,10 @@ export default function Team1() {
                                                                 exit={{ opacity: 0, y: 10 }}
                                                                 whileHover={{ scale: 1.05 }}
                                                                 transition={{ duration: 0.4 }}
-                                                                className="w-24 md:w-28 px-2 py-1 border-2 border-amber-300 bg-black bg-opacity-30 text-yellow-300 hover:text-white hover:bg-yellow-300 rounded-none text-[clamp(13px,1vw,17px)] text-center flex items-center justify-center"
+                                                                className="w-24 md:w-28 px-2 py-1 border-2 border-amber-300
+                                                                bg-black bg-opacity-30 text-yellow-300 hover:text-white
+                                                                hover:bg-yellow-300 rounded-none text-[clamp(13px,1vw,17px)]
+                                                                text-center flex items-center justify-center"
                                                             >
                                                                 <button className="w-full h-full flex items-center justify-center">
                                                                     제품정보
@@ -262,7 +270,10 @@ export default function Team1() {
                                                                     setSelectedInfo(() => block.productInfo);
                                                                     setOpenModal(true)
                                                                 }}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)] text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300
+                                                                bg-black bg-opacity-30 text-yellow-300 hover:text-black
+                                                                hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)]
+                                                                text-center flex items-center justify-center"
                                                             >
                                                                 제품정보
                                                             </button>
@@ -278,7 +289,10 @@ export default function Team1() {
                                                         >
                                                             <Link
                                                                 to={block.managerInfo}
-                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300 bg-black bg-opacity-30 text-yellow-300 hover:text-black hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)] text-center flex items-center justify-center"
+                                                                className="w-28 md:w-36 px-4 py-1 border-2 border-yellow-300
+                                                                bg-black bg-opacity-30 text-yellow-300 hover:text-black
+                                                                hover:bg-yellow-300 rounded-none text-[clamp(14px,1vw,18px)]
+                                                                text-center flex items-center justify-center"
                                                             >
                                                                 제품문의
                                                             </Link>
@@ -295,6 +309,8 @@ export default function Team1() {
                 })}
                 <CommonModal
                   isOpen={openModal}
+                  showStickyBar={showStickyBar}
+                  showNavBar={showNavBar}
                   onClose={() => setOpenModal(false)}
                 >
                   {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}

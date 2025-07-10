@@ -87,16 +87,15 @@ const CommonModal: React.FC<CommonModalProps> = ({ isOpen, showStickyBar, showNa
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="fixed inset-0 z-30 bg-[#F0EEEB] pt-8"
+                    className={`fixed inset-0 z-30 bg-[#F0EEEB]
+                        ${ showNavBar && showStickyBar ? 'top-40' :
+                        showStickyBar ? 'top-[108px]' : 'top-10' }`}
                 >
                     <div className="relative w-full h-full flex flex-col">
                         {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className={`absolute duration-200
-                            ${ showNavBar && showStickyBar ? 'top-40' :
-                                showStickyBar ? 'top-[108px]' :
-                                    'top-10' } right-4 text-red-950 hover:text-gray-400`}
+                            className={`absolute duration-200 right-4 pt-8 text-red-950 hover:text-gray-400`}
                         >
                             <X size={24} />
                         </button>

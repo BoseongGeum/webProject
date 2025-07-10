@@ -235,13 +235,13 @@ const OurServices = () => {
             <section
                 ref={section2Ref}
                 className="min-h-screen">
-                <div className="pt-24 pb-32 leading-relaxed">
+                <div className="leading-relaxed">
                     <div className="mt-10">
-                        <Team1 />
+                        <Team1 showNavBar={showNavbar} showStickyBar={true}/>
                     </div>
                 </div>
             </section>
-            <Footer />
+            <Footer/>
         </main>
     );
 };

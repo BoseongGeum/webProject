@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/Home";
-import Team1 from "./pages/Team1";
 import Team2 from "./pages/Team2";
 import PICManagerInfo from "./pages/PICManagerInfo";
 import PICProductInfo from "./pages/PICProductInfo";
@@ -101,7 +100,6 @@ function AppContent() {
                     >
                         <ScrollToTop />
                         <Routes location={location} key={location.pathname}>
-                            <Route path="/team1" element={<Team1 />} />
                             <Route
                                 path="/team1/picProductInfo"
                                 element={<PICProductInfo />}
