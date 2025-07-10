@@ -72,15 +72,10 @@ const KoreaOffice = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setShowNavbar(false);
-            } else {
-                setShowNavbar(true);
-            }
-            setLastScrollY(currentScrollY);
+            const currentY = window.scrollY;
+            setShowNavbar(currentY < lastScrollY);
+            setLastScrollY(currentY);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);

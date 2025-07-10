@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useCallback} from "react";
+import React, {useState, useEffect, useRef, useCallback, useLayoutEffect} from "react";
 import Stickybar from "../components/Stickybar";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Footer from "../components/Footer";
@@ -91,6 +91,34 @@ const OurServices = () => {
         [inViewSection1Ref]
     );
 
+    const measure = useCallback(() => {
+        if (!sliderRef.current || !trackRef.current) return;
+        const slideWidth = window.innerWidth * 0.5;
+        const trackWidth = trackRef.current.scrollWidth;
+
+        const baseDistance = trackWidth - slideWidth;
+
+        // containerHeight spans baseDistance scroll + viewport + extraOffset
+        setContainerHeight(baseDistance + window.innerHeight + slideWidth);
+
+        const { top } = sliderRef.current.getBoundingClientRect();
+        const startY = window.scrollY + top;
+        setStart(startY);
+        // end at start + baseDistance (transform uses baseDistance)
+        setEnd(startY + baseDistance);
+    }, []);
+
+    useLayoutEffect(() => {
+        measure();
+        window.addEventListener("resize", measure);
+        const ro = new ResizeObserver(measure);
+        if (trackRef.current) ro.observe(trackRef.current);
+        return () => {
+            window.removeEventListener("resize", measure);
+            ro.disconnect();
+        };
+    }, [measure]);
+
     useEffect(() => {
         if (inViewSection1)  {
             setActiveSectionTitle(titles[0]);
@@ -112,7 +140,7 @@ const OurServices = () => {
     useEffect(() => {
         // subscribe to progress changes
         const unsubscribe = progress.onChange((p) => {
-            const idx = Math.round(p * (items.length + 0.5));
+            const idx = Math.round(p * (items.length - 1));
             setActiveIndex(idx);
         });
         return () => unsubscribe();
@@ -121,47 +149,19 @@ const OurServices = () => {
     // Calculate horizontal translation so last item centers in viewport
     const x = useTransform(progress, (p) => {
         const width = window.innerWidth;
-        const slideWidth = width * 0.5;                       // 50vw
-        const scrollDistance = slideWidth * (items.length + 1);
-        const adjustedMaxX = scrollDistance - slideWidth / 2;
-        const startX = width / 2 - slideWidth / 2;            // 첫 슬라이드 중앙 맞추기
-        // p=0 → startX, p=1 → startX - scrollDistance
-        return startX - p * adjustedMaxX;
+        const slideWidth = width * 0.5;
+        const trackWidth = trackRef.current?.scrollWidth ?? items.length * slideWidth;
+        const baseDistance = trackWidth - slideWidth;
+        const startX = width / 2 - slideWidth / 2;
+        return startX - p * baseDistance;
     });
 
     useEffect(() => {
-        const onResize = () => {
-            const width = window.innerWidth;
-            const slideWidth = width * 0.5;                       // 50vw
-            const scrollDistance = slideWidth * (items.length + 1);
-            const adjustedMaxX = scrollDistance - slideWidth / 2;
-            // Section height = (scrollDistance) + (뷰포트 높이)
-            const height = adjustedMaxX + window.innerHeight;
-            setContainerHeight(height);
-
-            // Calculate scroll start/end positions for the section
-            const rect = sliderRef.current!.getBoundingClientRect();
-            const top = window.scrollY + rect.top;
-            setStart(top);
-            setEnd(top + adjustedMaxX);
-        };
-
-        onResize();
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, []);
-
-    useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setShowNavbar(false);
-            } else {
-                setShowNavbar(true);
-            }
-            setLastScrollY(currentScrollY);
+            const currentY = window.scrollY;
+            setShowNavbar(currentY < lastScrollY);
+            setLastScrollY(currentY);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
@@ -197,7 +197,6 @@ const OurServices = () => {
                         ref={trackRef}
                         style={{
                             display: "flex",
-                            width: `${items.length * 50}vw`,
                             x,
                         }}
                     >
