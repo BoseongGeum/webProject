@@ -128,9 +128,9 @@ const KoreaOffice = () => {
                             className="pt-24 pb-32 text-2xl leading-relaxed"
                         >
                             <iframe
-                                src="https://www.cbol.com/aboutus.html"
+                                src="https://www.cbol.com"
                                 title="CBOL 고객사 소개"
-                                className="w-full h-[400px] border-none"
+                                className="w-[1600px] h-[600px] border-none"
                             />
                         </motion.div>
                     </div>
