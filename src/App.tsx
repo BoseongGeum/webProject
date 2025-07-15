@@ -9,9 +9,8 @@ import KoreaOffice from "./pages/KoreaOffice";
 import OurServices from "./pages/OurServices";
 import {useEffect, useState} from "react";
 import Navbar from "./components/Navbar";
-import Lenis from "@studio-freight/lenis";
-import ScrollToTop from "./components/ScrollToTop";
 import {MENUS} from "./constants/menus";
+import {lenis} from "./hooks/lenis";
 
 const pageVariants = {
     initial: { y: "100%", rotate: 5 },
@@ -47,24 +46,18 @@ function AppContent() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    const { pathname } = useLocation();
+
+           // 1) 브라우저 자동 복원 비활성화 (한 번만)
     useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-            syncTouch: true,
-        });
+        if ("scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual";
+        }}, []);
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        return () => {
-            lenis.destroy();
-        };
-    }, []);
+           // 2) 페이지 전환 시 Lenis 를 즉시 최상단으로
+    useEffect(() => {
+        lenis.scrollTo(0, { immediate: true });
+        }, [pathname]);
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -72,10 +65,9 @@ function AppContent() {
             {!isHome && (
                 <motion.div
                     className="fixed top-0 left-0 w-full z-50"
-                    initial={{ y: -57, opacity: 1 }}
+                    initial={{ y: 0 }}
                     animate={{
                         y: showNavbar ? 0 : -57,
-                        opacity: 1,
                         pointerEvents: showNavbar ? 'auto' : 'none',
                     }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -89,13 +81,13 @@ function AppContent() {
                     <motion.div
                         key={location.pathname}
                         variants={pageVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial={isHome ? false : "initial"}
+                        animate={isHome ? false : "animate"}
                         exit="exit"
                         className="absolute inset-0"
                     >
-                        <ScrollToTop />
                         <Routes location={location} key={location.pathname}>
+                            <Route path="/" element={<Home />} />
                             <Route path="/team1/picManagerInfo" element={<PICManagerInfo />}/>
                             <Route path="/team1/quanticEvansManagerInfo" element={<QuanticEvansManagerInfo />}/>
                             <Route path="/team1/auraGenManagerInfo" element={<AuraGenManagerInfo />}/>
@@ -105,9 +97,6 @@ function AppContent() {
                         </Routes>
                     </motion.div>
                 </AnimatePresence>
-                    <Routes location={location} key={location.pathname}>
-                        <Route path="/" element={<Home />} />
-                    </Routes>
             </main>
         </div>
     );
