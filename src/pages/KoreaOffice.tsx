@@ -119,7 +119,7 @@ const KoreaOffice = () => {
                 {/* SECTION 2 */}
                 <section className="min-h-screen">
                     <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 52 : 0} align={"center"} />
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center pb-20">
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
@@ -132,7 +132,7 @@ const KoreaOffice = () => {
                                     클릭클릭
                                 </motion.p>
                             </div>
-                            <div className="px-20 w-screen h-screen">
+                            <div className="px-20 w-screen h-[80vh]">
                                 <a
                                     href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
                                     target="_blank"
