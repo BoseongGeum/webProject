@@ -48,13 +48,13 @@ function AppContent() {
 
     const { pathname } = useLocation();
 
-           // 1) 브라우저 자동 복원 비활성화 (한 번만)
+    // 1) 브라우저 자동 복원 비활성화 (한 번만)
     useEffect(() => {
         if ("scrollRestoration" in window.history) {
             window.history.scrollRestoration = "manual";
         }}, []);
 
-           // 2) 페이지 전환 시 Lenis 를 즉시 최상단으로
+    // 2) 페이지 전환 시 Lenis 를 즉시 최상단으로
     useEffect(() => {
         lenis.scrollTo(0, { immediate: true });
         }, [pathname]);
