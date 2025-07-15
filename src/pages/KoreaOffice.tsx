@@ -139,7 +139,7 @@ const KoreaOffice = () => {
                                     rel="noopener noreferrer"
                                     style={{ backgroundImage: "url(/images/team2/koreaOffice/partnerships.png)" }}
                                     className="block bg-cover bg-top bg-no-repeat w-full h-[70vh] duration-300
-                                    filter blur-sm rounded-xl transition hover:scale-[101%] hover:blur-[3px]"
+                                    filter blur-md rounded-xl transition hover:scale-[101%] hover:blur-[11px]"
                                 >
                                 </a>
                             </div>
