@@ -144,7 +144,7 @@ const OurServices = () => {
                     <CommonModal
                         isOpen={openModal}
                         showStickyBar={true}
-                        showNavBar={true}
+                        showNavBar={showNavbar}
                         onClose={() => setOpenModal(false)}
                     >
                         {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
