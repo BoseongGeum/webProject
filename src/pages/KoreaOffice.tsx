@@ -95,7 +95,7 @@ const KoreaOffice = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="pt-24 pb-32 text-2xl leading-relaxed"
+                            className="pt-24 pb-20 text-2xl leading-relaxed"
                         >
                             {paragraphs1.map((group, gIdx) => (
                                 <div
@@ -125,13 +125,25 @@ const KoreaOffice = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="pt-24 pb-32 text-2xl leading-relaxed"
+                            className="pt-24 text-2xl leading-relaxed"
                         >
-                            <iframe
-                                src="https://www.cbol.com"
-                                title="CBOL 고객사 소개"
-                                className="w-[1600px] h-[600px] border-none"
-                            />
+                            <div className="pb-2 flex flex-col items-center">
+                                <motion.p variants={lineVariants}>
+                                    클릭클릭
+                                </motion.p>
+                            </div>
+                            <div className="px-20 w-screen h-screen">
+                                <a
+                                    href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ backgroundImage: "url(/images/team2/koreaOffice/partnerships.png)" }}
+                                    className="block bg-cover bg-top bg-no-repeat w-full h-[70vh] duration-300
+                                    filter blur-sm rounded-xl transition hover:scale-[101%] hover:blur-[3px]"
+                                >
+                                </a>
+                            </div>
+
                         </motion.div>
                     </div>
                 </section>

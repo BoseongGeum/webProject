@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useRef, useCallback, useLayoutEffect} from "react";
+import React, {useState, useEffect} from "react";
 import Stickybar from "../components/Stickybar";
-import { motion, useTransform, useScroll } from "framer-motion";
 import Footer from "../components/Footer";
 import CommonModal from "../components/CommonModal";
 import ServicePage1 from "./ServicePage1";
@@ -64,12 +63,6 @@ const inViewOpts = {
 const OurServices = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
-    const [start, setStart] = useState(0);
-    const [end, setEnd] = useState(0);
-    const [containerHeight, setContainerHeight] = useState(0);
-    const sliderRef = useRef<HTMLElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
-    const { scrollY } = useScroll();
 
     const [openModal, setOpenModal] = useState(false);
     const [SelectedInfo, setSelectedInfo] = useState<React.FC | null>(null);
@@ -77,47 +70,9 @@ const OurServices = () => {
     const [activeSectionTitle, setActiveSectionTitle] = useState<Title>(titles[0]);
     const [activeSectionSubtitle, setActiveSectionSubtitle] = useState<Subtitle>(subtitles[0]);
 
-    const [inViewSection1Ref, inViewSection1] = useInView(inViewOpts);
+    const [section1Ref, inViewSection1] = useInView(inViewOpts);
     const [section2Ref, inViewSection2] = useInView(inViewOpts);
     const [, inViewSection3] = useInView(inViewOpts);
-
-    const section1Ref = useCallback(
-        (node: HTMLElement | null) => {
-            // a) slider 측정용 ref 에도 붙이고
-            sliderRef.current = node;
-            // b) intersection observer ref 콜백에도 node 전달
-            inViewSection1Ref(node);
-        },
-        [inViewSection1Ref]
-    );
-
-    const measure = useCallback(() => {
-        if (!sliderRef.current || !trackRef.current) return;
-        const slideWidth = window.innerWidth * 0.5;
-        const trackWidth = trackRef.current.scrollWidth;
-
-        const baseDistance = trackWidth - slideWidth;
-
-        // containerHeight spans baseDistance scroll + viewport + extraOffset
-        setContainerHeight(trackWidth + window.innerHeight);
-
-        const { top } = sliderRef.current.getBoundingClientRect();
-        const startY = window.scrollY + top;
-        setStart(startY);
-        // end at start + baseDistance (transform uses baseDistance)
-        setEnd(startY + baseDistance);
-    }, []);
-
-    useLayoutEffect(() => {
-        measure();
-        window.addEventListener("resize", measure);
-        const ro = new ResizeObserver(measure);
-        if (trackRef.current) ro.observe(trackRef.current);
-        return () => {
-            window.removeEventListener("resize", measure);
-            ro.disconnect();
-        };
-    }, [measure]);
 
     useEffect(() => {
         if (inViewSection1)  {
@@ -133,28 +88,6 @@ const OurServices = () => {
             setActiveSectionSubtitle(subtitles[2]);
         }
     }, [inViewSection1, inViewSection2, inViewSection3]);
-
-    // Map scrollY to a 0-1 progress value over the adjusted scroll range
-    const progress = useTransform(scrollY, [start, end], [0, 1], { clamp: true });
-    const [activeIndex, setActiveIndex] = useState(0);
-    useEffect(() => {
-        // subscribe to progress changes
-        const unsubscribe = progress.onChange((p) => {
-            const idx = Math.round(p * (items.length - 1));
-            setActiveIndex(idx);
-        });
-        return () => unsubscribe();
-    }, [progress]);
-
-    // Calculate horizontal translation so last item centers in viewport
-    const x = useTransform(progress, (p) => {
-        const width = window.innerWidth;
-        const slideWidth = width * 0.5;
-        const trackWidth = trackRef.current?.scrollWidth ?? items.length * slideWidth;
-        const baseDistance = trackWidth - slideWidth;
-        const startX = width / 2 - slideWidth / 2;
-        return startX - p * baseDistance;
-    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -178,61 +111,45 @@ const OurServices = () => {
                 topOffset={showNavbar ? 52 : 0}
             />
 
-            {/* SECTION 1: Services Slider */}
-            <section ref={section1Ref} style={{ height: containerHeight }}>
-                <div
-                    style={{
-                        position: "sticky",
-                        top: 180,
-                        height: "80vh",
-                        overflow: "hidden",
-                    }}
-                >
-                    <div className="flex flex-col items-center justify-center space-y-2 text-2xl leading-relaxed pb-32">
-                        <p>CBOL Korea는 해외 고객사의 민수 제품 요청에 따라,</p>
-                        <p>한국 및 아시아 제조사와 함께 생산을 진행하는 연결자 역할을 합니다.</p>
-                        <p>귀사의 생산 역량을 세계 시장으로 확장해 보세요.</p>
+                {/* SECTION 1: Overview & Services Grid */}
+                <section ref={section1Ref} className="pt-24 px-4 lg:px-0">
+                    <div className="container mx-auto flex flex-col text-center items-center gap-8">
+                        {/* Left: Intro Text */}
+                        <div className="w-full">
+                            <div className="flex flex-col justify-center space-y-2 text-2xl leading-relaxed">
+                                <p>CBOL Korea는 해외 고객사의 민수 제품 요청에 따라,</p>
+                                <p>한국 및 아시아 제조사와 함께 생산을 진행하는 연결자 역할을 합니다.</p>
+                                <p>귀사의 생산 역량을 세계 시장으로 확장해 보세요.</p>
+                            </div>
+                        </div>
+
+                        {/* Right: 2x3 Services Grid */}
+                        <div className="flex flex-col w-full">
+                            <div className="grid grid-cols-2 grid-rows-3 gap-6">
+                                {items.map((item, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
+                                        className="flex flex-col items-center bg-white rounded-2xl shadow p-6 hover:scale-105 transition"
+                                    >
+                                        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                                        <p className="text-center text-base leading-relaxed">{item.description}</p>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="progress-bar-bg">
-                        <motion.div className="progress-bar-active" style={{ scaleX: progress }} />
-                    </div>
-                    <motion.div
-                        ref={trackRef}
-                        style={{
-                            display: "flex",
-                            x,
-                        }}
+                    {/* Common Modal for Details */}
+                    <CommonModal
+                        isOpen={openModal}
+                        showStickyBar={true}
+                        showNavBar={true}
+                        onClose={() => setOpenModal(false)}
                     >
-                        {items.map((item, i) => (
-                            <div
-                                key={i}
-                                style={{ width: "50vw", flexShrink: 0 }}
-                                className="flex justify-center"
-                            >
-                                <button
-                                    onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
-                                    className={`flex flex-col justify-center gray-200items-center bg-white rounded-lg 
-                                    shadow p-8 max-w-sm h-52 transition-transform duration-500
-                                    ${i === activeIndex ? 'scale-150 border-2 border-red-900' : 'opacity-70'}`}
-                                    disabled={i !== activeIndex}
-                                >
-                                    <h3 className="text-xl font-semibold mb-6">{item.title}</h3>
-                                    <p className="text-base leading-relaxed text-center">{item.description}</p>
-                                </button>
-                            </div>
-                        ))}
-                        <CommonModal
-                            isOpen={openModal}
-                            showStickyBar={true}
-                            showNavBar={showNavbar}
-                            onClose={() => setOpenModal(false)}
-                        >
-                            {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
-                        </CommonModal>
-                    </motion.div>
-                </div>
-            </section>
+                        {SelectedInfo ? <SelectedInfo /> : <p>정보를 불러올 수 없습니다.</p>}
+                    </CommonModal>
+                </section>
 
             {/* SECTION 2: Greeting */}
             <section

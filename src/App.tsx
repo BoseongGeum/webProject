@@ -1,13 +1,9 @@
 import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/Home";
-import Team2 from "./pages/Team2";
 import PICManagerInfo from "./pages/PICManagerInfo";
-import PICProductInfo from "./pages/PICProductInfo";
 import QuanticEvansManagerInfo from "./pages/QuanticEvansManagerInfo";
-import QuanticEvansProductInfo from "./pages/QuanticEvansProductInfo";
 import AuraGenManagerInfo from "./pages/AuraGenManagerInfo";
-import AuraGenProductInfo from "./pages/AuraGenProductInfo";
 import ContactUs from "./pages/ContactUs";
 import KoreaOffice from "./pages/KoreaOffice";
 import OurServices from "./pages/OurServices";
@@ -100,43 +96,12 @@ function AppContent() {
                     >
                         <ScrollToTop />
                         <Routes location={location} key={location.pathname}>
-                            <Route
-                                path="/team1/picProductInfo"
-                                element={<PICProductInfo />}
-                            />
-                            <Route
-                                path="/team1/picManagerInfo"
-                                element={<PICManagerInfo />}
-                            />
-                            <Route
-                                path="/team1/quanticEvansProductInfo"
-                                element={<QuanticEvansProductInfo />}
-                            />
-                            <Route
-                                path="/team1/quanticEvansManagerInfo"
-                                element={<QuanticEvansManagerInfo />}
-                            />
-                            <Route
-                                path="/team1/auraGenProductInfo"
-                                element={<AuraGenProductInfo />}
-                            />
-                            <Route
-                                path="/team1/auraGenManagerInfo"
-                                element={<AuraGenManagerInfo />}
-                            />
-                            <Route path="/team2" element={<Team2 />} />
-                            <Route
-                                path="/team2/koreaOffice"
-                                element={<KoreaOffice />}
-                            />
-                            <Route
-                                path="/team2/ourServices"
-                                element={<OurServices />}
-                            />
-                            <Route
-                                path="/team2/contactUs"
-                                element={<ContactUs />}
-                            />
+                            <Route path="/team1/picManagerInfo" element={<PICManagerInfo />}/>
+                            <Route path="/team1/quanticEvansManagerInfo" element={<QuanticEvansManagerInfo />}/>
+                            <Route path="/team1/auraGenManagerInfo" element={<AuraGenManagerInfo />}/>
+                            <Route path="/koreaOffice" element={<KoreaOffice />}/>
+                            <Route path="/ourServices" element={<OurServices />}/>
+                            <Route path="/contactUs" element={<ContactUs />}/>
                         </Routes>
                     </motion.div>
                 </AnimatePresence>

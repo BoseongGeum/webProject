@@ -36,7 +36,7 @@ const lineVariants = {
     visible: (i: number) => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.3 + i * 0.3 },
+        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.3 + i * 0.2 },
     }),
 };
 
@@ -340,7 +340,7 @@ export default function Home() {
                                 src="/images/main/map-kor.png"
                                 alt="한국 지도"
                                 className="relative w-full h-full object-contain cursor-pointer"
-                                onClick={() => navigate('/team2/koreaOffice')}
+                                onClick={() => navigate('/koreaOffice')}
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ duration: 0.4 }}
                             />

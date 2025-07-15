@@ -48,26 +48,3 @@ code {
     transform: translateX(-100%);
   }
 }
-
-.progress-bar-bg {
-  position: absolute;
-  bottom: 10%;               /* 화면 아래에서 32px 위 */
-  left: 50%;                  /* 가로 중앙 정렬을 위해 */
-  transform: translateX(-50%);
-  width: 100%;                 /* 가로 너비 75% (필요시 조정) */
-  height: 4px;                /* 바 두께 */
-  background-color: #e5e7eb;  /* Tailwind의 gray-200 */
-  border-radius: 2px;         /* 모서리 둥글게 */
-  overflow: hidden; /* 내부 넘침 숨기기 */
-}
-
-.progress-bar-active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #7F1D1D;  /* Tailwind의 blue-500 */
-  transform-origin: left center;
-  will-change: transform;     /* 성능 최적화 */
-}
