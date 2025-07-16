@@ -55,8 +55,8 @@ const paragraphs2 = [
         "세계로 연결합니다."
     ],
     [
-        "단순한 상품 중개를 넘어 제품 이해, 품질 기준 충족,",
-        "납기 조율, 고객과의 소통까지—",
+        "단순한 상품 중개를 넘어 제품 이해, 품질 기준 충족, 납기 조율,",
+        "고객과의 소통까지—",
         "제조사가 핵심 역량에 집중하고,",
         "그 가치를 제대로 인정받을 수 있는 환경을 약속합니다."
     ],
@@ -65,10 +65,8 @@ const paragraphs2 = [
     ],
     [
         "국경을 허물고 가능성을 넓히며,",
-        "더 많은 제조사들이 글로벌 무대에서",
-        "‘경쟁력’으로 이야기될 수 있도록",
-        "CBOL Corporation 한국 연락사무소는",
-        "신뢰를 바탕으로 늘 함께하겠습니다."
+        "더 많은 제조사들이 글로벌 무대에서 ‘경쟁력’으로 이야기될 수 있도록",
+        "CBOL Corporation 한국 연락사무소는 신뢰를 바탕으로 늘 함께하겠습니다."
     ],
     [
         "감사합니다.",
@@ -100,7 +98,7 @@ const KoreaOffice = () => {
                 <section className="min-h-screen">
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div
-                        className="flex flex-col bg-cover bg-center bg-fixed"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-center bg-fixed"
                         style={{backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
@@ -108,7 +106,7 @@ const KoreaOffice = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="pt-24 pb-20 text-2xl leading-relaxed items-start pl-16
+                            className="min-h-screen pt-24 pb-20 text-2xl leading-relaxed pl-16
                             bg-black bg-opacity-75 text-white"
                         >
                             {paragraphs1.map((group, gIdx) => (
@@ -131,44 +129,44 @@ const KoreaOffice = () => {
                         </motion.div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between pt-24 pb-8">
+                    <div className="grid grid-cols-2 px-16 pt-24 pb-8">
                         {/* 왼쪽 이미지 */}
-                        <div className="w-full md:w-1/2 flex justify-center overflow-hidden pl-16 h-[135vh]">
+                        <div className="h-full w-full pr-8 overflow-hidden">
                             <img
                                 src="/images/team2/koreaOffice/greeting2.jpg"
                                 alt="Section illustration"
-                                className="w-full h-auto object-cover"
+                                className="h-full object-cover object-right-top"
                             />
                         </div>
 
-                        <div className="w-full md:w-1/2 px-16 pt-24">
+                        <div className="w-full h-full pt-24 pl-8">
                             <div className="bg-red-950 w-28 border-2 border-red-950" />
-                        {/* 오른쪽 텍스트 */}
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={containerVariants}
-                            className="pt-12 text-2xl leading-relaxed items-start"
-                        >
-                            {paragraphs2.map((group, gIdx) => (
-                                <div
-                                    key={gIdx}
-                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
-                                >
-                                    {group.map((sentence, sIdx) => (
-                                        <div key={sIdx} className="overflow-hidden">
-                                            <motion.p
-                                                variants={lineVariants}
-                                                className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}
-                                            >
-                                                {sentence}
-                                            </motion.p>
-                                        </div>
-                                    ))}
-                                </div>
-                            ))}
-                        </motion.div>
+                            {/* 오른쪽 텍스트 */}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={containerVariants}
+                                className="pt-12 pb-8 text-2xl leading-relaxed items-start"
+                            >
+                                {paragraphs2.map((group, gIdx) => (
+                                    <div
+                                        key={gIdx}
+                                        className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                    >
+                                        {group.map((sentence, sIdx) => (
+                                            <div key={sIdx} className="overflow-hidden">
+                                                <motion.p
+                                                    variants={lineVariants}
+                                                    className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}
+                                                >
+                                                    {sentence}
+                                                </motion.p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
+                            </motion.div>
                         </div>
                     </div>
                 </section>
