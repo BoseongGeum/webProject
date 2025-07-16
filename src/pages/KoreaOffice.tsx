@@ -89,7 +89,36 @@ const KoreaOffice = () => {
                 {/* SECTION 1 */}
                 <section className="min-h-screen">
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
-                    <div className="flex flex-col items-center">
+                    <div
+                        className="flex flex-col bg-cover bg-center bg-fixed"
+                        style={{backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
+                    >
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            variants={containerVariants}
+                            className="pt-24 pb-20 text-2xl leading-relaxed items-start pl-16
+                            bg-black bg-opacity-75 text-white"
+                        >
+                            {paragraphs1.map((group, gIdx) => (
+                                <div
+                                    key={gIdx}
+                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                >
+                                    {group.map((sentence, sIdx) => (
+                                        <div key={sIdx} className="overflow-hidden">
+                                            <motion.p variants={lineVariants}>
+                                                {sentence}
+                                            </motion.p>
+                                        </div>
+
+                                    ))}
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
+                    <div className="flex flex-col items-center" >
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
@@ -116,7 +145,7 @@ const KoreaOffice = () => {
                     </div>
                 </section>
 
-                {/* SECTION 2 */}
+            {/* SECTION 2 */}
                 <section className="min-h-screen">
                     <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div className="flex flex-col items-center pb-20">
