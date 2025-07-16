@@ -309,7 +309,6 @@ export default function Home() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        variants={dynamicVariants('up', 0)}
                     >
                         {/* 배경 */}
                         <motion.div
@@ -321,7 +320,10 @@ export default function Home() {
                         />
 
                         {/* 텍스트 */}
-                        <motion.div className="text-center relative">
+                        <motion.div
+                            className="text-center relative"
+                            variants={dynamicVariants('up', 0.6)}
+                        >
                             <h2 className="text-5xl font-bold text-black tracking-tight">CBOL을 만나보세요</h2>
                             <p className="text-lg text-black font-bold mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
                         </motion.div>
