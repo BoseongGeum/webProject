@@ -106,7 +106,7 @@ const KoreaOffice = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="min-h-screen pt-24 pb-20 text-2xl leading-relaxed pl-16
+                            className="min-h-screen pt-24 pb-20 text-2xl flex flex-col justify-center leading-relaxed pl-16
                             bg-black bg-opacity-75 text-white"
                         >
                             {paragraphs1.map((group, gIdx) => (
@@ -133,7 +133,7 @@ const KoreaOffice = () => {
                         {/* 왼쪽 이미지 */}
                         <div className="h-full w-full pr-8 overflow-hidden">
                             <img
-                                src="/images/team2/koreaOffice/greeting2.jpg"
+                                src="/images/team2/koreaOffice/greeting2.png"
                                 alt="Section illustration"
                                 className="h-full object-cover object-right-top"
                             />
