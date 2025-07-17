@@ -230,22 +230,24 @@ const OurServices = () => {
                         </div>
                     </div>
 
-                    <div className="container mx-auto flex flex-col text-center items-center gap-8 pt-12">
-
+                    <div className="container mx-auto flex flex-col text-center items-center gap-8 pt-52">
                         {/* Right: 2x3 Services Grid */}
                         <div className="w-full h-full">
-                            <div className="grid grid-cols-3 grid-rows-2 gap-x-8 gap-y-12">
+                            <div className="grid grid-cols-3 grid-rows-2 gap-x-8 gap-y-16">
                                 {items.map((item, idx) => (
                                     <div className="w-full h-full flex flex-col">
                                         <button
                                             key={idx}
                                             onClick={() => { setOpenModal(true); setSelectedInfo(() => item.page); }}
-                                            className="w-full h-full flex flex-col items-center bg-center bg-cover rounded-2xl
-                                            shadow p-32 hover:scale-105 transition duration-200"
-                                            style={{backgroundImage: item.bgImage }}
+                                            className="w-full h-full relative overflow-hidden rounded-xl shadow group p-32"
                                         >
+                                            {/* 배경 이미지 레이어 */}
+                                            <div
+                                            className="absolute inset-0 bg-center bg-cover transition duration-500 group-hover:scale-110"
+                                            style={{ backgroundImage: item.bgImage }}
+                                            />
                                         </button>
-                                        <h3 className="text-start text-xl font-semibold pt-8 pl-8 mb-24">{item.title}</h3>
+                                        <h3 className="text-start text-xl font-semibold pt-8 pl-8 mb-28">{item.title}</h3>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />
                                     </div>
                                 ))}
