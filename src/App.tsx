@@ -13,18 +13,19 @@ import OurServices from "./pages/OurServices";
 
 import Navbar from "./components/Navbar";
 import { MENUS } from "./constants/menus";
+import ScrollToTop from "./components/ScrollToTop";
 
 const pageVariants = {
     initial: { y: "100%", rotate: 5 },
     animate: {
         y: "0%",
         rotate: 0,
-        transition: { duration: 0.6, ease: "easeInOut" },
+        transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
     },
     exit: {
         y: "0%",
         opacity: 0.99,
-        transition: { duration: 0.6, ease: "easeInOut" },
+        transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
     },
 };
 
@@ -32,16 +33,12 @@ function AppContent() {
     const location = useLocation();
     const isHome = location.pathname === "/";
     const [showNavbar, setShowNavbar] = useState(true);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
     const lastScrollY = useRef(0);
 
     useEffect(() => {
-        const container = scrollContainerRef.current;
-        if (!container) return;
-
         const handleScroll = () => {
-            const currentY = container.scrollTop;
-            // 100px 이상 아래로 내리면 숨기고, 그 외엔 보이기
+            const currentY = window.scrollY;
+            console.log("scrollY:", currentY, "last:", lastScrollY.current);
             if (currentY > lastScrollY.current && currentY > 100) {
                 setShowNavbar(false);
             } else {
@@ -50,9 +47,14 @@ function AppContent() {
             lastScrollY.current = currentY;
         };
 
-        container.addEventListener("scroll", handleScroll, { passive: true });
-        return () => container.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        console.log("Navbar visible:", showNavbar);
+    }, [showNavbar]);
+
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -60,8 +62,11 @@ function AppContent() {
             {!isHome && (
                 <motion.div
                     className="fixed top-0 left-0 w-full z-50"
-                    initial={{ y: 0 }}
-                    animate={{ y: showNavbar ? "0%" : "-100%", pointerEvents: showNavbar ? "auto" : "none" }}
+                    animate={{
+                        y: showNavbar ? 0 : -57,
+                        opacity: 1,
+                        pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
+                    }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                     <Navbar menus={MENUS} />
@@ -79,7 +84,7 @@ function AppContent() {
                         className="absolute inset-0 flex flex-col"
                     >
                         {/* 스크롤 컨테이너 */}
-                        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto">
+                        <div className="flex-1">
                             <Routes location={location} key={location.pathname}>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/team1/picManagerInfo" element={<PICManagerInfo />} />
@@ -100,6 +105,7 @@ function AppContent() {
 export default function App() {
     return (
         <Router>
+            <ScrollToTop />
             <AppContent />
         </Router>
     );
