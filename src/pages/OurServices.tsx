@@ -2,11 +2,11 @@ import React, {useState, useEffect} from "react";
 import Stickybar from "../components/Stickybar";
 import Footer from "../components/Footer";
 import CommonModal from "../components/CommonModal";
-import ServicePage1 from "./ServicePage1";
-import ServicePage2 from "./ServicePage2";
-import ServicePage3 from "./ServicePage3";
-import ServicePage4 from "./ServicePage4";
-import ServicePage5 from "./ServicePage5";
+import ServiceDetailsPage1 from "./ServiceDetailsPage1";
+import ServiceDetailsPage2 from "./ServiceDetailsPage2";
+import ServiceDetailsPage3 from "./ServiceDetailsPage3";
+import ServiceDetailsPage4 from "./ServiceDetailsPage4";
+import ServiceDetailsPage5 from "./ServiceDetailsPage5";
 import {useInView} from "react-intersection-observer";
 import Team1 from "./Team1";
 import {motion} from "framer-motion";
@@ -83,31 +83,31 @@ const items = [
         title: "사양 전달",
         description: "고객사의 요구사항을 제조 파트너에게 상세히 전달하고 협력합니다.",
         bgImage: "url('/images/team2/ourServices/serviceDetails1.jpg')",
-        page: ServicePage1,
+        page: ServiceDetailsPage1,
     },
     {
         title: "조건 협의 / 생산 대응",
         description: "납기, 수량, 공정 조건 등을 협의하며, 제조사는 생산에 집중할 수 있습니다.",
         bgImage: "url('/images/team2/ourServices/serviceDetails2.jpg')",
-        page: ServicePage2,
+        page: ServiceDetailsPage2,
     },
     {
         title: "품질관리 / 납품",
         description: "생산 완료 후 품질 검수 및 납품 절차를 관리합니다.",
         bgImage: "url('/images/team2/ourServices/serviceDetails3.jpg')",
-        page: ServicePage3,
+        page: ServiceDetailsPage3,
     },
     {
         title: "서류 관리 / 수출 대응",
         description: "계약, 수출입 관련 서류는 CBOL Korea가 전담합니다.",
         bgImage: "url('/images/team2/ourServices/serviceDetails4.jpg')",
-        page: ServicePage4,
+        page: ServiceDetailsPage4,
     },
     {
         title: "지속적인 협업 기회",
         description: "단발성 거래가 아닌, 장기적인 파트너십 기반으로 반복 수주가 가능합니다.",
         bgImage: "url('/images/team2/ourServices/serviceDetails5.jpg')",
-        page: ServicePage5,
+        page: ServiceDetailsPage5,
     },
 ];
 
@@ -243,9 +243,11 @@ const OurServices = () => {
                                         >
                                             {/* 배경 이미지 레이어 */}
                                             <div
-                                            className="absolute inset-0 bg-center bg-cover transition duration-500 group-hover:scale-110"
+                                            className="absolute inset-0 bg-center bg-cover transition duration-500
+                                            group-hover:scale-110"
                                             style={{ backgroundImage: item.bgImage }}
                                             />
+                                            <div className="absolute inset-0 transition duration-500 group-hover:bg-black/30" />
                                         </button>
                                         <h3 className="text-start text-xl font-semibold pt-8 pl-8 mb-28">{item.title}</h3>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />

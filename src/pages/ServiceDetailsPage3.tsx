@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
-const ServicePage2: React.FC = () => {
+const ServiceDetailsPage3: React.FC = () => {
     // const images = [
     //     "/images/team1/main/PICLogo.svg",
     //     "/images/team1/PIC/picProductInfo1.png",
@@ -155,4 +155,4 @@ const ServicePage2: React.FC = () => {
     );
 };
 
-export default ServicePage2;
+export default ServiceDetailsPage3;
