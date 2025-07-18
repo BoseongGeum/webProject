@@ -98,7 +98,7 @@ const KoreaOffice = () => {
                 <section className="min-h-screen">
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center bg-fixed"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
                         style={{ backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
