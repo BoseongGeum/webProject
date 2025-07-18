@@ -23,7 +23,7 @@ const pageVariants = {
     },
     exit: {
         y: "0%",
-        opacity: 0.9,
+        opacity: 0.99,
         transition: { duration: 0.6, ease: "easeInOut" },
     },
 };
