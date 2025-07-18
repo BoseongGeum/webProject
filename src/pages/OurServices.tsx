@@ -205,7 +205,9 @@ const OurServices = () => {
                             ))}
                         </motion.div>
                     </div>
+                </section>
 
+                <section ref={section1Ref} className="min-h-screen">
                     <div className="container mx-auto flex flex-col text-start gap-8 pt-24">
                         <div className="w-full">
                             <div className="flex flex-col justify-center space-y-2 text-2xl leading-relaxed">
@@ -233,8 +235,10 @@ const OurServices = () => {
                             </div>
                         </div>
                     </div>
+                </section>
 
-                    <div className="container mx-auto flex flex-col text-center items-center gap-8 pt-52">
+                <section ref={section1Ref} className="min-h-screen">
+                    <div className="container mx-auto flex flex-col text-center items-center gap-8">
                         {/* Right: 2x3 Services Grid */}
                         <div className="w-full h-full">
                             <div className="grid grid-cols-3 grid-rows-2 gap-x-8 gap-y-16">
