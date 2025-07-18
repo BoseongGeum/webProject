@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Stickybar from "../components/Stickybar";
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
@@ -99,7 +99,7 @@ const KoreaOffice = () => {
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 52 : 0} align={"center"} />
                     <div
                         className="w-full min-h-screen flex flex-col bg-cover bg-center bg-fixed"
-                        style={{backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
+                        style={{ backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
                             initial="hidden"
