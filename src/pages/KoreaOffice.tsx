@@ -182,23 +182,31 @@ const KoreaOffice = () => {
                             variants={containerVariants}
                             className="pt-24 text-2xl leading-relaxed"
                         >
-                            <div className="pb-2 flex flex-col items-center">
-                                <motion.p variants={lineVariants}>
-                                    클릭클릭
-                                </motion.p>
-                            </div>
-                            <div className="px-20 w-screen h-[80vh]">
-                                <a
-                                    href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{ backgroundImage: "url(/images/team2/koreaOffice/partnerships.png)" }}
-                                    className="block bg-cover bg-top bg-no-repeat w-full h-[70vh] filter blur-xl rounded-xl"
-                                >
-                                    <div className="absolute inset-0 transition duration-500 hover:bg-black/40" />
-                                </a>
-                            </div>
+                            <div className="relative group px-10 w-screen h-[80vh]">
+                                    {/* 흐린 배경 이미지 레이어 */}
+                                    <div
+                                        className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl scale-110"
+                                        style={{ backgroundImage: "url(/images/team2/koreaOffice/partnerships.png)" }}
+                                    >
+                                        {/* 어두운 반투명 오버레이 (호버 시에만 보임) */}
+                                        <div className="absolute inset-0 transition duration-500 bg-transparent group-hover:bg-black/40" />
+                                    </div>
 
+                                    {/* 선명한 콘텐츠 레이어 */}
+                                    <div className="absolute inset-0 hidden group-hover:flex items-center justify-center transition duration-500 z-10">
+                                        <div className="bg-white bg-opacity-90 px-6 py-4 rounded-xl text-center shadow-lg">
+                                            <p className="text-lg font-semibold mb-3 text-black">고객사</p>
+                                            <a
+                                                href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-block px-4 py-2 rounded-md bg-red-950 text-white font-medium hover:bg-red-900 transition"
+                                            >
+                                                고객사 리스트 보기
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                         </motion.div>
                     </div>
                 </section>

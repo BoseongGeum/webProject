@@ -14,6 +14,7 @@ import OurServices from "./pages/OurServices";
 import Navbar from "./components/Navbar";
 import { MENUS } from "./constants/menus";
 import ScrollToTop from "./components/ScrollToTop";
+import Lenis from "@studio-freight/lenis";
 
 const pageVariants = {
     initial: { y: "100%", rotate: 5 },
@@ -38,7 +39,6 @@ function AppContent() {
     useEffect(() => {
         const handleScroll = () => {
             const currentY = window.scrollY;
-            console.log("scrollY:", currentY, "last:", lastScrollY.current);
             if (currentY > lastScrollY.current && currentY > 100) {
                 setShowNavbar(false);
             } else {
@@ -52,9 +52,22 @@ function AppContent() {
     }, []);
 
     useEffect(() => {
-        console.log("Navbar visible:", showNavbar);
-    }, [showNavbar]);
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
 
+        const raf = (time: number) => {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        };
+
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen">
