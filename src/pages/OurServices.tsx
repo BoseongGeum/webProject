@@ -212,7 +212,7 @@ const OurServices = () => {
                     <div className="h-[57px]" />
                 </section>
 
-                <section className="min-h-screen">
+                <section className="h-full mb-52">
                     <div className="container mx-auto flex flex-col text-start gap-8 pt-12">
                         <div className="w-full">
                             <div className="flex flex-col justify-center space-y-2 text-2xl leading-relaxed">
