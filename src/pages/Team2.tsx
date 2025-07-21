@@ -4,7 +4,7 @@ import { useImagePreloader } from "../hooks/useImagePreloader";
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function Team2() {
-    const imagePaths = ["/images/team2/team2main.png", "/images/logo.png"];
+    const imagePaths = ["/images/team2/main.png", "/images/logo.png"];
     const imagesLoaded = useImagePreloader(imagePaths);
     const [showContent, setShowContent] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Team2() {
             >
                 <div className="flex-1 flex items-center justify-center min-h-0 order-2 mt-16 py-4">
                     <img
-                        src="/images/team2/team2main.png"
+                        src="/images/main/main.png"
                         alt="Team2 Banner"
                         className="max-w-full max-h-full object-contain"
                     />

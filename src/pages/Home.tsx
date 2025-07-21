@@ -56,7 +56,7 @@ export default function Home() {
         '/images/main/top.jpeg',
         '/images/main/bottom.jpeg',
         '/images/main/map-kor.png',
-        '/images/team2/team2main.png',
+        '/images/main/main.png',
         '/images/logo.png',
         '/images/logo-white.png',
         '/masks/blob-mask.svg',
@@ -196,7 +196,7 @@ export default function Home() {
                             viewport={{ once: true }}
                         >
                             <img
-                                src="/images/team2/team2main.png"
+                                src="/images/main/main.png"
                                 alt="Team2 Banner"
                                 className="max-w-full max-h-full object-contain"
                             />

@@ -167,6 +167,16 @@ const OurServices = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    // const images = [
+    //     '/images/team2/ourServices/services1.jpg',
+    //     '/images/team2/ourServices/serviceDetails1.jpg',
+    //     '/images/team2/ourServices/serviceDetails2.jpg',
+    //     '/images/team2/ourServices/serviceDetails3.jpg',
+    //     '/images/team2/ourServices/serviceDetails4.png',
+    // ];
+
+    //const loaded = useImagePreloader(images);
+
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">
 

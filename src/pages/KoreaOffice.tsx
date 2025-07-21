@@ -92,6 +92,14 @@ const KoreaOffice = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    // const images = [
+    //     '/images/team2/koreaOffice/greeting1.jpg',
+    //     '/images/team2/koreaOffice/greeting2.png',
+    //     '/images/team2/koreaOffice/partnerships.png',
+    // ];
+
+    //const loaded = useImagePreloader(images);
+
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">
                 {/* SECTION 1 */}
