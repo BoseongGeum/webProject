@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
 type Props = {
-    description: string[][];
+    description: string[];
     bgImage: string;
 };
 
@@ -30,25 +30,18 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                     />
                 </div>
 
-                <div className="w-full h-full pt-24 pl-8">
-                    <div className="bg-red-950 w-28 border-2 border-red-950" />
+                <div className="w-full h-full pt-12 pl-8">
+                    <div className="bg-red-950 w-32 border-2 border-red-950" />
                     {/* 오른쪽 텍스트 */}
-                    <div className="pt-12 pb-8 text-2xl leading-relaxed items-start">
-                        {description.map((group, gIdx) => (
-                            <div
-                                key={gIdx}
-                                className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
-                            >
-                                {group.map((sentence, sIdx) => (
-                                    <div key={sIdx} className="overflow-hidden">
-                                        <motion.p
-                                            variants={lineVariants}
-                                            className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}
-                                        >
-                                            {sentence}
-                                        </motion.p>
-                                    </div>
-                                ))}
+                    <div className="py-8 text-2xl leading-relaxed items-start">
+                        {description.map((sentence, idx) => (
+                            <div key={idx} className="overflow-hidden">
+                                <motion.p
+                                    variants={lineVariants}
+                                    className={`${idx === 0 ? "text-6xl font-bold mb-8" : ""}`}
+                                >
+                                    {sentence}
+                                </motion.p>
                             </div>
                         ))}
                     </div>

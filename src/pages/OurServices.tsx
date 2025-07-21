@@ -74,37 +74,54 @@ const items = [
     {
         title: "사양 전달",
         description: [
-            ["고객사의 요구사항을 제조 파트너에게 상세히 전달하고 협력합니다."]
+            "정확한 제품 스펙 확인 & 생산 가능성 검토",
+            "미국, 유럽 고객사의 2D/3D 도면, 제품 사양을 검토합니다.",
+            "원소재 수급, 가공 방식, 후처리 등",
+            "현지 제조 가능여부를 검토하여",
+            "불필요한 리스크와 시간 낭비를 줄여드립니다."
         ],
         bgImage: "/images/team2/ourServices/serviceDetails1.jpg",
     },
     {
         title: "조건 협의 / 생산 대응",
         description: [
-            ["납기, 수량, 공정 조건 등을 협의하며, 제조사는 생산에 집중할 수 있습니다."]
+            "조건 협의 및 생산 대응",
+            "복잡한 사양 협의나 소통 부담 없이,",
+            "제조사는 실제 생산과 품질 대응에만 전념하실 수 있습니다.",
+            "초기 샘플 제작과 품질 테스트를 통해",
+            "고객사와 제조사가 만족할 수 있는 품질 기준을 조율합니다.",
+            "생산 및 납품 일정을 면밀히 조율하여,",
+            "생산 조건과 품질 기준을 함께 맞춰갑니다."
         ],
         bgImage: "/images/team2/ourServices/serviceDetails2.jpg",
     },
     {
-        title: "품질관리 / 납품",
+        title: "서류 관리 / 수출 대응",
         description: [
-            ["생산 완료 후 품질 검수 및 납품 절차를 관리합니다."]
+            "수출 실적 및 서류 절차 지원",
+            "복잡한 수출 절차, 저희가 직접 도와드립니다.",
+            "통관, 서류 준비, 물류 등 수출에 필요한 모든 과정을",
+            "CBOL 전문 협력 포워더와 함께 원활하게 진행하여,",
+            "제조사의 부담을 최소화합니다.",
+            "수출 경험이 적어도 걱정하지 마세요.",
+            "수출이 처음이거나 경험이 부족한 제조사도",
+            "불편 없이 실무적인 지원을 약속합니다."
         ],
         bgImage: "/images/team2/ourServices/serviceDetails3.jpg",
     },
     {
-        title: "서류 관리 / 수출 대응",
-        description: [
-            ["계약, 수출입 관련 서류는 CBOL Korea가 전담합니다."]
-        ],
-        bgImage: "/images/team2/ourServices/serviceDetails4.jpg",
-    },
-    {
         title: "지속적인 협업 기회",
         description: [
-            ["단발성 거래가 아닌, 장기적인 파트너십 기반으로 반복 수주가 가능합니다."]
+            "지속적인 신규 개발 프로젝트 연계",
+            "다양한 고객사들의 요청을 기반으로",
+            "신규 개발 프로젝트가 꾸준히 진행하고 있습니다.",
+            "기존 협력사들에게 우선적으로",
+            "함께 성장할 수 있는 다양한 기회를 공유합니다.",
+            "CBOL 한국연락사무소는 단발성 거래가 아닌,",
+            "장기적이고 지속적인 협력 관계를 통해",
+            "협력사와 함께 성장하는 상생 파트너십을 추구합니다."
         ],
-        bgImage: "/images/team2/ourServices/serviceDetails5.jpg",
+        bgImage: "/images/team2/ourServices/serviceDetails4.png",
     },
 ];
 
@@ -120,7 +137,7 @@ const OurServices = () => {
 
     const [openModal, setOpenModal] = useState(false);
     const [selectedInfo, setSelectedInfo] = useState<{
-        description: string[][];
+        description: string[];
         bgImage: string;
     } | null>(null);
 
