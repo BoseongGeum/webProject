@@ -12,7 +12,6 @@ interface MainNavbarProps {
 }
 
 export default function Navbar( {menus}: MainNavbarProps ) {
-    const [isOpen, setIsOpen] = useState(true);
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,7 +25,6 @@ export default function Navbar( {menus}: MainNavbarProps ) {
         } else {
             navigate("/");
         }
-        setIsOpen(true);
     };
 
     const handleMenuClick = (targetPath: string) => {
@@ -40,9 +38,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
 
     return (
         <div
-            className={`fixed flex top-0 left-0 right-0 w-full transform transition-transform duration-500 ${
-                isOpen ? "translate-y-0" : "-translate-y-[100%]"
-            }`}
+            className={`fixed flex top-0 left-0 right-0 w-full`}
         >
             {/* 네비게이션 바 */}
             <div className="relative bg-[#F0EEEB] text-red-950 w-full px-6 py-2 flex items-center sm:px-10 sm:py-3 border-b-2 border-red-950">

@@ -26,17 +26,13 @@ const lineVariants = {
 };
 
 const titles = [
-    "PARTNERSHIP",
-    "TEAM1",
-    "KOREA OFFICE",
+    "SERVICES",
 ] as const;
 
 type Title = typeof titles[number];
 
 const subtitles = [
     "글로벌 진출을 위한 파트너쉽",
-    "팀1(임시)",
-    "한국연락 사무소",
 ] as const;
 
 type Subtitle = typeof subtitles[number];
@@ -132,23 +128,13 @@ const OurServices = () => {
     const [activeSectionSubtitle, setActiveSectionSubtitle] = useState<Subtitle>(subtitles[0]);
 
     const [section1Ref, inViewSection1] = useInView(inViewOpts);
-    const [section2Ref, inViewSection2] = useInView(inViewOpts);
-    const [, inViewSection3] = useInView(inViewOpts);
 
     useEffect(() => {
         if (inViewSection1)  {
             setActiveSectionTitle(titles[0]);
             setActiveSectionSubtitle(subtitles[0]);
         }
-        else if (inViewSection2) {
-            setActiveSectionTitle(titles[1]);
-            setActiveSectionSubtitle(subtitles[1]);
-        }
-        else if (inViewSection3) {
-            setActiveSectionTitle(titles[2]);
-            setActiveSectionSubtitle(subtitles[2]);
-        }
-    }, [inViewSection1, inViewSection2, inViewSection3]);
+    }, [inViewSection1]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -166,16 +152,17 @@ const OurServices = () => {
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">
-            <Stickybar
-                title={activeSectionTitle}
-                subtitle={activeSectionSubtitle}
-                topOffset={showNavbar ? 52 : 0}
-            />
 
                 {/* SECTION 1: Overview & Services Grid */}
                 <section ref={section1Ref} className="min-h-screen">
+                    <Stickybar
+                        title={activeSectionTitle}
+                        subtitle={activeSectionSubtitle}
+                        topOffset={showNavbar ? 0 : -57}
+                        align={"center"}
+                    />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-center mt-[-57px]"
                         style={{backgroundImage: "url('/images/team2/ourServices/services1.jpg')" }}
                     >
                         <motion.div
@@ -205,10 +192,11 @@ const OurServices = () => {
                             ))}
                         </motion.div>
                     </div>
+                    <div className="h-[57px]" />
                 </section>
 
-                <section ref={section1Ref} className="min-h-screen">
-                    <div className="container mx-auto flex flex-col text-start gap-8 pt-24">
+                <section className="min-h-screen">
+                    <div className="container mx-auto flex flex-col text-start gap-8 pt-12">
                         <div className="w-full">
                             <div className="flex flex-col justify-center space-y-2 text-2xl leading-relaxed">
                                 <p>1987년 미국 LA 본사 창립, 1998년 한국 연락사무소 설립 이후,</p>
@@ -237,7 +225,7 @@ const OurServices = () => {
                     </div>
                 </section>
 
-                <section ref={section1Ref} className="min-h-screen">
+                <section className="min-h-screen">
                     <div className="container mx-auto flex flex-col text-center items-center gap-8">
                         {/* Right: 2x3 Services Grid */}
                         <div className="w-full h-full">
@@ -269,7 +257,7 @@ const OurServices = () => {
                                 {/* Common Modal for Details */}
                                 <CommonModal
                                     isOpen={openModal}
-                                    showStickyBar={true}
+                                    showStickyBar={false}
                                     showNavBar={showNavbar}
                                     onClose={() => setOpenModal(false)}
                                 >
@@ -289,7 +277,6 @@ const OurServices = () => {
 
             {/* SECTION 2: Greeting */}
             <section
-                ref={section2Ref}
                 className="min-h-screen">
                 <div className="leading-relaxed">
                     <div className="mt-10">

@@ -6,7 +6,8 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 interface CommonModalProps {
     isOpen: boolean;
-    showStickyBar?: boolean; showNavBar?: boolean;
+    showStickyBar?: boolean;
+    showNavBar?: boolean;
     onClose: () => void;
     title?: string;
     children: React.ReactNode;
@@ -88,8 +89,9 @@ const CommonModal: React.FC<CommonModalProps> = ({ isOpen, showStickyBar, showNa
                     animate="animate"
                     exit="exit"
                     className={`fixed inset-0 z-30 bg-[#F0EEEB]
-                        ${ showNavBar && showStickyBar ? 'top-40' :
-                        showStickyBar ? 'top-[108px]' : 'top-10' }`}
+                        ${ showNavBar && showStickyBar ? 'top-40' : 
+                        showStickyBar ? 'top-[108px]' : 
+                            showNavBar ? 'top-10' : '' }`}
                 >
                     <div className="relative w-full h-full flex flex-col">
                         {/* Close Button */}

@@ -19,12 +19,12 @@ import Lenis from "@studio-freight/lenis";
 const pageVariants = {
     initial: { y: "100%", rotate: 5 },
     animate: {
-        y: "0%",
+        y: "57px",
         rotate: 0,
         transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
     },
     exit: {
-        y: "0%",
+        y: "57px",
         opacity: 0.99,
         transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
     },
@@ -53,7 +53,7 @@ function AppContent() {
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 0.6,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
 
@@ -80,7 +80,7 @@ function AppContent() {
                         opacity: 1,
                         pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
                     }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                 >
                     <Navbar menus={MENUS} />
                 </motion.div>
@@ -93,7 +93,11 @@ function AppContent() {
                         variants={pageVariants}
                         initial={isHome ? false : "initial"}
                         animate={isHome ? false : "animate"}
-                        exit="exit"
+                        exit={isHome ? {
+                            y: "0%",
+                            opacity: 0.99,
+                            transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
+                        } : "exit"}
                         className="absolute inset-0 flex flex-col"
                     >
                         {/* 스크롤 컨테이너 */}

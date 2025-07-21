@@ -170,7 +170,12 @@ export default function Home() {
                             opacity: 1,
                             pointerEvents: showNavbar ? 'auto' : 'none', // 클릭 방지
                         }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        exit={{
+                            y: -57,
+                            opacity: 0,
+                            transition: { duration: 0 },
+                        }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
                     >
                         <Navbar menus={MENUS}/>
                     </motion.div>
@@ -214,7 +219,7 @@ export default function Home() {
                         </motion.div>
                     </motion.section>
 
-                    <Stickybar title={activeSection} topOffset={showNavbar ? 52 : 0} />
+                    <Stickybar title={activeSection} topOffset={showNavbar ? 57 : 0} />
 
                     {/* Section 1 */}
                     <motion.section
