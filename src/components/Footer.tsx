@@ -5,13 +5,13 @@ const Footer: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const isContactUsPage = location.pathname.startsWith("/team2/contactUs");
+    const isContactUsPage = location.pathname.startsWith("/contactUs");
 
     const handleContactClick = () => {
-        if (location.pathname === "/team2/contactUs") {
+        if (location.pathname === "/contactUs") {
             window.location.reload();
         } else {
-            navigate("/team2/contactUs");
+            navigate("/contactUs");
         }
     };
 

@@ -276,8 +276,7 @@ const OurServices = () => {
                 </section>
 
             {/* SECTION 2: Greeting */}
-            <section
-                className="min-h-screen">
+            <section className="min-h-screen">
                 <div className="leading-relaxed">
                     <div className="mt-10">
                         <Team1 showNavBar={showNavbar} showStickyBar={true}/>
