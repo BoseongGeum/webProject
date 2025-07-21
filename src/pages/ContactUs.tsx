@@ -11,7 +11,7 @@ const ContactUs: React.FC = () => {
 
     return (
         <main className="min-h-screen bg-[#F0EEEB] relative">
-        <div className="w-full min-h-screen text-black font-bold pt-8 px-4 lg:px-0">
+        <div className="w-full min-h-screen text-black font-bold pt-8 pb-24 px-4 lg:px-0">
             <div className="max-w-7xl mx-auto">
                 <div className="text-left mb-8">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
@@ -44,7 +44,7 @@ const ContactUs: React.FC = () => {
                             <span className="text-yellow-500">Contact</span> Info
                         </h3>
 
-                        <div className="space-y-4 lg:space-y-6 text-sm sm:text-base mb-24">
+                        <div className="space-y-4 lg:space-y-6 text-sm sm:text-base">
                             <div className="flex items-start">
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className="mt-1 mr-4 text-red-800 text-xl" />
                                 <div>
