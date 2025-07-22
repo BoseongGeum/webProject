@@ -32,11 +32,14 @@ const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', del
 };
 
 const lineVariants = {
-    hidden: { y: '100%', opacity: 0 },
-    visible: (i: number) => ({
+    hidden: {
+        y: '20%',
+        opacity: 0,
+    },
+    visible: () => ({
         y: '0%',
         opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut', delay: 0.3 + i * 0.2 },
+        transition: { duration: 0.6, ease: 'easeInOut' },
     }),
 };
 
@@ -60,6 +63,14 @@ export default function Home() {
         '/images/logo.png',
         '/images/logo-white.png',
         '/masks/blob-mask.svg',
+        '/images/team2/koreaOffice/greeting1.jpg',
+        '/images/team2/koreaOffice/greeting2.png',
+        '/images/team2/koreaOffice/partnerships.png',
+        '/images/team2/ourServices/services1.jpg',
+        '/images/team2/ourServices/serviceDetails1.jpg',
+        '/images/team2/ourServices/serviceDetails2.jpg',
+        '/images/team2/ourServices/serviceDetails3.jpg',
+        '/images/team2/ourServices/serviceDetails4.png',
     ];
     const loaded = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');

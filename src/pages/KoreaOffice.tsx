@@ -14,9 +14,13 @@ const containerVariants = {
 };
 
 const lineVariants = {
-    hidden: { y: '100%' },
+    hidden: {
+        y: '20%',
+        opacity: 0,
+    },
     visible: () => ({
         y: '0%',
+        opacity: 1,
         transition: { duration: 0.6, ease: 'easeInOut' },
     }),
 };
@@ -91,14 +95,6 @@ const KoreaOffice = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
-
-    // const images = [
-    //     '/images/team2/koreaOffice/greeting1.jpg',
-    //     '/images/team2/koreaOffice/greeting2.png',
-    //     '/images/team2/koreaOffice/partnerships.png',
-    // ];
-
-    //const loaded = useImagePreloader(images);
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">

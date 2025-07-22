@@ -18,9 +18,13 @@ const containerVariants = {
 };
 
 const lineVariants = {
-    hidden: { y: '100%' },
+    hidden: {
+        y: '20%',
+        opacity: 0,
+    },
     visible: () => ({
         y: '0%',
+        opacity: 1,
         transition: { duration: 0.6, ease: 'easeInOut' },
     }),
 };
@@ -166,16 +170,6 @@ const OurServices = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
-
-    // const images = [
-    //     '/images/team2/ourServices/services1.jpg',
-    //     '/images/team2/ourServices/serviceDetails1.jpg',
-    //     '/images/team2/ourServices/serviceDetails2.jpg',
-    //     '/images/team2/ourServices/serviceDetails3.jpg',
-    //     '/images/team2/ourServices/serviceDetails4.png',
-    // ];
-
-    //const loaded = useImagePreloader(images);
 
     return (
         <main className="bg-[#F0EEEB] min-h-screen relative">

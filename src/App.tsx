@@ -20,12 +20,12 @@ const pageVariants = {
     animate: {
         y: "57px",
         rotate: 0,
-        transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
+        transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
     },
     exit: {
         y: "57px",
         opacity: 0.99,
-        transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
+        transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
     },
 };
 
