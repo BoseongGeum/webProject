@@ -1,40 +1,44 @@
 import { useEffect, useState } from "react";
 
-export function useImagePreloader(imagePaths: string[], minDelay = 700) {
-    const [isLoaded, setIsLoaded] = useState(false);
+export function useImagePreloader(urls: string[]) {
+    const [loadedCount, setLoadedCount] = useState(0);
+    const [loaded, setLoaded] = useState(false);
+    const total = urls.length;
 
     useEffect(() => {
-        if (!imagePaths || imagePaths.length === 0) {
-            setTimeout(() => setIsLoaded(true), minDelay);
+        if (urls.length === 0) {
+            setLoaded(true);
             return;
         }
 
         let isCancelled = false;
-        const start = performance.now();
 
-        Promise.all(
-            imagePaths.map(
-                (src) =>
-                    new Promise<void>((resolve) => {
-                        const img = new Image();
-                        img.src = src;
-                        img.onload = () => resolve();
-                        img.onerror = () => resolve(); // 실패해도 resolve
-                    })
-            )
-        ).then(() => {
-            const elapsed = performance.now() - start;
-            const remaining = Math.max(minDelay - elapsed, 0);
+        urls.forEach((url) => {
+            const img = new Image();
+            img.src = url;
 
-            setTimeout(() => {
-                if (!isCancelled) setIsLoaded(true);
-            }, remaining);
+            const handleDone = () => {
+                if (!isCancelled) {
+                    setLoadedCount((prev) => {
+                        const next = prev + 1;
+                        if (next === urls.length) {
+                            setLoaded(true);
+                        }
+                        return next;
+                    });
+                }
+            };
+
+            img.onload = handleDone;
+            img.onerror = handleDone;
         });
 
         return () => {
             isCancelled = true;
         };
-    }, [imagePaths, minDelay]);
+    }, [urls]);
 
-    return isLoaded;
+    const percent = total === 0 ? 100 : Math.min(100, Math.round((loadedCount / total) * 100));
+
+    return { loaded, percent };
 }
