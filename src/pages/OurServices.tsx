@@ -185,7 +185,7 @@ const OurServices = () => {
                     <Stickybar
                         title={activeSectionTitle}
                         subtitle={activeSectionSubtitle}
-                        topOffset={showNavbar ? 0 : -57}
+                        topOffset={showNavbar ? -2 : -57}
                         align={"center"}
                     />
                     <div

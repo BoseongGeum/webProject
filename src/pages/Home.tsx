@@ -219,7 +219,7 @@ export default function Home() {
                         </motion.div>
                     </motion.section>
 
-                    <Stickybar title={activeSection} topOffset={showNavbar ? 57 : 0} />
+                    <Stickybar title={activeSection} topOffset={showNavbar ? 55 : 0} />
 
                     {/* Section 1 */}
                     <motion.section
