@@ -40,5 +40,14 @@ export function useImagePreloader(urls: string[]) {
 
     const percent = total === 0 ? 100 : Math.min(100, Math.round((loadedCount / total) * 100));
 
-    return { loaded, percent };
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+        if (loaded) {
+            const timeout = setTimeout(() => setReady(true), 800);
+            return () => clearTimeout(timeout);
+        }
+    }, [loaded]);
+
+    return { loaded: ready, percent };
 }

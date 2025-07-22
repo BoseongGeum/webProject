@@ -17,11 +17,6 @@ export default function LoadingScreen({ isWhite, percent = 0 }: LoadingScreenPro
                 transition={{ duration: 1.2, repeat: Infinity }}
             />
 
-            {/* 퍼센트 텍스트 */}
-            <div className={`text-xl font-semibold ${isWhite ? "text-black" : "text-white"}`}>
-                {percent.toFixed(0)}%
-            </div>
-
             {/* 프로그레스 바 */}
             <div className="w-64 h-2 bg-gray-300 rounded-full overflow-hidden">
                 <motion.div
