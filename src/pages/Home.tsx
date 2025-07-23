@@ -135,15 +135,22 @@ export default function Home() {
 
     const textLines1 = [
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
-        { text: "다양한 역량을 갖춘 글로벌 기업", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
+        { text: "CBOL Corporation은 다양한 역량을 갖춘 글로벌 기업으로,", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold" },
-        { text: "다양한 산업 분야에 제품을 공급하고 있습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "여러 분야에 걸쳐 고품질의 제품과 솔루션을 제공합니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "저희 한국 사무소는 CBOL Corporation OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해,", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "본사의 혁신적 비전을 실현하고 다양한 산업군의 성장을 함께 이끌겠습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
     ];
 
     const textLines2 = [
-        { text: "전 세계에 구축된 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
-        { text: "글로벌 공급처로부터 고품질 부품, 조립품, 원자재,", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-4" },
-        { text: "화학제품을 비롯해 OEM 및 희귀 부품까지 제공합니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "전 세계에 구축된 글로벌 공급 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
+        { text: "CBOL Corporation Korea office는", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-4" },
+        { text: "한국과 중국 외에도 글로벌 제조 및 공급 파트너 네트워크를 바탕으로,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "고품질의 부품, 조립품, 원자재, 화학제품 등", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "안정적으로 고객에게 one-stop solution을 제안합니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "다양한 산업군의 까다로운 요구에도 유연하게 대응하며,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "전 세계 고객에게 신뢰할 수 있는 공급 솔루션을 제공하겠습니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
     ];
 
     return (
@@ -222,7 +229,9 @@ export default function Home() {
                                 className="w-40 sm:w-60 md:w-80 lg:w-96 mb-4"
                             />
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left">
-                                생각과 제조를<br />연결하다
+                                당신의 기술이, 글로벌 고객에게 닿도록
+                                <br />
+                                전 세계 고객과 연결되는 제조 파트너십
                             </h1>
                         </motion.div>
                     </section>
