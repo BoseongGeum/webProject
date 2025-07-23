@@ -138,7 +138,7 @@ export default function Home() {
         { text: "CBOL Corporation은 다양한 역량을 갖춘 글로벌 기업으로,", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "여러 분야에 걸쳐 고품질의 제품과 솔루션을 제공합니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
-        { text: "저희 한국 사무소는 CBOL Corporation OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "저희 한국 사무소는 OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해,", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "본사의 혁신적 비전을 실현하고 다양한 산업군의 성장을 함께 이끌겠습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
     ];
