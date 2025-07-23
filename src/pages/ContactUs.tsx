@@ -48,15 +48,15 @@ const ContactUs: React.FC = () => {
                             <div className="flex items-start">
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className="mt-1 mr-4 text-red-800 text-xl" />
                                 <div>
-                                    <h4 className="text-red-800 text-lg font-semibold mb-1">MAILING ADDRESS</h4>
-                                    <p className="text-gray-500">서울시 중구 정동길 35, 두비빌딩 403호</p>
+                                    <h4 className="text-red-800 text-lg mb-1">MAILING ADDRESS</h4>
+                                    <p className="text-gray-500 font-semibold">서울시 중구 정동길 35, 두비빌딩 403호</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
                                 <FontAwesomeIcon icon={faPhoneAlt} className="mt-1 mr-4 text-red-800 text-xl" />
                                 <div>
-                                    <h4 className="text-red-800 text-lg font-semibold mb-1">PHONE & FAX</h4>
-                                    <p className="text-gray-500">
+                                    <h4 className="text-red-800 text-lg mb-1">PHONE & FAX</h4>
+                                    <p className="text-gray-500 font-semibold">
                                         Tel: 02-318-5510
                                         <br />
                                         Fax: 02-318-0550
@@ -66,8 +66,8 @@ const ContactUs: React.FC = () => {
                             <div className="flex items-start">
                                 <FontAwesomeIcon icon={faEnvelope} className="mt-1 mr-4 text-red-800 text-xl" />
                                 <div>
-                                    <h4 className="text-red-800 text-lg font-semibold mb-1">EMAIL ADDRESS</h4>
-                                    <p className="text-gray-500">info@cbol.com</p>
+                                    <h4 className="text-red-800 text-lg mb-1">EMAIL ADDRESS</h4>
+                                    <p className="text-gray-500 font-semibold">info@cbol.com</p>
                                 </div>
                             </div>
                         </div>
