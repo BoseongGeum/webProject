@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import CommonModal from "../components/CommonModal";
 import ServiceDetailsPage from "./ServiceDetailsPage";
 import {useInView} from "react-intersection-observer";
-import Team1 from "./Team1";
 import {motion} from "framer-motion";
 
 const containerVariants = {
@@ -297,13 +296,13 @@ const OurServices = () => {
                 </section>
 
             {/* SECTION 2: Greeting */}
-            <section className="min-h-screen">
-                <div className="leading-relaxed">
-                    <div className="mt-10">
-                        <Team1 showNavBar={showNavbar} showStickyBar={false}/>
-                    </div>
-                </div>
-            </section>
+            {/*<section className="min-h-screen">*/}
+            {/*    <div className="leading-relaxed">*/}
+            {/*        <div className="mt-10">*/}
+            {/*            <Team1 showNavBar={showNavbar} showStickyBar={false}/>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
             <Footer/>
         </main>
     );
