@@ -250,7 +250,7 @@ const OurServices = () => {
                     <div className="container mx-auto flex flex-col text-center items-center gap-8">
                         {/* Right: 2x3 Services Grid */}
                         <div className="w-full h-full">
-                            <div className="grid grid-cols-3 grid-rows-2 gap-x-8 gap-y-16">
+                            <div className="grid grid-cols-2 grid-rows-2 gap-x-8 gap-y-16">
                                 {items.map((item, idx) => (
                                     <div className="w-full h-full flex flex-col">
                                         <button

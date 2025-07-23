@@ -18,7 +18,7 @@ export default function LoadingScreen({ isWhite, percent = 0 }: LoadingScreenPro
             />
 
             {/* 프로그레스 바 */}
-            <div className="w-64 h-2 bg-gray-300 rounded-full overflow-hidden">
+            <div className="w-72 h-2 bg-gray-300 rounded-full overflow-hidden">
                 <motion.div
                     className="h-full bg-red-950 origin-left"
                     initial={{ width: 0 }}

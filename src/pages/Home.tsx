@@ -192,12 +192,9 @@ export default function Home() {
                     </motion.div>
 
                     {/* Intro Section */}
-                    <motion.section
+                    <section
                         ref={refIntroSection}
                         className="h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
                     >
                         <motion.div
                             className="lg:w-2/3 w-full h-full flex p-10"
@@ -228,7 +225,7 @@ export default function Home() {
                                 생각과 제조를<br />연결하다
                             </h1>
                         </motion.div>
-                    </motion.section>
+                    </section>
 
                     <Stickybar title={activeSection} topOffset={showNavbar ? 55 : 0} />
 
@@ -261,7 +258,7 @@ export default function Home() {
                             </TextCard>
                         </motion.div>
 
-                        <motion.div className="w-full md:w-2/5 flex items-center justify-center flex-col pr-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-center justify-center flex-col pr-10 space-y-3">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
@@ -276,7 +273,7 @@ export default function Home() {
                                     </motion.p>
                                 </div>
                             ))}
-                        </motion.div>
+                        </div>
                     </motion.section>
 
                     {/* Section 2 */}
@@ -287,7 +284,7 @@ export default function Home() {
                         initial="hidden"
                         animate={inViewSection2 ? 'visible' : 'hidden'}
                     >
-                        <motion.div className="w-full md:w-2/5 flex items-center justify-center flex-col pl-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-center justify-center flex-col pl-10 space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
@@ -302,7 +299,7 @@ export default function Home() {
                                     </motion.p>
                                 </div>
                             ))}
-                        </motion.div>
+                        </div>
 
                         <motion.div
                             className="w-full md:w-3/5 flex pt-60 items-center justify-center"
@@ -311,7 +308,15 @@ export default function Home() {
                             whileInView="visible"
                             viewport={{ once: true }}
                         >
-                            <TextCard className="w-full aspect-[9/8]" maskText="CBOL">
+                            <TextCard
+                                className="w-full aspect-[9/8]"
+                                maskText="CBOL"
+                                fontSize={0.38}
+                                fontWeight={900}
+                                letterSpacing="-0.05"
+                                strokeWidth={0.02}
+                                verticalScale={2.2}
+                            >
                                 <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/10" />
                             </TextCard>
@@ -319,19 +324,12 @@ export default function Home() {
                     </motion.section>
 
                     {/* Section 3 */}
-                    <motion.section
+                    <section
                         ref={refSection3}
                         className="h-screen px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
                     >
                         {/* 배경 */}
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                            viewport={{ once: true }}
+                        <div
                             className="absolute bottom-0 left-0 w-full h-[70vh] bg-black"
                         />
 
@@ -350,7 +348,7 @@ export default function Home() {
                             variants={dynamicVariants('up', 1.0)}
                         >
                             <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[120%] h-[100%]">
-                                <BlobCard className="w-full h-full" clip maxTilt={0} maxTranslate={5}>
+                                <BlobCard className="w-full h-full" clip>
                                     <div className="w-full h-full bg-[#3A5BA0]" />
                                 </BlobCard>
                             </div>
@@ -364,7 +362,7 @@ export default function Home() {
                             />
                         </motion.div>
                         <Footer />
-                    </motion.section>
+                    </section>
                 </div>
             )}
         </main>
