@@ -300,7 +300,7 @@ const OurServices = () => {
             <section className="min-h-screen">
                 <div className="leading-relaxed">
                     <div className="mt-10">
-                        <Team1 showNavBar={showNavbar} showStickyBar={true}/>
+                        <Team1 showNavBar={showNavbar} showStickyBar={false}/>
                     </div>
                 </div>
             </section>
