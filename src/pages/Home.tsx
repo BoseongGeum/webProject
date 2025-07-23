@@ -228,10 +228,10 @@ export default function Home() {
                                 alt="CBOL Logo"
                                 className="w-40 sm:w-60 md:w-80 lg:w-96 mb-4"
                             />
-                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left">
-                                당신의 기술이, 글로벌 고객에게 닿도록
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug text-center lg:text-left">
+                                당신의 기술이,
                                 <br />
-                                전 세계 고객과 연결되는 제조 파트너십
+                                글로벌 고객에게 닿도록
                             </h1>
                         </motion.div>
                     </section>
