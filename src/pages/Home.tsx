@@ -137,10 +137,10 @@ export default function Home() {
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
         { text: "CBOL Corporation은", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "다양한 역량을 갖춘 글로벌 기업으로,", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
-        { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold mt-2" },
         { text: "여러 분야에 걸쳐 고품질의 제품과 솔루션을 제공합니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
-        { text: "저희 한국 사무소는 OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold" },
-        { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해,", style: "text-base sm:text-lg md:text-xl font-bold" },
+        { text: "저희 한국 사무소는 OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold mt-2" },
+        { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "본사의 혁신적 비전을 실현하고", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "다양한 산업군의 성장을 함께 이끌겠습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
 
@@ -149,11 +149,11 @@ export default function Home() {
     const textLines2 = [
         { text: "전 세계에 구축된", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "글로벌 공급 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
-        { text: "한국과 중국뿐만 아니라", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-4" },
+        { text: "한국과 중국뿐만 아니라", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-2" },
         { text: "글로벌 제조 및 공급 파트너 네트워크를 바탕으로,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "고품질의 부품, 조립품, 원자재, 화학제품 등", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "안정적으로 고객에게 one-stop solution을 제안합니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
-        { text: "다양한 산업군의 까다로운 요구에도 유연하게 대응하며,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
+        { text: "다양한 산업군의 까다로운 요구에도 유연하게 대응하며,", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-2" },
         { text: "전 세계 고객에게 신뢰할 수 있는 공급 솔루션을 제공하겠습니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
     ];
 
