@@ -42,34 +42,42 @@ type Subtitle = typeof subtitles[number];
 
 const paragraphs1 = [
     [
-        "함께 만들어가는",
-        "성장과 신뢰의 파트너십"
+        "함께 만들어가는 성장과 신뢰의 파트너십"
     ],
     [
-        "귀사의 생산 역량을 세계 시장으로 확장해 보세요."
+        "CBOL Corporation 한국연락사무소는",
+        "제조사와 고객사 사이의 공백을 메우며,",
+        "제품이 만들어지고 전달되는 전 과정을 함께합니다.",
+        "생산만으로는 어려운 순간들,",
+        "유통까지 이어질 수 있도록 필요한 역할은",
+        "저희가 책임지고 채워 나가겠습니다."
+    ],
+    [
+        "지금, 귀사의 생산 역량을",
+        "세계 시장으로 넓혀 보세요."
     ]
 ];
 
 const records = [
     {
         count: "27",
-        unit: "년의",
-        description: "업계 경력",
+        unit: "년 동안",
+        description: "쌓아온 업계 경력과 신뢰",
     },
     {
         count: "50",
         unit: "억 원",
-        description: "모든 협력사 연평균 수출",
+        description: "CBOL과 함께한 모든 협력사의 연간 수출 총합",
     },
     {
         count: "60",
         unit: "여 개",
-        description: "다양한 업계의 고객사",
+        description: "고객사와 함께한 협업 경험",
     },
     {
         count: "300",
         unit: "여 개",
-        description: "부품 관리",
+        description: "제품 누적 관리 경험으로 쌓은 전문성",
     },
 ];
 
@@ -232,11 +240,11 @@ const OurServices = () => {
                                     <div
                                         className="flex flex-col text-start p-6"
                                     >
-                                        <div className="flex flex-row text-red-950 mb-2">
+                                        <div className="h-[96px] flex flex-row text-red-950 mb-2">
                                             <h3 className="text-8xl font-bold">{item.count}</h3>
-                                            <p className="flex items-end pb-2 text-xl text-black">{item.unit}</p>
+                                            <p className="flex items-end pb-2 text-2xl text-black">{item.unit}</p>
                                         </div>
-                                        <p className="text-xl leading-relaxed pl-2 mb-16">{item.description}</p>
+                                        <p className="h-[80px] text-2xl leading-relaxed pl-2 mb-12">{item.description}</p>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />
                                     </div>
                                 ))}
@@ -303,7 +311,12 @@ const OurServices = () => {
             {/*        </div>*/}
             {/*    </div>*/}
             {/*</section>*/}
-            <Footer/>
+            {/* Section 3 */}
+            <section
+                className="h-full px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
+            >
+                <Footer />
+            </section>
         </main>
     );
 };

@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion';
 import {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { useImagePreloader } from '../hooks/useImagePreloader';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
 import Stickybar from '../components/Stickybar';
-import BlobCard from "../components/BlobCard";
 import TextCard from "../components/TextCard";
 import Footer from "../components/Footer";
 import {MENUS} from "../constants/menus";
@@ -52,17 +50,13 @@ const sectionFade = {
 };
 
 export default function Home() {
-    const navigate = useNavigate();
-
     // Main preloader and animation phase
     const images = [
         '/images/main/top.jpeg',
         '/images/main/bottom.jpeg',
-        '/images/main/map-kor.png',
         '/images/main/main.png',
         '/images/logo.png',
         '/images/logo-white.png',
-        '/masks/blob-mask.svg',
         '/images/team2/koreaOffice/greeting1.jpg',
         '/images/team2/koreaOffice/greeting2.png',
         '/images/team2/koreaOffice/partnerships.png',
@@ -77,19 +71,17 @@ export default function Home() {
 
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
-    const [activeSection, setActiveSection] = useState<'INTRO'|'GLOBAL'|'NETWORK'|'WELCOME'>('INTRO');
+    const [activeSection, setActiveSection] = useState<'GLOBAL'|'NETWORK'|'WELCOME'>('WELCOME');
 
     const [refIntroSection, inViewIntroSection] = useInView({ threshold: 0.5 });
     const [refSection1, inViewSection1] = useInView({ threshold: 0.5 });
     const [refSection2, inViewSection2] = useInView({ threshold: 0.5 });
-    const [refSection3, inViewSection3] = useInView({ threshold: 0.5 });
 
     useEffect(() => {
         if (inViewSection1)  setActiveSection('GLOBAL');
         else if (inViewSection2) setActiveSection('NETWORK');
-        else if (inViewSection3) setActiveSection('WELCOME');
-        else if (inViewIntroSection) setActiveSection('INTRO');
-    }, [inViewSection1, inViewSection2, inViewSection3, inViewIntroSection]);
+        else if (inViewIntroSection) setActiveSection('WELCOME');
+    }, [inViewSection1, inViewSection2, inViewIntroSection]);
 
     useEffect(() => {
         if (!loaded) return;
@@ -135,7 +127,7 @@ export default function Home() {
 
     const textLines1 = [
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
-        { text: "CBOL Corporation은", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
+        { text: "CBOL Corporation은", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold mt-4" },
         { text: "다양한 역량을 갖춘 글로벌 기업으로,", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold mt-2" },
         { text: "여러 분야에 걸쳐 고품질의 제품과 솔루션을 제공합니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
@@ -149,7 +141,7 @@ export default function Home() {
     const textLines2 = [
         { text: "전 세계에 구축된", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
         { text: "글로벌 공급 네트워크", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
-        { text: "한국과 중국뿐만 아니라", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-2" },
+        { text: "한국과 중국뿐만 아니라", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-4" },
         { text: "글로벌 제조 및 공급 파트너 네트워크를 바탕으로,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "고품질의 부품, 조립품, 원자재, 화학제품 등", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "안정적으로 고객에게 one-stop solution을 제안합니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
@@ -271,11 +263,11 @@ export default function Home() {
                             </TextCard>
                         </motion.div>
 
-                        <div className="w-full md:w-2/5 flex items-center justify-center flex-col pr-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-end justify-center flex-col pr-10 space-y-3">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
-                                        className={`text-center ${line.style}`}
+                                        className={`text-end ${line.style}`}
                                         variants={lineVariants}
                                         initial="hidden"
                                         whileInView="visible"
@@ -297,11 +289,11 @@ export default function Home() {
                         initial="hidden"
                         animate={inViewSection2 ? 'visible' : 'hidden'}
                     >
-                        <div className="w-full md:w-2/5 flex items-center justify-center flex-col pl-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-start justify-center flex-col pl-10 space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
-                                        className={`text-center ${line.style}`}
+                                        className={`text-start ${line.style}`}
                                         variants={lineVariants}
                                         initial="hidden"
                                         whileInView="visible"
@@ -338,42 +330,8 @@ export default function Home() {
 
                     {/* Section 3 */}
                     <section
-                        ref={refSection3}
-                        className="h-screen px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
+                        className="h-full px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
                     >
-                        {/* 배경 */}
-                        <div
-                            className="absolute bottom-0 left-0 w-full h-[70vh] bg-black"
-                        />
-
-                        {/* 텍스트 */}
-                        <motion.div
-                            className="text-center relative"
-                            variants={dynamicVariants('up', 0.6)}
-                        >
-                            <h2 className="text-5xl font-bold text-black tracking-tight">CBOL을 만나보세요</h2>
-                            <p className="text-lg text-black font-bold mt-4">지도를 클릭하면 자세한 정보를 확인하실 수 있습니다</p>
-                        </motion.div>
-
-                        {/* 지도 */}
-                        <motion.div
-                            className="relative w-full max-w-xl mx-auto aspect-[4/3]"
-                            variants={dynamicVariants('up', 1.0)}
-                        >
-                            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[120%] h-[100%]">
-                                <BlobCard className="w-full h-full" clip>
-                                    <div className="w-full h-full bg-[#3A5BA0]" />
-                                </BlobCard>
-                            </div>
-                            <motion.img
-                                src="/images/main/map-kor.png"
-                                alt="한국 지도"
-                                className="relative w-full h-full object-contain cursor-pointer"
-                                onClick={() => navigate('/koreaOffice')}
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.4 }}
-                            />
-                        </motion.div>
                         <Footer />
                     </section>
                 </div>
