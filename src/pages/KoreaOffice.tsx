@@ -160,12 +160,12 @@ const KoreaOffice = () => {
                                     >
                                         {group.map((sentence, sIdx) => (
                                             <div key={sIdx} className="overflow-hidden">
-                                                <motion.p
-                                                    variants={lineVariants}
+                                                <p
+                                                    // variants={lineVariants}
                                                     className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}
                                                 >
                                                     {sentence}
-                                                </motion.p>
+                                                </p>
                                             </div>
                                         ))}
                                     </div>

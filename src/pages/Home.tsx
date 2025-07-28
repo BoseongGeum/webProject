@@ -29,17 +29,17 @@ const dynamicVariants = (direction: 'up' | 'down' | 'left' | 'right' = 'up', del
     };
 };
 
-const lineVariants = {
-    hidden: {
-        y: '20%',
-        opacity: 0,
-    },
-    visible: () => ({
-        y: '0%',
-        opacity: 1,
-        transition: { duration: 0.6, ease: 'easeInOut' },
-    }),
-};
+// const lineVariants = {
+//     hidden: {
+//         y: '20%',
+//         opacity: 0,
+//     },
+//     visible: () => ({
+//         y: '0%',
+//         opacity: 1,
+//         transition: { duration: 0.6, ease: 'easeInOut' },
+//     }),
+// };
 
 const sectionFade = {
     hidden: { opacity: 0 },                         // 보이지 않고 살짝 아래로
@@ -242,12 +242,12 @@ export default function Home() {
                         initial="hidden"
                         animate={inViewSection1 ? 'visible' : 'hidden'}
                     >
-                        <motion.div
+                        <div
                             className="w-full md:w-3/5 flex items-center justify-center pt-36 ml-[-64px]"
-                            variants={dynamicVariants('left', 0.4)}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            // variants={dynamicVariants('left', 0.4)}
+                            // initial="hidden"
+                            // whileInView="visible"
+                            // viewport={{ once: true }}
                         >
                             <TextCard
                                 className="w-full aspect-[9/8]"
@@ -261,21 +261,21 @@ export default function Home() {
                                 <img src="/images/main/top.jpeg" alt="Top Visual" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/20" />
                             </TextCard>
-                        </motion.div>
+                        </div>
 
                         <div className="w-full md:w-2/5 flex items-end justify-center flex-col space-y-3 ml-16">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
-                                    <motion.p
+                                    <p
                                         className={`text-end ${line.style}`}
-                                        variants={lineVariants}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
-                                        custom={i}
+                                        // variants={lineVariants}
+                                        // initial="hidden"
+                                        // whileInView="visible"
+                                        // viewport={{ once: true }}
+                                        // custom={i}
                                     >
                                         {line.text}
-                                    </motion.p>
+                                    </p>
                                 </div>
                             ))}
                         </div>
@@ -292,26 +292,26 @@ export default function Home() {
                         <div className="w-full md:w-2/5 flex items-start justify-center flex-col space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
-                                    <motion.p
+                                    <p
                                         className={`text-start ${line.style}`}
-                                        variants={lineVariants}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
-                                        custom={i}
+                                        // variants={lineVariants}
+                                        // initial="hidden"
+                                        // whileInView="visible"
+                                        // viewport={{ once: true }}
+                                        // custom={i}
                                     >
                                         {line.text}
-                                    </motion.p>
+                                    </p>
                                 </div>
                             ))}
                         </div>
 
-                        <motion.div
+                        <div
                             className="w-full md:w-3/5 flex items-center justify-center pt-36"
-                            variants={dynamicVariants('right', 0.4)}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            // variants={dynamicVariants('right', 0.4)}
+                            // initial="hidden"
+                            // whileInView="visible"
+                            // viewport={{ once: true }}
                         >
                             <TextCard
                                 className="w-full aspect-[9/8]"
@@ -325,7 +325,7 @@ export default function Home() {
                                 <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/10" />
                             </TextCard>
-                        </motion.div>
+                        </div>
                     </motion.section>
 
                     {/* Section 3 */}

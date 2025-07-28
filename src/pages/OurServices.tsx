@@ -62,22 +62,22 @@ const records = [
     {
         count: "27",
         unit: "년 동안",
-        description: "쌓아온 업계 경력과 신뢰",
+        description: ["쌓아온 업계 경력과 신뢰"],
     },
     {
         count: "50",
         unit: "억 원",
-        description: "CBOL과 함께한 모든 협력사의 연간 수출 총합",
+        description: ["CBOL과 함께한", "협력사 연간 수출 총합"],
     },
     {
         count: "60",
         unit: "여 개",
-        description: "고객사와 함께한 협업 경험",
+        description: ["고객사와 함께한 협업 경험"],
     },
     {
         count: "300",
         unit: "여 개",
-        description: "제품 누적 관리 경험으로 쌓은 전문성",
+        description: ["제품 누적 관리 경험", "으로 쌓은 전문성"],
     },
 ];
 
@@ -238,16 +238,20 @@ const OurServices = () => {
 
                         {/* Right: 4x1 Services Grid */}
                         <div className="flex flex-col w-full pt-12">
-                            <div className="grid grid-cols-4 grid-rows-1 gap-6">
+                            <div className="grid grid-cols-4 grid-rows-1 gap-10">
                                 {records.map((item) => (
                                     <div
-                                        className="flex flex-col text-start p-6"
+                                        className="flex flex-col text-start"
                                     >
                                         <div className="h-[96px] flex flex-row text-red-950 mb-2">
                                             <h3 className="text-8xl font-bold">{item.count}</h3>
                                             <p className="flex items-end pb-2 text-2xl text-black">{item.unit}</p>
                                         </div>
-                                        <p className="h-[80px] text-2xl leading-relaxed pl-2 mb-12">{item.description}</p>
+                                        <div className="h-[80px] text-2xl leading-relaxed pl-2 mb-12">
+                                            {item.description.map((sentence) => (
+                                                <p>{sentence}</p>
+                                            ))}
+                                        </div>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />
                                     </div>
                                 ))}
@@ -282,7 +286,7 @@ const OurServices = () => {
                                             <div className="absolute inset-0 transition duration-500 group-hover:bg-black/30" />
                                         </button>
                                         <h3 className="text-start text-2xl font-bold pt-8 pl-4">{item.title}</h3>
-                                        <p className="text-start text-2xl pt-2 pl-4 pr-4 mb-28">{item.subtitle}</p>
+                                        <p className="text-start text-2xl pt-2 pl-4 pr-4 mb-16">{item.subtitle}</p>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />
                                     </div>
                                 ))}
