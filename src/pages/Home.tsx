@@ -225,9 +225,9 @@ export default function Home() {
                                 className="w-40 sm:w-60 md:w-80 lg:w-96 mb-4"
                             />
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug text-center lg:text-left">
-                                당신의 기술이,
+                                기술의 가치를,
                                 <br />
-                                글로벌 고객에게 닿도록
+                                글로벌 시장으로
                             </h1>
                         </motion.div>
                     </section>
