@@ -224,7 +224,6 @@ const OurServices = () => {
                             ))}
                         </motion.div>
                     </div>
-                    <div className="h-[57px]" />
                 </section>
 
                 <section className="h-full mb-52">
