@@ -197,7 +197,7 @@ export default function Home() {
                     {/* Intro Section */}
                     <section
                         ref={refIntroSection}
-                        className="h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold"
+                        className="h-screen flex flex-col lg:flex-row items-center justify-center px-8 pt-10 text-red-950 font-bold"
                     >
                         <motion.div
                             className="lg:w-2/3 w-full h-full flex p-10"
@@ -237,13 +237,13 @@ export default function Home() {
                     {/* Section 1 */}
                     <motion.section
                         ref={refSection1}
-                        className="h-screen flex flex-col md:flex-row items-center justify-center pt-28"
+                        className="h-screen flex flex-col md:flex-row items-center justify-center pt-28 px-16"
                         variants={sectionFade}
                         initial="hidden"
                         animate={inViewSection1 ? 'visible' : 'hidden'}
                     >
                         <motion.div
-                            className="w-full md:w-3/5 flex items-center justify-center pt-36"
+                            className="w-full md:w-3/5 flex items-center justify-center pt-36 ml-[-64px]"
                             variants={dynamicVariants('left', 0.4)}
                             initial="hidden"
                             whileInView="visible"
@@ -263,7 +263,7 @@ export default function Home() {
                             </TextCard>
                         </motion.div>
 
-                        <div className="w-full md:w-2/5 flex items-end justify-center flex-col pr-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-end justify-center flex-col space-y-3 ml-16">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p
@@ -284,12 +284,12 @@ export default function Home() {
                     {/* Section 2 */}
                     <motion.section
                         ref={refSection2}
-                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center"
+                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center px-16"
                         variants={sectionFade}
                         initial="hidden"
                         animate={inViewSection2 ? 'visible' : 'hidden'}
                     >
-                        <div className="w-full md:w-2/5 flex items-start justify-center flex-col pl-10 space-y-3">
+                        <div className="w-full md:w-2/5 flex items-start justify-center flex-col space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <motion.p

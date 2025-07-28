@@ -41,7 +41,7 @@ export default function Navbar( {menus}: MainNavbarProps ) {
             className={`fixed flex top-0 left-0 right-0 w-full`}
         >
             {/* 네비게이션 바 */}
-            <div className="relative bg-[#F0EEEB] text-red-950 w-full px-6 py-2 flex items-center sm:px-10 sm:py-3 border-b-2 border-red-950">
+            <div className="relative bg-[#F0EEEB] text-red-950 w-full px-6 py-2 flex items-center justify-between sm:px-10 sm:py-3 border-b-2 border-red-950">
                 <button
                     onClick={handleLogoClick}
                     className="transition-transform duration-300 hover:scale-105"
@@ -81,6 +81,21 @@ export default function Navbar( {menus}: MainNavbarProps ) {
                             </div>
                         );
                     })}
+                </div>
+
+                <div className="flex items-center space-x-4">
+                    {/* 국기 링크 추가 */}
+                    <a
+                        href="https://www.cbol.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            src="/images/main/flag-usa.png"
+                            alt="English"
+                            className="h-6 w-10 object-cover rounded-sm transition-transform duration-300 hover:scale-105"
+                        />
+                    </a>
                 </div>
 
                 {/* 모바일 메뉴 버튼 */}

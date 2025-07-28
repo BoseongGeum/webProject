@@ -11,7 +11,7 @@ const ContactUs: React.FC = () => {
 
     return (
         <main className="min-h-screen bg-[#F0EEEB] relative">
-        <div className="w-full min-h-screen text-black font-bold pt-8 pb-24 px-4 lg:px-0">
+        <div className="w-full min-h-screen text-black font-bold pt-24 pb-24 px-16">
             <div className="w-full mx-auto">
                 <div className="text-left mb-8">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">

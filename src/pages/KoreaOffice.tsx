@@ -100,9 +100,9 @@ const KoreaOffice = () => {
         <main className="bg-[#F0EEEB] min-h-screen relative">
                 {/* SECTION 1 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? -2 : -57} align={"center"} />
+                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center mt-[-57px]"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
                         style={{ backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
@@ -177,7 +177,7 @@ const KoreaOffice = () => {
 
             {/* SECTION 2 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? -2 : -57} align={"center"} />
+                    <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                         <motion.div
                             initial="hidden"
                             whileInView="visible"

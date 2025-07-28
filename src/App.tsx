@@ -1,6 +1,6 @@
 // src/App.tsx
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import Home from "./pages/Home";
@@ -15,19 +15,19 @@ import Navbar from "./components/Navbar";
 import { MENUS } from "./constants/menus";
 import ScrollToTop from "./components/ScrollToTop";
 
-const pageVariants = {
-    initial: { y: "100%", rotate: 5 },
-    animate: {
-        y: "57px",
-        rotate: 0,
-        transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
-    },
-    exit: {
-        y: "57px",
-        opacity: 0.99,
-        transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
-    },
-};
+// const pageVariants = {
+//     initial: { y: "100%", rotate: 5 },
+//     animate: {
+//         y: "57px",
+//         rotate: 0,
+//         transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
+//     },
+//     exit: {
+//         y: "57px",
+//         opacity: 0.99,
+//         transition: { duration: 1.5, ease: [0.36, 1, 0.22, 1] },
+//     },
+// };
 
 function AppContent() {
     const location = useLocation();
@@ -86,17 +86,17 @@ function AppContent() {
             )}
 
             <main className="flex-1 relative bg-[#F0EEEB]">
-                <AnimatePresence mode="sync">
-                    <motion.div
+                {/*<AnimatePresence mode="sync">*/}
+                    <div
                         key={location.pathname}
-                        variants={pageVariants}
-                        initial={isHome ? false : "initial"}
-                        animate={isHome ? false : "animate"}
-                        exit={isHome ? {
-                            y: "0%",
-                            opacity: 0.99,
-                            transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
-                        } : "exit"}
+                        // variants={pageVariants}
+                        // initial={isHome ? false : "initial"}
+                        // animate={isHome ? false : "animate"}
+                        // exit={isHome ? {
+                        //     y: "0%",
+                        //     opacity: 0.99,
+                        //     transition: { duration: 1.2, ease: [0.36, 1, 0.22, 1] },
+                        // } : "exit"}
                         className="absolute inset-0 flex flex-col"
                     >
                         {/* 스크롤 컨테이너 */}
@@ -111,8 +111,8 @@ function AppContent() {
                                 <Route path="/contactUs" element={<ContactUs />} />
                             </Routes>
                         </div>
-                    </motion.div>
-                </AnimatePresence>
+                    </div>
+                {/*</AnimatePresence>*/}
             </main>
         </div>
     );

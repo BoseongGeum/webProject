@@ -83,8 +83,9 @@ const records = [
 
 const items = [
     {
-        title: "사양 전달",
-        description: [
+        title: "요구를 사양으로",
+        subtitle: "고객의 도면과 요청사항을 생산 가능한 언어로 정리합니다.",
+            description: [
             "정확한 제품 스펙 확인 & 생산 가능성 검토",
             "미국, 유럽 고객사의 2D/3D 도면, 제품 사양을 검토합니다.",
             "원소재 수급, 가공 방식, 후처리 등",
@@ -94,7 +95,8 @@ const items = [
         bgImage: "/images/team2/ourServices/serviceDetails1.jpg",
     },
     {
-        title: "조건 협의 / 생산 대응",
+        title: "생산 조건 협의 & 품질 대응",
+        subtitle: "고객 요구에 맞춘 생산 조건 조율 및 이슈 대응까지 함께합니다.",
         description: [
             "조건 협의 및 생산 대응",
             "복잡한 사양 협의나 소통 부담 없이,",
@@ -107,7 +109,8 @@ const items = [
         bgImage: "/images/team2/ourServices/serviceDetails2.jpg",
     },
     {
-        title: "서류 관리 / 수출 대응",
+        title: "수출 서류 대응 전담",
+        subtitle: "수출입 서류, 출하부터 통관까지 전 과정을 지원합니다.",
         description: [
             "수출 실적 및 서류 절차 지원",
             "복잡한 수출 절차, 저희가 직접 도와드립니다.",
@@ -121,7 +124,8 @@ const items = [
         bgImage: "/images/team2/ourServices/serviceDetails3.jpg",
     },
     {
-        title: "지속적인 협업 기회",
+        title: "지속 가능한 협력 기회",
+        subtitle: "1회성 거래가 아닌 장기적 파트너십으로 이어갑니다.",
         description: [
             "지속적인 신규 개발 프로젝트 연계",
             "다양한 고객사들의 요청을 기반으로",
@@ -186,11 +190,11 @@ const OurServices = () => {
                     <Stickybar
                         title={activeSectionTitle}
                         subtitle={activeSectionSubtitle}
-                        topOffset={showNavbar ? -2 : -57}
+                        topOffset={showNavbar ? 55 : 0}
                         align={"center"}
                     />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center mt-[-57px]"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
                         style={{backgroundImage: "url('/images/team2/ourServices/services1.jpg')" }}
                     >
                         <motion.div
@@ -226,7 +230,7 @@ const OurServices = () => {
                 <section className="h-full mb-52">
                     <div className="container mx-auto flex flex-col text-start gap-8 pt-12">
                         <div className="w-full">
-                            <div className="flex flex-col justify-center space-y-2 text-2xl leading-relaxed">
+                            <div className="flex flex-col space-y-2 text-2xl leading-relaxed">
                                 <p>1987년 미국 LA 본사 창립, 1998년 한국 연락사무소 설립 이후,</p>
                                 <p>미국과 유럽을 포함한 글로벌 시장에</p>
                                 <p>우수한 OEM 제품을 안정적으로 공급하고 있습니다.</p>
@@ -255,7 +259,7 @@ const OurServices = () => {
 
                 <section className="min-h-screen">
                     <div className="container mx-auto flex flex-col text-center items-center gap-8">
-                        {/* Right: 2x3 Services Grid */}
+                        {/* Right: 2x2 Services Grid */}
                         <div className="w-full h-full">
                             <div className="grid grid-cols-2 grid-rows-2 gap-x-8 gap-y-16">
                                 {items.map((item, idx) => (
@@ -278,7 +282,8 @@ const OurServices = () => {
                                             />
                                             <div className="absolute inset-0 transition duration-500 group-hover:bg-black/30" />
                                         </button>
-                                        <h3 className="text-start text-xl font-semibold pt-8 pl-8 mb-28">{item.title}</h3>
+                                        <h3 className="text-start text-2xl font-bold pt-8 pl-4">{item.title}</h3>
+                                        <p className="text-start text-2xl pt-2 pl-4 pr-4 mb-28">{item.subtitle}</p>
                                         <div className="bg-red-950 w-full border-2 border-red-950" />
                                     </div>
                                 ))}

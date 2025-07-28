@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 export interface TextCardProps {
     children: React.ReactNode;
@@ -24,59 +24,59 @@ const TextCard: React.FC<TextCardProps> = ({
                                                letterSpacing = '0',
                                                strokeWidth = 0.02,
                                                verticalScale = 1,
-                                               maxImageTranslate = 30,
-                                               disabled = false,
+                                               // maxImageTranslate = 30,
+                                               // disabled = false,
                                            }) => {
     const maskId = `text-mask-${maskText.replace(/\s+/g, '-').toLowerCase()}`;
     const contentRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (disabled) return;
-        const content = contentRef.current;
-        if (!content) return;
-
-        let frame: number;
-        let last = performance.now();
-        let moved = false;
-        const dur = 1000;
-        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-        const easeOut = (t: number) => 1 - (1 - t) * (1 - t);
-
-        let ix = 0, iy = 0, six = 0, siy = 0, tix = 0, tiy = 0;
-        let iprog = 1;
-
-        const animate = (now: number) => {
-            const dt = now - last;
-            last = now;
-            if (moved) {
-                iprog = Math.min(iprog + dt / dur, 1);
-                const ie = easeOut(iprog);
-                ix = lerp(six, tix, ie);
-                iy = lerp(siy, tiy, ie);
-            }
-            content.style.transform = `translateX(${ix}px) translateY(${iy}px)`;
-            frame = requestAnimationFrame(animate);
-        };
-
-        const onMove = (e: MouseEvent) => {
-            const { innerWidth: w, innerHeight: h } = window;
-            const ox = (e.clientX - w / 2) / (w / 2);
-            const oy = (e.clientY - h / 2) / (h / 2);
-            six = ix;
-            siy = iy;
-            tix = ox * maxImageTranslate;
-            tiy = -oy * maxImageTranslate;
-            iprog = 0;
-            moved = true;
-        };
-
-        window.addEventListener('mousemove', onMove);
-        frame = requestAnimationFrame(animate);
-        return () => {
-            window.removeEventListener('mousemove', onMove);
-            cancelAnimationFrame(frame);
-        };
-    }, [maxImageTranslate, disabled]);
+    // useEffect(() => {
+    //     if (disabled) return;
+    //     const content = contentRef.current;
+    //     if (!content) return;
+    //
+    //     let frame: number;
+    //     let last = performance.now();
+    //     let moved = false;
+    //     const dur = 1000;
+    //     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    //     const easeOut = (t: number) => 1 - (1 - t) * (1 - t);
+    //
+    //     let ix = 0, iy = 0, six = 0, siy = 0, tix = 0, tiy = 0;
+    //     let iprog = 1;
+    //
+    //     const animate = (now: number) => {
+    //         const dt = now - last;
+    //         last = now;
+    //         if (moved) {
+    //             iprog = Math.min(iprog + dt / dur, 1);
+    //             const ie = easeOut(iprog);
+    //             ix = lerp(six, tix, ie);
+    //             iy = lerp(siy, tiy, ie);
+    //         }
+    //         content.style.transform = `translateX(${ix}px) translateY(${iy}px)`;
+    //         frame = requestAnimationFrame(animate);
+    //     };
+    //
+    //     const onMove = (e: MouseEvent) => {
+    //         const { innerWidth: w, innerHeight: h } = window;
+    //         const ox = (e.clientX - w / 2) / (w / 2);
+    //         const oy = (e.clientY - h / 2) / (h / 2);
+    //         six = ix;
+    //         siy = iy;
+    //         tix = ox * maxImageTranslate;
+    //         tiy = -oy * maxImageTranslate;
+    //         iprog = 0;
+    //         moved = true;
+    //     };
+    //
+    //     window.addEventListener('mousemove', onMove);
+    //     frame = requestAnimationFrame(animate);
+    //     return () => {
+    //         window.removeEventListener('mousemove', onMove);
+    //         cancelAnimationFrame(frame);
+    //     };
+    // }, [maxImageTranslate, disabled]);
 
     return (
         <>
