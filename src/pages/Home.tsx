@@ -258,8 +258,8 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/top.jpeg" alt="Top Visual" className="w-full h-full object-cover" />
-                                <div className="absolute inset-0 bg-black/20" />
+                                <img src="/images/main/mainSection1.png" alt="Top Visual" className="w-full h-full object-contain" />
+                                <div className="absolute inset-0 bg-black opacity-15" />
                             </TextCard>
                         </div>
 
@@ -322,15 +322,15 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/bottom.jpeg" alt="Bottom Visual" className="w-full h-full object-cover" />
-                                <div className="absolute inset-0 bg-black/10" />
+                                <img src="/images/main/mainSection2.png" alt="Bottom Visual" className="w-full h-full object-contain" />
+                                <div className="absolute inset-0 bg-blue-900 opacity-15" />
                             </TextCard>
                         </div>
                     </motion.section>
 
                     {/* Section 3 */}
                     <section
-                        className="h-full px-6 py-24 bg-[#F0EEEB] text-black flex flex-col justify-center relative overflow-hidden pt-28"
+                        className="h-full px-6 py-24 text-black flex flex-col justify-center relative overflow-hidden pt-28"
                     >
                         <Footer />
                     </section>
