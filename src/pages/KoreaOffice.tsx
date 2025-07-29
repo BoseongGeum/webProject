@@ -99,7 +99,7 @@ const KoreaOffice = () => {
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                     <div
                         className="w-full min-h-screen flex flex-col bg-cover bg-center"
-                        style={{ backgroundImage: "url('/images/team2/koreaOffice/greeting1.jpg')" }}
+                        style={{ backgroundImage: "url('/images/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
                             initial="hidden"
@@ -133,7 +133,7 @@ const KoreaOffice = () => {
                         {/* 왼쪽 이미지 */}
                         <div className="h-full w-full pr-8 overflow-hidden">
                             <img
-                                src="/images/team2/koreaOffice/greeting2.png"
+                                src="/images/koreaOffice/greeting2.png"
                                 alt="Section illustration"
                                 className="h-full object-cover object-right-top"
                             />
@@ -185,7 +185,7 @@ const KoreaOffice = () => {
                                     {/* 흐린 배경 이미지 레이어 */}
                                     <div
                                         className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl"
-                                        style={{ backgroundImage: "url(/images/team2/koreaOffice/partnerships.png)" }}
+                                        style={{ backgroundImage: "url(/images/koreaOffice/partnerships.png)" }}
                                     >
                                         {/* 어두운 반투명 오버레이 (호버 시에만 보임) */}
                                         <div className="absolute inset-0 transition duration-500 bg-transparent

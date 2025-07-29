@@ -92,7 +92,7 @@ const items = [
             "현지 제조 가능여부를 검토하여",
             "불필요한 리스크와 시간 낭비를 줄여드립니다."
         ],
-        bgImage: "/images/team2/ourServices/serviceDetails1.jpg",
+        bgImage: "/images/ourServices/serviceDetails1.jpg",
     },
     {
         title: "생산 조건 협의 & 품질 대응",
@@ -106,7 +106,7 @@ const items = [
             "생산 및 납품 일정을 면밀히 조율하여,",
             "생산 조건과 품질 기준을 함께 맞춰갑니다."
         ],
-        bgImage: "/images/team2/ourServices/serviceDetails2.jpg",
+        bgImage: "/images/ourServices/serviceDetails2.jpg",
     },
     {
         title: "수출 서류 대응 전담",
@@ -121,7 +121,7 @@ const items = [
             "수출이 처음이거나 경험이 부족한 제조사도",
             "불편 없이 실무적인 지원을 약속합니다."
         ],
-        bgImage: "/images/team2/ourServices/serviceDetails3.jpg",
+        bgImage: "/images/ourServices/serviceDetails3.jpg",
     },
     {
         title: "지속 가능한 협력 기회",
@@ -136,7 +136,7 @@ const items = [
             "장기적이고 지속적인 협력 관계를 통해",
             "협력사와 함께 성장하는 상생 파트너십을 추구합니다."
         ],
-        bgImage: "/images/team2/ourServices/serviceDetails4.png",
+        bgImage: "/images/ourServices/serviceDetails4.png",
     },
 ];
 
@@ -195,7 +195,7 @@ const OurServices = () => {
                     />
                     <div
                         className="w-full min-h-screen flex flex-col bg-cover bg-center"
-                        style={{backgroundImage: "url('/images/team2/ourServices/services1.jpg')" }}
+                        style={{backgroundImage: "url('/images/ourServices/services1.jpg')" }}
                     >
                         <motion.div
                             initial="hidden"
