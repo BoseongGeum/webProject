@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
 type Props = {
@@ -19,21 +19,35 @@ const lineVariants = {
     }),
 };
 
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            when: "beforeChildren",  // children 애니 시작 전
+            staggerChildren: 0.2,    // 0.2s 간격으로
+        },
+    },
+};
+
 const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
     // const loaded = useImagePreloader(images);
 
     return (
         <main className="bg-[#F0EEEB]">
-            <div className="grid grid-cols-2 px-16 pt-24 pb-8">
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={containerVariants}
+                className="grid grid-cols-2 px-16 pt-24 pb-8">
                 {/* 왼쪽 이미지 */}
                 <div className="h-full w-full pr-8 overflow-hidden">
                     <img
                         src={bgImage}
                         alt="Section illustration"
-                        className="h-full object-cover object-right-top"
+                        className="h-full object-cover object-right-top rounded-sm"
                     />
                 </div>
-
                 <div className="w-full h-full pt-12 pl-8">
                     <div className="bg-red-950 w-32 border-2 border-red-950" />
                     {/* 오른쪽 텍스트 */}
@@ -50,7 +64,7 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                         ))}
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </main>
     );
 };

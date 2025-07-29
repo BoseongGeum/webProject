@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import Home from "./pages/Home";
-import PICManagerInfo from "./pages/PICManagerInfo";
-import QuanticEvansManagerInfo from "./pages/QuanticEvansManagerInfo";
-import AuraGenManagerInfo from "./pages/AuraGenManagerInfo";
 import ContactUs from "./pages/ContactUs";
 import KoreaOffice from "./pages/KoreaOffice";
 import OurServices from "./pages/OurServices";
@@ -103,9 +100,6 @@ function AppContent() {
                         <div className="flex-1">
                             <Routes location={location} key={location.pathname}>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/team1/picManagerInfo" element={<PICManagerInfo />} />
-                                <Route path="/team1/quanticEvansManagerInfo" element={<QuanticEvansManagerInfo />} />
-                                <Route path="/team1/auraGenManagerInfo" element={<AuraGenManagerInfo />} />
                                 <Route path="/koreaOffice" element={<KoreaOffice />} />
                                 <Route path="/ourServices" element={<OurServices />} />
                                 <Route path="/contactUs" element={<ContactUs />} />
