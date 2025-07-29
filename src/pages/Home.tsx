@@ -52,19 +52,19 @@ const sectionFade = {
 export default function Home() {
     // Main preloader and animation phase
     const images = [
-        '/images/main/top.jpeg',
-        '/images/main/bottom.jpeg',
         '/images/main/main.png',
+        '/images/main/mainSection1.png',
+        '/images/main/mainSection2.png',
         '/images/logo.png',
         '/images/logo-white.png',
-        '/images/team2/koreaOffice/greeting1.jpg',
-        '/images/team2/koreaOffice/greeting2.png',
-        '/images/team2/koreaOffice/partnerships.png',
-        '/images/team2/ourServices/services1.jpg',
-        '/images/team2/ourServices/serviceDetails1.jpg',
-        '/images/team2/ourServices/serviceDetails2.jpg',
-        '/images/team2/ourServices/serviceDetails3.jpg',
-        '/images/team2/ourServices/serviceDetails4.png',
+        '/images/koreaOffice/greeting1.jpg',
+        '/images/koreaOffice/greeting2.png',
+        '/images/koreaOffice/partnerships.png',
+        '/images/ourServices/services1.jpg',
+        '/images/ourServices/serviceDetails1.jpg',
+        '/images/ourServices/serviceDetails2.jpg',
+        '/images/ourServices/serviceDetails3.jpg',
+        '/images/ourServices/serviceDetails4.png',
     ];
     const { loaded, percent } = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
