@@ -172,46 +172,46 @@ const KoreaOffice = () => {
                 </section>
 
             {/* SECTION 2 */}
-                <section className="min-h-screen">
-                    <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 55 : 0} align={"center"} />
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={containerVariants}
-                            className="pt-24 text-2xl leading-relaxed pb-36 px-12"
-                        >
-                            <div className="container mx-auto relative group w-full h-[60vh]">
-                                {/* 흐린 배경 이미지 레이어 */}
-                                <div
-                                    className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl"
-                                    style={{ backgroundImage: "url(/images/koreaOffice/partnerships.png)" }}
-                                >
-                                    {/* 어두운 반투명 오버레이 (호버 시에만 보임) */}
-                                    <div className="absolute inset-0 transition duration-500 bg-transparent
-                                       group-hover:bg-black/40" />
-                                </div>
+            {/*    <section className="min-h-screen">*/}
+            {/*        <Stickybar title={titles[1]} subtitle={subtitles[1]} topOffset={showNavbar ? 55 : 0} align={"center"} />*/}
+            {/*            <motion.div*/}
+            {/*                initial="hidden"*/}
+            {/*                whileInView="visible"*/}
+            {/*                viewport={{ once: true }}*/}
+            {/*                variants={containerVariants}*/}
+            {/*                className="pt-24 text-2xl leading-relaxed pb-36 px-12"*/}
+            {/*            >*/}
+            {/*                <div className="container mx-auto relative group w-full h-[60vh]">*/}
+            {/*                    /!* 흐린 배경 이미지 레이어 *!/*/}
+            {/*                    <div*/}
+            {/*                        className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl"*/}
+            {/*                        style={{ backgroundImage: "url(/images/koreaOffice/partnerships.png)" }}*/}
+            {/*                    >*/}
+            {/*                        /!* 어두운 반투명 오버레이 (호버 시에만 보임) *!/*/}
+            {/*                        <div className="absolute inset-0 transition duration-500 bg-transparent*/}
+            {/*                           group-hover:bg-black/40" />*/}
+            {/*                    </div>*/}
 
-                                {/* 선명한 콘텐츠 레이어 */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100
-                                   transition-opacity duration-500 flex items-center justify-center z-10">
-                                    <div className="bg-white px-6 py-4 rounded-xl text-center shadow-lg">
-                                        <p className="text-lg font-semibold mb-2 text-black"><strong>CBOL</strong>과 함께했던 고객사, 지금 확인해보세요</p>
-                                        <a
-                                            href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-block px-4 py-2 rounded-md bg-red-950 text-white
-                                               text-lg font-semibold hover:bg-red-900 transition mb-2"
-                                        >
-                                            고객사 리스트 보기 →
-                                        </a>
-                                        <p className="text-sm font-semibold text-gray-500">* 일부 고객사는 과거 협업 사례입니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                </section>
+            {/*                    /!* 선명한 콘텐츠 레이어 *!/*/}
+            {/*                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100*/}
+            {/*                       transition-opacity duration-500 flex items-center justify-center z-10">*/}
+            {/*                        <div className="bg-white px-6 py-4 rounded-xl text-center shadow-lg">*/}
+            {/*                            <p className="text-lg font-semibold mb-2 text-black"><strong>CBOL</strong>과 함께했던 고객사, 지금 확인해보세요</p>*/}
+            {/*                            <a*/}
+            {/*                                href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"*/}
+            {/*                                target="_blank"*/}
+            {/*                                rel="noopener noreferrer"*/}
+            {/*                                className="inline-block px-4 py-2 rounded-md bg-red-950 text-white*/}
+            {/*                                   text-lg font-semibold hover:bg-red-900 transition mb-2"*/}
+            {/*                            >*/}
+            {/*                                고객사 리스트 보기 →*/}
+            {/*                            </a>*/}
+            {/*                            <p className="text-sm font-semibold text-gray-500">* 일부 고객사는 과거 협업 사례입니다.</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </motion.div>*/}
+            {/*    </section>*/}
 
             <Footer />
         </main>
