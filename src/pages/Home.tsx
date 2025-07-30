@@ -55,6 +55,7 @@ export default function Home() {
         '/images/main/main.png',
         '/images/main/textImage.png',
         '/images/logo.png',
+        '/images/logoKorea.png',
         '/images/logo-white.png',
         '/images/koreaOffice/greeting1.jpg',
         '/images/koreaOffice/greeting2.png',
@@ -134,7 +135,6 @@ export default function Home() {
         { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "본사의 혁신적 비전을 실현하고", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "다양한 산업군의 성장을 함께 이끌겠습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
-
     ];
 
     const textLines2 = [
