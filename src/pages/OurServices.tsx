@@ -232,7 +232,7 @@ const OurServices = () => {
                     <div className="container mx-auto flex flex-col text-start gap-8 pt-12">
                         <div className="w-full">
                             <div className="flex flex-col space-y-2 text-2xl leading-relaxed">
-                                <p>1987년 미국 LA 본사 창립, 1998년 한국 연락사무소 설립 이후,</p>
+                                <p>1987년 미국 California 본사 창립, 1998년 한국 연락사무소 설립 이후,</p>
                                 <p>미국과 유럽을 포함한 글로벌 시장에</p>
                                 <p>우수한 OEM 제품을 안정적으로 공급하고 있습니다.</p>
                             </div>
