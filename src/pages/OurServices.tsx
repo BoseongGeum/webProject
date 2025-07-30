@@ -194,7 +194,7 @@ const OurServices = () => {
                         align={"center"}
                     />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-fixed"
                         style={{backgroundImage: "url('/images/ourServices/services1.jpg')" }}
                     >
                         <motion.div
@@ -202,13 +202,13 @@ const OurServices = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="min-h-screen pb-20 flex flex-col text-2xl leading-relaxed justify-center pl-16
+                            className="min-h-screen pb-20 flex flex-col text-2xl leading-relaxed justify-center
                             bg-black bg-opacity-75 text-white"
                         >
                             {paragraphs1.map((group, gIdx) => (
                                 <div
                                     key={gIdx}
-                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                    className={`container mx-auto ${gIdx > 0 ? "mt-10" : ""} space-y-2`}
                                 >
                                     {group.map((sentence, sIdx) => (
                                         <div key={sIdx} className="overflow-hidden">

@@ -106,14 +106,14 @@ const TextCard: React.FC<TextCardProps> = ({
                 </defs>
             </svg>
             <div
-                className={`relative overflow-hidden will-change-transform ${className} pl-12`}
+                className={`relative overflow-hidden will-change-transform ${className} pl-[50px]`}
                 style={{
-                    mask: `url(#${maskId}) no-repeat center/cover`,
-                    WebkitMask: `url(#${maskId}) no-repeat center/cover`,
+                    mask: `url(#${maskId}) no-repeat center/contain`,
+                    WebkitMask: `url(#${maskId}) no-repeat center/contain`,
                     maskRepeat: 'no-repeat',
                     WebkitMaskRepeat: 'no-repeat',
-                    maskSize: 'cover',
-                    WebkitMaskSize: 'cover',
+                    maskSize: 'contain',
+                    WebkitMaskSize: 'contain',
                     maskPosition: 'center',
                     WebkitMaskPosition: 'center',
                 }}

@@ -53,8 +53,7 @@ export default function Home() {
     // Main preloader and animation phase
     const images = [
         '/images/main/main.png',
-        '/images/main/mainSection1.png',
-        '/images/main/mainSection2.png',
+        '/images/main/textImage.png',
         '/images/logo.png',
         '/images/logo-white.png',
         '/images/koreaOffice/greeting1.jpg',
@@ -220,9 +219,9 @@ export default function Home() {
                             viewport={{ once: true }}
                         >
                             <img
-                                src="/images/logo.png"
+                                src="/images/logoKorea.png"
                                 alt="CBOL Logo"
-                                className="w-40 sm:w-60 md:w-80 lg:w-96 mb-4"
+                                className="w-0 sm:w-60 md:w-80 lg:w-96 mb-4"
                             />
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug text-center lg:text-left">
                                 기술의 가치를,
@@ -258,8 +257,8 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/mainSection1.png" alt="Top Visual" className="w-full h-full object-contain" />
-                                <div className="absolute inset-0 bg-black opacity-15" />
+                                <img src="/images/main/textImage.png" alt="Top Visual" className="w-full h-full" />
+                                <div className="absolute inset-0 bg-blue-900 opacity-15" />
                             </TextCard>
                         </div>
 
@@ -322,7 +321,7 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/mainSection2.png" alt="Bottom Visual" className="w-full h-full object-contain" />
+                                <img src="/images/main/textImage.png" alt="Bottom Visual" className="w-full h-full" />
                                 <div className="absolute inset-0 bg-blue-900 opacity-15" />
                             </TextCard>
                         </div>

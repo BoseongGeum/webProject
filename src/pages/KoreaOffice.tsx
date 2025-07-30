@@ -98,7 +98,7 @@ const KoreaOffice = () => {
                 <section className="min-h-screen">
                     <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                     <div
-                        className="w-full min-h-screen flex flex-col bg-cover bg-center"
+                        className="w-full min-h-screen flex flex-col bg-cover bg-fixed"
                         style={{ backgroundImage: "url('/images/koreaOffice/greeting1.jpg')" }}
                     >
                         <motion.div
@@ -106,13 +106,13 @@ const KoreaOffice = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="min-h-screen pt-24 pb-20 text-2xl flex flex-col justify-center leading-relaxed pl-16
+                            className="min-h-screen pt-24 pb-20 text-2xl flex flex-col justify-center leading-relaxed
                             bg-black bg-opacity-75 text-white"
                         >
                             {paragraphs1.map((group, gIdx) => (
                                 <div
                                     key={gIdx}
-                                    className={`${gIdx > 0 ? "mt-10" : ""} space-y-2`}
+                                    className={`container mx-auto ${gIdx > 0 ? "mt-10" : ""} space-y-2`}
                                 >
                                     {group.map((sentence, sIdx) => (
                                         <div key={sIdx} className="overflow-hidden">
@@ -129,7 +129,7 @@ const KoreaOffice = () => {
                         </motion.div>
                     </div>
 
-                    <div className="grid grid-cols-2 px-16 pt-24 pb-32">
+                    <div className="container mx-auto grid grid-cols-2 pt-24 pb-32">
                         {/* 왼쪽 이미지 */}
                         <div className="h-full w-full pr-8 overflow-hidden">
                             <img
@@ -139,7 +139,7 @@ const KoreaOffice = () => {
                             />
                         </div>
 
-                        <div className="w-full h-full pt-24 pl-8">
+                        <div className="w-full h-full pt-20 pl-8">
                             <div className="bg-red-950 w-28 border-2 border-red-950" />
                             {/* 오른쪽 텍스트 */}
                             <motion.div
@@ -147,7 +147,7 @@ const KoreaOffice = () => {
                                 whileInView="visible"
                                 viewport={{ once: true }}
                                 variants={containerVariants}
-                                className="pt-12 pb-8 text-2xl leading-relaxed items-start"
+                                className="pt-12 pb-12 text-2xl leading-relaxed items-start"
                             >
                                 {paragraphs2.map((group, gIdx) => (
                                     <div
@@ -181,35 +181,35 @@ const KoreaOffice = () => {
                             variants={containerVariants}
                             className="pt-24 text-2xl leading-relaxed pb-36 px-12"
                         >
-                            <div className="relative group w-full h-[70vh]">
-                                    {/* 흐린 배경 이미지 레이어 */}
-                                    <div
-                                        className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl"
-                                        style={{ backgroundImage: "url(/images/koreaOffice/partnerships.png)" }}
-                                    >
-                                        {/* 어두운 반투명 오버레이 (호버 시에만 보임) */}
-                                        <div className="absolute inset-0 transition duration-500 bg-transparent
-                                        group-hover:bg-black/40" />
-                                    </div>
+                            <div className="container mx-auto relative group w-full h-[60vh]">
+                                {/* 흐린 배경 이미지 레이어 */}
+                                <div
+                                    className="absolute inset-0 bg-cover bg-top bg-no-repeat filter blur-xl"
+                                    style={{ backgroundImage: "url(/images/koreaOffice/partnerships.png)" }}
+                                >
+                                    {/* 어두운 반투명 오버레이 (호버 시에만 보임) */}
+                                    <div className="absolute inset-0 transition duration-500 bg-transparent
+                                       group-hover:bg-black/40" />
+                                </div>
 
-                                    {/* 선명한 콘텐츠 레이어 */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100
-                                    transition-opacity duration-500 flex items-center justify-center z-10">
-                                        <div className="bg-white px-6 py-4 rounded-xl text-center shadow-lg">
-                                            <p className="text-lg font-semibold mb-2 text-black"><strong>CBOL</strong>과 함께했던 고객사, 지금 확인해보세요</p>
-                                            <a
-                                                href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-block px-4 py-2 rounded-md bg-red-950 text-white
-                                                text-lg font-semibold hover:bg-red-900 transition mb-2"
-                                            >
-                                                고객사 리스트 보기 →
-                                            </a>
-                                            <p className="text-sm font-semibold text-gray-500">* 일부 고객사는 과거 협업 사례입니다.</p>
-                                        </div>
+                                {/* 선명한 콘텐츠 레이어 */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+                                   transition-opacity duration-500 flex items-center justify-center z-10">
+                                    <div className="bg-white px-6 py-4 rounded-xl text-center shadow-lg">
+                                        <p className="text-lg font-semibold mb-2 text-black"><strong>CBOL</strong>과 함께했던 고객사, 지금 확인해보세요</p>
+                                        <a
+                                            href="https://www.cbol.com/aboutus.html#:~:text=Partnerships"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-block px-4 py-2 rounded-md bg-red-950 text-white
+                                               text-lg font-semibold hover:bg-red-900 transition mb-2"
+                                        >
+                                            고객사 리스트 보기 →
+                                        </a>
+                                        <p className="text-sm font-semibold text-gray-500">* 일부 고객사는 과거 협업 사례입니다.</p>
                                     </div>
                                 </div>
+                            </div>
                         </motion.div>
                 </section>
 
