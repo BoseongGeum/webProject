@@ -61,7 +61,7 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                                     <div key={sIdx} className="overflow-hidden">
                                         <motion.p
                                             variants={lineVariants}
-                                            className={`${gIdx === 0 ? "text-6xl font-bold mb-8" : ""}`}
+                                            className={`${gIdx === 0 ? "text-4xl font-bold mb-8" : ""}`}
                                         >
                                             {sentence}
                                         </motion.p>
