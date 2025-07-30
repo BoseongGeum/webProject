@@ -7,5 +7,5 @@ export interface MenuItem {
 export const MENUS: MenuItem[] = [
     { name: "인사말", path: "/koreaOffice" },
     { name: "서비스",   path: "/ourServices" },
-    { name: "Contact",  path: "/contactUs" },
+    { name: "문의하기",  path: "/contactUs" },
 ];

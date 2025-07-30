@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 // import { useImagePreloader } from "../hooks/useImagePreloader";
 
 type Props = {
-    description: string[];
+    description: string[][];
     bgImage: string;
 };
 
@@ -52,14 +52,21 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                     <div className="bg-red-950 w-32 border-2 border-red-950" />
                     {/* 오른쪽 텍스트 */}
                     <div className="py-8 text-2xl leading-relaxed items-start">
-                        {description.map((sentence, idx) => (
-                            <div key={idx} className="overflow-hidden">
-                                <motion.p
-                                    variants={lineVariants}
-                                    className={`${idx === 0 ? "text-6xl font-bold mb-8" : ""}`}
-                                >
-                                    {sentence}
-                                </motion.p>
+                        {description.map((group, gIdx) => (
+                            <div
+                                key={gIdx}
+                                className={`${gIdx > 0 ? "mt-6" : ""} space-y-1`}
+                            >
+                                {group.map((sentence, sIdx) => (
+                                    <div key={sIdx} className="overflow-hidden">
+                                        <motion.p
+                                            variants={lineVariants}
+                                            className={`${gIdx === 0 ? "text-6xl font-bold mb-8" : ""}`}
+                                        >
+                                            {sentence}
+                                        </motion.p>
+                                    </div>
+                                ))}
                             </div>
                         ))}
                     </div>
