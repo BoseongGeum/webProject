@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faPhoneAlt, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,18 +11,6 @@ interface ContactSectionProps {
     email: string;
     mapSrc: string;
 }
-
-const containerVariants = {
-    hidden: {},
-    visible: {
-        transition: { staggerChildren: 0.1 },
-    },
-};
-
-const lineVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeInOut" } },
-};
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
                                                                   imageSrc,
@@ -38,7 +25,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
     return (
         <>
-            <div className="w-full flex flex-row gap-4 lg:gap-12 mt-6">
+            <div className="w-full flex flex-row gap-4 lg:gap-12">
                 {/* Left Image */}
                 <div className="h-[185px] w-[370px] overflow-hidden">
                     <img
@@ -49,14 +36,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
 
                 {/* Contact Info */}
-                <motion.div className="w-full" variants={containerVariants} initial="hidden" animate="visible">
-                    <motion.h3 className="text-red-950 text-2xl sm:text-3xl mb-8" variants={lineVariants}>
+                <div className="w-full">
+                    <h3 className="text-red-950 text-2xl sm:text-3xl mb-8" >
                         <span>{name}</span>
-                    </motion.h3>
+                    </h3>
 
                     <div className="space-y-4 mb-2">
                         {/* Row 1: Mailing Address */}
-                        <motion.div className="flex" variants={lineVariants}>
+                        <div className="flex">
                             <div className="w-[5%] flex justify-center items-center">
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className="text-red-800 text-xl" />
                             </div>
@@ -64,10 +51,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                                 MAILING ADDRESS
                             </div>
                             <div className="w-[70%] text-gray-600 text-sm sm:text-base font-medium">{mailingAddress}</div>
-                        </motion.div>
+                        </div>
 
                         {/* Row 2: Phone & Fax */}
-                        <motion.div className="flex" variants={lineVariants}>
+                        <div className="flex">
                             <div className="w-[5%] flex justify-center items-center">
                                 <FontAwesomeIcon icon={faPhoneAlt} className="text-red-800 text-xl" />
                             </div>
@@ -77,10 +64,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                             <div className="w-[70%] text-gray-600 text-sm sm:text-base font-medium">
                                 Tel: {phone} / Fax: {fax}
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* Row 3: Email */}
-                        <motion.div className="flex" variants={lineVariants}>
+                        <div className="flex">
                             <div className="w-[5%] flex justify-center items-center">
                                 <FontAwesomeIcon icon={faEnvelope} className="text-red-800 text-xl" />
                             </div>
@@ -88,20 +75,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                                 EMAIL ADDRESS
                             </div>
                             <div className="w-[70%] text-gray-600 text-sm sm:text-base font-medium">{email}</div>
-                        </motion.div>
+                        </div>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Map Toggle Button */}
                 <div className="flex items-center justify-center pr-4">
-                    <motion.button
+                    <button
                         onClick={() => setShowMap(!showMap)}
-                        className="flex p-3 bg-gray-100 rounded-full shadow-md hover:bg-gray-200"
+                        className="flex p-3 bg-gray-100 rounded-full shadow-md hover:bg-gray-200 duration-200"
                         title="지도 보기/숨기기"
-                        variants={lineVariants}
                     >
                         <FontAwesomeIcon icon={faMapMarkerAlt} className="text-xl text-gray-700" />
-                    </motion.button>
+                    </button>
                 </div>
             </div>
 
