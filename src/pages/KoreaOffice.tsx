@@ -96,11 +96,11 @@ const KoreaOffice = () => {
         <main className="bg-[#F0EEEB] min-h-screen relative">
                 {/* SECTION 1 */}
                 <section className="min-h-screen">
-                    <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                     <div
                         className="w-full min-h-screen flex flex-col bg-cover bg-fixed"
                         style={{ backgroundImage: "url('/images/koreaOffice/greeting1.jpg')" }}
                     >
+                        <Stickybar title={titles[0]} subtitle={subtitles[0]} topOffset={showNavbar ? 55 : 0} align={"center"} />
                         <motion.div
                             initial="hidden"
                             whileInView="visible"

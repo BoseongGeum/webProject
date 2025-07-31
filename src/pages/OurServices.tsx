@@ -213,7 +213,7 @@ const OurServices = () => {
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={containerVariants}
-                            className="min-h-screen pb-20 flex flex-col text-2xl leading-relaxed justify-center
+                            className="min-h-screen pt-24 pb-20 flex flex-col text-2xl leading-relaxed justify-center
                             bg-black bg-opacity-75 text-white"
                         >
                             {paragraphs1.map((group, gIdx) => (
