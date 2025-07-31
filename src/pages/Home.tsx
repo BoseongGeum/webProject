@@ -223,7 +223,7 @@ export default function Home() {
                                 alt="CBOL Logo"
                                 className="w-0 sm:w-60 md:w-80 lg:w-96 mb-4"
                             />
-                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug text-center lg:text-left">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left">
                                 기술의 가치를,
                                 <br />
                                 글로벌 시장으로
@@ -258,7 +258,7 @@ export default function Home() {
                                 verticalScale={2.2}
                             >
                                 <img src="/images/main/textImage.png" alt="Top Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-blue-900 opacity-15" />
+                                <div className="absolute inset-0 bg-blue-900 opacity-20" />
                             </TextCard>
                         </div>
 
@@ -322,7 +322,7 @@ export default function Home() {
                                 verticalScale={2.2}
                             >
                                 <img src="/images/main/textImage.png" alt="Bottom Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-blue-900 opacity-15" />
+                                <div className="absolute inset-0 bg-blue-900 opacity-20" />
                             </TextCard>
                         </div>
                     </motion.section>

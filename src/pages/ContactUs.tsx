@@ -74,15 +74,6 @@ const ContactUs: React.FC = () => {
                         </motion.p>
                     </motion.div>
                     <ContactSection
-                        imageSrc="/images/example.png"
-                        name="본사"
-                        mailingAddress="19850 Plummer St. Chatsworth, CA 91311"
-                        phone="818-704-8200"
-                        fax="818-704-4336"
-                        email="info@cbol.com"
-                        mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3298.2598745885157!2d-118.56752208477998!3d34.24191188055478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c29b7033afd367%3A0xa8be6d728e186243!2s19850%20Plummer%20St%2C%20Chatsworth%2C%20CA%2091311!5e0!3m2!1sen!2sus!4v1603896825281!5m2!1sen!2sus"
-                    />
-                    <ContactSection
                         imageSrc="/images/contactUs/koreaOfficeImage.png"
                         name="한국 연락사무소"
                         mailingAddress="서울시 중구 정동길 35, 두비빌딩 403호"
@@ -90,6 +81,15 @@ const ContactUs: React.FC = () => {
                         fax="02-318-0550"
                         email="info@cbol.com"
                         mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.535524122019!2d126.96973547669083!3d37.566005572038826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca28c525e6ea7%3A0x9d3bd3623a642835!2z65GQ67mE67mM65Sp!5e0!3m2!1sko!2skr!4v1747612919622!5m2!1sko!2skr"
+                    />
+                    <ContactSection
+                        imageSrc="/images/example.png"
+                        name="본사"
+                        mailingAddress="19850 Plummer St. Chatsworth, CA 91311"
+                        phone="818-704-8200"
+                        fax="818-704-4336"
+                        email="info@cbol.com"
+                        mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3298.2598745885157!2d-118.56752208477998!3d34.24191188055478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c29b7033afd367%3A0xa8be6d728e186243!2s19850%20Plummer%20St%2C%20Chatsworth%2C%20CA%2091311!5e0!3m2!1sen!2sus!4v1603896825281!5m2!1sen!2sus"
                     />
                 </motion.div>
             </div>
