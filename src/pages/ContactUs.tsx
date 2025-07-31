@@ -83,7 +83,7 @@ const ContactUs: React.FC = () => {
                         mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.535524122019!2d126.96973547669083!3d37.566005572038826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca28c525e6ea7%3A0x9d3bd3623a642835!2z65GQ67mE67mM65Sp!5e0!3m2!1sko!2skr!4v1747612919622!5m2!1sko!2skr"
                     />
                     <ContactSection
-                        imageSrc="/images/example.png"
+                        imageSrc="/images/contactUs/HQImage.jpg"
                         name="본사"
                         mailingAddress="19850 Plummer St. Chatsworth, CA 91311"
                         phone="818-704-8200"

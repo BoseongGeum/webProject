@@ -40,7 +40,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <>
             <div className="w-full flex flex-row gap-4 lg:gap-12 mt-6">
                 {/* Left Image */}
-                <div className="h-[185px] w-[400px] overflow-hidden">
+                <div className="h-[185px] w-[370px] overflow-hidden">
                     <img
                         src={imageSrc}
                         alt="Section illustration"
