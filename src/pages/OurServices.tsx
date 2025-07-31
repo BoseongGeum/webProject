@@ -222,7 +222,7 @@ const OurServices = () => {
                                     className={`container mx-auto ${gIdx > 0 ? "mt-10" : ""} space-y-2`}
                                 >
                                     {group.map((sentence, sIdx) => (
-                                        <div key={sIdx} className="overflow-hidden">
+                                        <div key={sIdx}>
                                             <motion.p
                                                 variants={lineVariants}
                                                 className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}

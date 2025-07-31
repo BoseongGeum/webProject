@@ -115,7 +115,7 @@ const KoreaOffice = () => {
                                     className={`container mx-auto ${gIdx > 0 ? "mt-10" : ""} space-y-2`}
                                 >
                                     {group.map((sentence, sIdx) => (
-                                        <div key={sIdx} className="overflow-hidden">
+                                        <div key={sIdx}>
                                             <motion.p
                                                 variants={lineVariants}
                                                 className={`${gIdx === 0 ? "text-6xl font-bold" : ""}`}
@@ -142,11 +142,7 @@ const KoreaOffice = () => {
                         <div className="w-full h-full pt-20 pl-8">
                             <div className="bg-red-950 w-28 border-2 border-red-950" />
                             {/* 오른쪽 텍스트 */}
-                            <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={containerVariants}
+                            <div
                                 className="pt-12 pb-12 text-2xl leading-relaxed items-start"
                             >
                                 {paragraphs2.map((group, gIdx) => (
@@ -166,7 +162,7 @@ const KoreaOffice = () => {
                                         ))}
                                     </div>
                                 ))}
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </section>
