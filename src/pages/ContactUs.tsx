@@ -87,7 +87,7 @@ const ContactUs: React.FC = () => {
                     </motion.div>
                     <motion.div className="text-left mb-8" variants={lineVariants}>
                         <ContactSection
-                            imageSrc="/images/contactUs/HQImage.jpg"
+                            imageSrc="/images/contactUs/HQImage.png"
                             name="본사"
                             mailingAddress="19850 Plummer St. Chatsworth, CA 91311"
                             phone="818-704-8200"
