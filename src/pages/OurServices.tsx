@@ -67,11 +67,6 @@ const records = [
         description: ["쌓아온 업계 경력과 신뢰"],
     },
     {
-        count: "50",
-        unit: "억 원",
-        description: ["CBOL과 함께한", "협력사 연간 수출 총합"],
-    },
-    {
         count: "60",
         unit: "여 개",
         description: ["고객사와 함께한 협업 경험"],
@@ -80,6 +75,11 @@ const records = [
         count: "300",
         unit: "여 개",
         description: ["제품 누적 관리 경험", "으로 쌓은 전문성"],
+    },
+    {
+        count: "1000",
+        unit: "여 건",
+        description: ["누적 프로젝트 실적 보유"],
     },
 ];
 
