@@ -35,13 +35,14 @@ const Footer: React.FC = () => {
 
                 {/* 우측: 문의하기 버튼 (ContactUs 페이지에서는 숨김) */}
                 {!isContactUsPage && (
-                    <div className="flex items-center text-sm gap-24">
+                    <div className="flex items-center text-sm gap-12">
                         <button
                             onClick={handleCreditsClick}
                             className={`relative text-xs transition-colors duration-200 group`}
                         >
                             Resources & Credits
                         </button>
+                        <div className="text-base">|</div>
                         <div className="flex items-center text-sm text-white gap-3">
                             궁금한 점이 있으신가요?
                             <button
