@@ -39,7 +39,7 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={containerVariants}
-                className="grid grid-cols-[40%_60%] px-16 pt-24 pb-8">
+                className="grid grid-cols-[45%_55%] px-16 pt-24 pb-8">
                 {/* 왼쪽 이미지 */}
                 <div className="h-full w-full pr-6 overflow-hidden">
                     <img

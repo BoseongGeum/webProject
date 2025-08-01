@@ -297,7 +297,7 @@ const OurServices = () => {
                                                 description: item.description,
                                                 bgImage: item.bgImage,
                                             });}}
-                                            className="w-full h-full relative overflow-hidden rounded-xl shadow group p-32"
+                                            className="w-full h-[350px] relative overflow-hidden rounded-xl shadow group p-32"
                                         >
                                             {/* 배경 이미지 레이어 */}
                                             <div
