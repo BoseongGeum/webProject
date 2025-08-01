@@ -41,14 +41,14 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                 variants={containerVariants}
                 className="grid grid-cols-[40%_60%] px-16 pt-24 pb-8">
                 {/* 왼쪽 이미지 */}
-                <div className="h-full w-full pr-8 overflow-hidden">
+                <div className="h-full w-full pr-6 overflow-hidden">
                     <img
                         src={bgImage}
                         alt="Section illustration"
                         className="h-full object-cover object-center rounded-sm"
                     />
                 </div>
-                <div className="w-full h-full pt-12 pl-8">
+                <div className="w-full h-full pt-12 pl-6">
                     <div className="bg-red-950 w-32 border-2 border-red-950" />
                     {/* 오른쪽 텍스트 */}
                     <div className="py-8 text-2xl leading-relaxed items-start">
