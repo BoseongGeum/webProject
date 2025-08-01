@@ -39,13 +39,13 @@ const ServiceDetailsPage: React.FC<Props> = ({ description, bgImage }) => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={containerVariants}
-                className="grid grid-cols-2 px-16 pt-24 pb-8">
+                className="grid grid-cols-[40%_60%] px-16 pt-24 pb-8">
                 {/* 왼쪽 이미지 */}
                 <div className="h-full w-full pr-8 overflow-hidden">
                     <img
                         src={bgImage}
                         alt="Section illustration"
-                        className="h-full object-cover object-right-top rounded-sm"
+                        className="h-full object-cover object-center rounded-sm"
                     />
                 </div>
                 <div className="w-full h-full pt-12 pl-8">
