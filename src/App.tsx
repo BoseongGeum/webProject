@@ -11,6 +11,7 @@ import OurServices from "./pages/OurServices";
 import Navbar from "./components/Navbar";
 import { MENUS } from "./constants/menus";
 import ScrollToTop from "./components/ScrollToTop";
+import CreditsPage from "./pages/CreditsPage";
 
 // const pageVariants = {
 //     initial: { y: "100%", rotate: 5 },
@@ -103,6 +104,7 @@ function AppContent() {
                                 <Route path="/koreaOffice" element={<KoreaOffice />} />
                                 <Route path="/ourServices" element={<OurServices />} />
                                 <Route path="/contactUs" element={<ContactUs />} />
+                                <Route path="/credits" element={<CreditsPage />} />
                             </Routes>
                         </div>
                     </div>

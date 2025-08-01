@@ -257,8 +257,8 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/textImage.png" alt="Top Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-blue-900 opacity-20" />
+                                <img src="/images/main/text1.png" alt="Top Visual" className="w-full h-full" />
+                                <div className="absolute inset-0 bg-black opacity-10" />
                             </TextCard>
                         </div>
 
@@ -321,8 +321,8 @@ export default function Home() {
                                 strokeWidth={0.02}
                                 verticalScale={2.2}
                             >
-                                <img src="/images/main/textImage.png" alt="Bottom Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-blue-900 opacity-20" />
+                                <img src="/images/main/text2.png" alt="Bottom Visual" className="w-full h-full" />
+                                <div className="absolute inset-0 bg-black opacity-10" />
                             </TextCard>
                         </div>
                     </motion.section>
