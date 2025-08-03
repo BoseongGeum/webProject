@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 
 type LoadingScreenProps = {
     isWhite: boolean;
-    percent?: number;
+    progress?: number;
 };
 
-export default function LoadingScreen({ isWhite, percent = 0 }: LoadingScreenProps) {
+export default function LoadingScreen({ isWhite, progress = 0 }: LoadingScreenProps) {
     return (
         <div className={`fixed inset-0 z-50 flex flex-col gap-6 items-center justify-center ${isWhite ? "bg-[#F0EEEB]" : "bg-black"}`}>
             <motion.img
@@ -22,7 +22,7 @@ export default function LoadingScreen({ isWhite, percent = 0 }: LoadingScreenPro
                 <motion.div
                     className="h-full bg-red-950 origin-left"
                     initial={{ width: 0 }}
-                    animate={{ width: `${percent}%` }}
+                    animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                 />
             </div>

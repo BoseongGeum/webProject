@@ -1,31 +1,51 @@
 import { useEffect, useState } from "react";
 
 export function useImagePreloader(urls: string[]) {
-    const [loadedCount, setLoadedCount] = useState(0);
     const [loaded, setLoaded] = useState(false);
-    const total = urls.length;
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        if (urls.length === 0) {
-            setLoaded(true);
+        const hasLoadedBefore = sessionStorage.getItem("imagesLoaded") === "true";
+        const startTime = Date.now();
+
+        let intervalId: NodeJS.Timeout | null = null;
+        let loadedCount = 0;
+        let isCancelled = false;
+
+        // ✅ progress를 부드럽게 증가시키는 가짜 인터벌
+        intervalId = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 99) return 99; // 실제 완료 전에는 99%까지 제한
+                return prev + 1;
+            });
+        }, 10); // 1%씩 10ms마다 증가하면 약 1초에 도달
+
+        const finish = () => {
+            const elapsed = Date.now() - startTime;
+            const waitTime = Math.max(0, 1000 - elapsed); // 최소 1초 보장
+
+            setTimeout(() => {
+                if (isCancelled) return;
+                sessionStorage.setItem("imagesLoaded", "true");
+                if (intervalId) clearInterval(intervalId);
+                setProgress(100);
+                setLoaded(true);
+            }, waitTime);
+        };
+
+        if (hasLoadedBefore || urls.length === 0) {
+            finish();
             return;
         }
-
-        let isCancelled = false;
 
         urls.forEach((url) => {
             const img = new Image();
             img.src = url;
 
             const handleDone = () => {
-                if (!isCancelled) {
-                    setLoadedCount((prev) => {
-                        const next = prev + 1;
-                        if (next === urls.length) {
-                            setLoaded(true);
-                        }
-                        return next;
-                    });
+                loadedCount += 1;
+                if (loadedCount === urls.length) {
+                    finish();
                 }
             };
 
@@ -35,19 +55,9 @@ export function useImagePreloader(urls: string[]) {
 
         return () => {
             isCancelled = true;
+            if (intervalId) clearInterval(intervalId);
         };
     }, [urls]);
 
-    const percent = total === 0 ? 100 : Math.min(100, Math.round((loadedCount / total) * 100));
-
-    const [ready, setReady] = useState(false);
-
-    useEffect(() => {
-        if (loaded) {
-            const timeout = setTimeout(() => setReady(true), 800);
-            return () => clearTimeout(timeout);
-        }
-    }, [loaded]);
-
-    return { loaded: ready, percent };
+    return { loaded, progress };
 }

@@ -66,7 +66,7 @@ export default function Home() {
         '/images/ourServices/serviceDetails3.jpg',
         '/images/ourServices/serviceDetails4.png',
     ];
-    const { loaded, percent } = useImagePreloader(images);
+    const { loaded, progress } = useImagePreloader(images);
     const [phase, setPhase] = useState<'loading' | 'black' | 'curtain1' | 'curtain2' | 'content'>('loading');
 
     const [showNavbar, setShowNavbar] = useState(true);
@@ -112,7 +112,7 @@ export default function Home() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
-    if (!loaded) return <LoadingScreen isWhite={true} percent={percent} />;
+    if (!loaded) return <LoadingScreen isWhite={true} progress={progress} />;
 
     const createSteps = (color: string) =>
         Array.from({ length: 11 }).map((_, i) => ({
