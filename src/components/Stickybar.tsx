@@ -48,8 +48,7 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
                 top: 0 }}
         >
             <div
-                className="relative bg-[#F0EEEB] w-full flex items-center overflow-hidden border-b-2 border-t-2 border-red-950"
-                style={{ height: '120px' }}
+                className="relative bg-[#F0EEEB] w-full h-[120px] flex items-center overflow-hidden border-b-2 border-t-2 border-red-950"
             >
                 <div className="container mx-auto">
                     <AnimatePresence mode="sync" initial={false}>
