@@ -49,14 +49,14 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
         >
             <div
                 className="relative bg-[#F0EEEB] w-full flex items-center overflow-hidden border-b-2 border-t-2 border-red-950"
-                style={{ minHeight: '124px' }}
+                style={{ minHeight: '120px' }}
             >
                 <div className="container mx-auto">
                     <AnimatePresence mode="sync" initial={false}>
                         <motion.h2
                             key={title}
-                            className={`absolute top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 
-                        leading-tight font-sans font-extrabold tracking-tighter flex
+                            className={`absolute -translate-y-[52.5%] scale-y-[1.5] text-[90px] text-red-950 
+                        leading-tight font-sans font-extrabold tracking-tighter
                         ${
                                 align === "center"
                                     ? "left-1/2 -translate-x-1/2"
