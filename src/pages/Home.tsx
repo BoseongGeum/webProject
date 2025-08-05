@@ -194,7 +194,7 @@ export default function Home() {
                     {/* Intro Section */}
                     <section
                         ref={refIntroSection}
-                        className="container mx-auto h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold space-x-12"
+                        className="container mx-auto h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold space-x-28"
                     >
                         <motion.div
                             className="lg:w-2/3 w-full h-full flex"
