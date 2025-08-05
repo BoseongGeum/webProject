@@ -55,7 +55,7 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
                     <AnimatePresence mode="sync" initial={false}>
                         <motion.h2
                             key={title}
-                            className={`absolute -translate-y-[52.5%] scale-y-[1.5] text-[90px] text-red-950 
+                            className={`absolute translate-y-[-52.5%] scale-y-[1.5] text-[90px] text-red-950 
                         leading-tight font-sans font-extrabold tracking-tighter
                         ${
                                 align === "center"
