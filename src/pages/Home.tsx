@@ -5,7 +5,6 @@ import { useImagePreloader } from '../hooks/useImagePreloader';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
 import Stickybar from '../components/Stickybar';
-import TextCard from "../components/TextCard";
 import Footer from "../components/Footer";
 import {MENUS} from "../constants/menus";
 
@@ -129,9 +128,9 @@ export default function Home() {
         { text: "Welcome to our CBOL corporation", style: "text-2xl sm:text-3xl md:text-4xl font-bold" },
         { text: "CBOL Corporation은", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold mt-4" },
         { text: "다양한 역량을 갖춘 글로벌 기업으로,", style: "text-2xl sm:text-3xl md:text-4xl text-yellow-500 font-bold" },
-        { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold mt-2" },
+        { text: "항공우주, 방위산업, 우주, 에너지, 산업 및 전자 분야 등", style: "text-base sm:text-lg md:text-xl font-bold mt-4" },
         { text: "여러 분야에 걸쳐 고품질의 제품과 솔루션을 제공합니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
-        { text: "저희 한국 사무소는 OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold mt-2" },
+        { text: "저희 한국 사무소는 OEM 제품 핵심 제조 거점으로,", style: "text-base sm:text-lg md:text-xl font-bold mt-4" },
         { text: "글로벌 품질 기준을 충족하는 생산 공정과 첨단 기술력을 통해", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "본사의 혁신적 비전을 실현하고", style: "text-base sm:text-lg md:text-xl font-bold" },
         { text: "다양한 산업군의 성장을 함께 이끌겠습니다.", style: "text-base sm:text-lg md:text-xl font-bold" },
@@ -144,13 +143,12 @@ export default function Home() {
         { text: "글로벌 제조 및 공급 파트너 네트워크를 바탕으로,", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "고품질의 부품, 조립품, 원자재, 화학제품 등", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
         { text: "안정적으로 고객에게 one-stop solution을 제안합니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
-        { text: "다양한 산업군의 까다로운 요구에도 유연하게 대응하며,", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-2" },
+        { text: "다양한 산업군의 까다로운 요구에도 유연하게 대응하며,", style: "text-base sm:text-lg md:text-xl text-black font-bold mt-4" },
         { text: "전 세계 고객에게 신뢰할 수 있는 공급 솔루션을 제공하겠습니다.", style: "text-base sm:text-lg md:text-xl text-black font-bold" },
     ];
 
     return (
-        <main
-            className="bg-[#F0EEEB] text-black">
+        <main className="bg-[#F0EEEB] text-black">
 
             {/* Curtains */}
             <div className="fixed inset-0 bg-[#F0EEEB] z-10 pointer-events-none" />
@@ -196,10 +194,10 @@ export default function Home() {
                     {/* Intro Section */}
                     <section
                         ref={refIntroSection}
-                        className="h-screen flex flex-col lg:flex-row items-center justify-center px-8 pt-10 text-red-950 font-bold"
+                        className="container mx-auto h-screen flex flex-col lg:flex-row items-center justify-center pt-10 text-red-950 font-bold space-x-12"
                     >
                         <motion.div
-                            className="lg:w-2/3 w-full h-full flex p-10"
+                            className="lg:w-2/3 w-full h-full flex"
                             variants={dynamicVariants('left', 0.4)}
                             initial="hidden"
                             whileInView="visible"
@@ -212,7 +210,7 @@ export default function Home() {
                             />
                         </motion.div>
                         <motion.div
-                            className="lg:w-1/3 w-full flex flex-col p-16"
+                            className="lg:w-1/3 w-full flex flex-col"
                             variants={dynamicVariants('right', 0.8)}
                             initial="hidden"
                             whileInView="visible"
@@ -221,7 +219,7 @@ export default function Home() {
                             <img
                                 src="/images/logoKorea.png"
                                 alt="CBOL Logo"
-                                className="w-0 sm:w-60 md:w-80 lg:w-96 mb-4"
+                                className="w-0 sm:w-60 md:w-80 lg:w-96 mb-8"
                             />
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-snug text-center lg:text-left">
                                 기술의 가치를,
@@ -236,42 +234,20 @@ export default function Home() {
                     {/* Section 1 */}
                     <motion.section
                         ref={refSection1}
-                        className="h-screen flex flex-col md:flex-row items-center justify-center pt-28 px-16"
+                        className="container mx-auto h-screen flex flex-col md:flex-row items-center justify-center space-x-12 pt-28"
                         variants={sectionFade}
                         initial="hidden"
                         animate={inViewSection1 ? 'visible' : 'hidden'}
                     >
-                        <div
-                            className="w-full md:w-3/5 flex items-center justify-center pt-36 ml-[-64px]"
-                            // variants={dynamicVariants('left', 0.4)}
-                            // initial="hidden"
-                            // whileInView="visible"
-                            // viewport={{ once: true }}
-                        >
-                            <TextCard
-                                className="w-full aspect-[9/8]"
-                                maskText="CBOL"
-                                fontSize={0.38}
-                                fontWeight={900}
-                                letterSpacing="-0.05"
-                                strokeWidth={0.02}
-                                verticalScale={2.2}
-                            >
-                                <img src="/images/main/text1.png" alt="Top Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-black opacity-10" />
-                            </TextCard>
+                        <div className="w-3/5">
+                            <img src="/images/main/text1.png" alt="Top Visual" className="w-full h-full" />
                         </div>
 
-                        <div className="w-full md:w-2/5 flex items-end justify-center flex-col space-y-3 ml-16">
+                        <div className="w-2/5 flex flex-col space-y-3">
                             {textLines1.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <p
                                         className={`text-end ${line.style}`}
-                                        // variants={lineVariants}
-                                        // initial="hidden"
-                                        // whileInView="visible"
-                                        // viewport={{ once: true }}
-                                        // custom={i}
                                     >
                                         {line.text}
                                     </p>
@@ -283,21 +259,16 @@ export default function Home() {
                     {/* Section 2 */}
                     <motion.section
                         ref={refSection2}
-                        className="snap-start h-screen flex flex-col md:flex-row items-center justify-center px-16"
+                        className="container mx-auto snap-start h-screen flex flex-col md:flex-row items-center justify-center"
                         variants={sectionFade}
                         initial="hidden"
                         animate={inViewSection2 ? 'visible' : 'hidden'}
                     >
-                        <div className="w-full md:w-2/5 flex items-start justify-center flex-col space-y-3">
+                        <div className="w-full md:w-2/5 flex flex-col text-start space-y-3">
                             {textLines2.map((line, i) => (
                                 <div className="overflow-hidden" key={i}>
                                     <p
                                         className={`text-start ${line.style}`}
-                                        // variants={lineVariants}
-                                        // initial="hidden"
-                                        // whileInView="visible"
-                                        // viewport={{ once: true }}
-                                        // custom={i}
                                     >
                                         {line.text}
                                     </p>
@@ -305,32 +276,13 @@ export default function Home() {
                             ))}
                         </div>
 
-                        <div
-                            className="w-full md:w-3/5 flex items-center justify-center pt-36"
-                            // variants={dynamicVariants('right', 0.4)}
-                            // initial="hidden"
-                            // whileInView="visible"
-                            // viewport={{ once: true }}
-                        >
-                            <TextCard
-                                className="w-full aspect-[9/8]"
-                                maskText="CBOL"
-                                fontSize={0.38}
-                                fontWeight={900}
-                                letterSpacing="-0.05"
-                                strokeWidth={0.02}
-                                verticalScale={2.2}
-                            >
-                                <img src="/images/main/text2.png" alt="Bottom Visual" className="w-full h-full" />
-                                <div className="absolute inset-0 bg-black opacity-10" />
-                            </TextCard>
+                        <div className="w-full md:w-3/5 flex items-center justify-center">
+                            <img src="/images/main/text2.png" alt="Bottom Visual" className="w-full h-full" />
                         </div>
                     </motion.section>
 
                     {/* Section 3 */}
-                    <section
-                        className="h-full px-6 py-24 text-black flex flex-col justify-center relative overflow-hidden pt-28"
-                    >
+                    <section className="h-full text-black flex flex-col justify-center relative overflow-hidden pt-28">
                         <Footer />
                     </section>
                 </div>

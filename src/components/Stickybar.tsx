@@ -48,43 +48,26 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
                 top: 0 }}
         >
             <div
-                className="relative bg-[#F0EEEB] w-full px-6 py-1 flex items-center sm:px-10 overflow-hidden border-b-2 border-t-2 border-red-950"
+                className="relative bg-[#F0EEEB] w-full flex items-center overflow-hidden border-b-2 border-t-2 border-red-950"
                 style={{ minHeight: '120px' }}
             >
-                <AnimatePresence mode="sync" initial={false}>
-                    <motion.h2
-                        key={title}
-                        className={`absolute top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 
+                <div className="container mx-auto">
+                    <AnimatePresence mode="sync" initial={false}>
+                        <motion.h2
+                            key={title}
+                            className={`absolute top-1/2 -translate-y-1/2 scale-y-[1.5] text-[90px] text-red-950 
                         leading-tight font-sans font-extrabold tracking-tighter flex
                         ${
-                            align === "center"
-                                ? "left-1/2 -translate-x-1/2"
-                                : "left-8"
-                        }`}
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                    >
-                        {title.split("").map((ch, i) => (
-                            <motion.span
-                                key={`${ch}-${i}`}
-                                variants={letterVariants}
-                                style={{ display: 'inline-block' }}
-                            >
-                                {ch === " " ? "\u00A0" : ch}
-                            </motion.span>
-                        ))}
-                    </motion.h2>
-                    {subtitle && (
-                        <motion.span
-                            className="absolute right-4 bottom-2 text-2xl text-extrabold text-black/80"
+                                align === "center"
+                                    ? "left-1/2 -translate-x-1/2"
+                                    : "left-auto"
+                            }`}
+                            variants={containerVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            variants={containerVariants}
                         >
-                            {subtitle.split("").map((ch, i) => (
+                            {title.split("").map((ch, i) => (
                                 <motion.span
                                     key={`${ch}-${i}`}
                                     variants={letterVariants}
@@ -93,9 +76,28 @@ export default function Stickybar({ title, subtitle, topOffset, align }: Stickyb
                                     {ch === " " ? "\u00A0" : ch}
                                 </motion.span>
                             ))}
-                        </motion.span>
-                    )}
-                </AnimatePresence>
+                        </motion.h2>
+                        {subtitle && (
+                            <motion.span
+                                className="absolute right-4 bottom-2 text-2xl text-extrabold text-black/80"
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={containerVariants}
+                            >
+                                {subtitle.split("").map((ch, i) => (
+                                    <motion.span
+                                        key={`${ch}-${i}`}
+                                        variants={letterVariants}
+                                        style={{ display: 'inline-block' }}
+                                    >
+                                        {ch === " " ? "\u00A0" : ch}
+                                    </motion.span>
+                                ))}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
+                </div>
             </div>
         </motion.div>
     );
